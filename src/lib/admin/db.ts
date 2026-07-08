@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { products, collections } from "@/data/products";
+import { fetchSearchConsoleData } from "@/lib/admin/google-search-console";
 
 type Database = {
   exec: (sql: string) => void;
@@ -360,6 +361,22 @@ function initSchema(database: Database) {
       UNIQUE(entity_type, entity_id)
     );
 
+    CREATE TABLE IF NOT EXISTS seo_search_console_rows (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      site_url TEXT NOT NULL,
+      data_date TEXT NOT NULL,
+      query TEXT NOT NULL DEFAULT '',
+      page TEXT NOT NULL DEFAULT '',
+      country TEXT NOT NULL DEFAULT '',
+      device TEXT NOT NULL DEFAULT '',
+      clicks INTEGER NOT NULL DEFAULT 0,
+      impressions INTEGER NOT NULL DEFAULT 0,
+      ctr REAL NOT NULL DEFAULT 0,
+      position REAL NOT NULL DEFAULT 0,
+      synced_at TEXT NOT NULL,
+      UNIQUE(site_url, data_date, query, page, country, device)
+    );
+
     CREATE TABLE IF NOT EXISTS sync_jobs (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       source_name TEXT NOT NULL,
@@ -679,9 +696,32 @@ export function getModuleData(module: DbModule) {
         `)
       };
     case "seo":
-      return { seoRecords: all("SELECT * FROM seo_records ORDER BY updated_at DESC") };
+      return {
+        seoRecords: all("SELECT * FROM seo_records ORDER BY updated_at DESC"),
+        searchConsoleSummary: get(`
+          SELECT
+            COUNT(*) AS rows,
+            COALESCE(SUM(clicks), 0) AS clicks,
+            COALESCE(SUM(impressions), 0) AS impressions,
+            COALESCE(AVG(position), 0) AS avg_position,
+            MAX(synced_at) AS last_synced_at
+          FROM seo_search_console_rows
+        `),
+        searchConsoleRows: all("SELECT * FROM seo_search_console_rows ORDER BY data_date DESC, clicks DESC LIMIT 100")
+      };
     case "sync":
-      return { syncJobs: all("SELECT * FROM sync_jobs ORDER BY started_at DESC") };
+      return {
+        syncJobs: all("SELECT * FROM sync_jobs ORDER BY started_at DESC"),
+        searchConsoleSummary: get(`
+          SELECT
+            COUNT(*) AS rows,
+            COALESCE(SUM(clicks), 0) AS clicks,
+            COALESCE(SUM(impressions), 0) AS impressions,
+            COALESCE(AVG(position), 0) AS avg_position,
+            MAX(synced_at) AS last_synced_at
+          FROM seo_search_console_rows
+        `)
+      };
     case "users":
       return {
         admins: all("SELECT admins.id, admins.username, admins.display_name, admins.role_code, admins.failed_attempts, admins.locked_until, admins.last_login_at, admins.created_at FROM admins ORDER BY id ASC"),
@@ -696,7 +736,7 @@ export function getModuleData(module: DbModule) {
   }
 }
 
-export function executeAction(user: AdminUser, action: string, payload: Record<string, unknown>, request: Request) {
+export async function executeAction(user: AdminUser, action: string, payload: Record<string, unknown>, request: Request) {
   const database = getDb();
   const timestamp = now();
   switch (action) {
@@ -848,6 +888,44 @@ export function executeAction(user: AdminUser, action: string, payload: Record<s
       const row = get("SELECT * FROM sync_jobs ORDER BY id DESC LIMIT 1");
       audit(user, "手动同步商品快照", "sync", String(row?.id), null, row, request);
       return row;
+    }
+    case "sync.google_search_console": {
+      assertPermission(user, "sync.run");
+      const startedAt = timestamp;
+      const result = await fetchSearchConsoleData(Number(payload.days || 28));
+      let success = 0;
+      for (const row of result.rows) {
+        const keys = row.keys || [];
+        database.prepare(`
+          INSERT INTO seo_search_console_rows
+          (site_url, data_date, query, page, country, device, clicks, impressions, ctr, position, synced_at)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          ON CONFLICT(site_url, data_date, query, page, country, device) DO UPDATE SET
+            clicks = excluded.clicks,
+            impressions = excluded.impressions,
+            ctr = excluded.ctr,
+            position = excluded.position,
+            synced_at = excluded.synced_at
+        `).run(
+          result.siteUrl,
+          String(keys[0] || ""),
+          String(keys[1] || ""),
+          String(keys[2] || ""),
+          String(keys[3] || ""),
+          String(keys[4] || ""),
+          Math.round(Number(row.clicks || 0)),
+          Math.round(Number(row.impressions || 0)),
+          Number(row.ctr || 0),
+          Number(row.position || 0),
+          now()
+        );
+        success += 1;
+      }
+      database.prepare("INSERT INTO sync_jobs (source_name, job_type, status, records_total, records_success, records_failed, message, started_at, finished_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
+        .run("Google Search Console", "seo_search_analytics", "success", result.rows.length, success, 0, `已同步 ${result.siteUrl} ${result.fromDate} 至 ${result.toDate} 的搜索表现数据`, startedAt, now());
+      const row = get("SELECT * FROM sync_jobs ORDER BY id DESC LIMIT 1");
+      audit(user, "同步 Google SEO 数据", "sync", String(row?.id), null, { ...row, availableSites: result.availableSites }, request);
+      return { ...row, siteUrl: result.siteUrl, fromDate: result.fromDate, toDate: result.toDate, rows: success };
     }
     case "settings.save": {
       assertPermission(user, "settings.edit");

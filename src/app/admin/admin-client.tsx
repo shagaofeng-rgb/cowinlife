@@ -454,46 +454,69 @@ function Content({ data, runAction }: { data: ApiState; runAction: (action: stri
 }
 
 function Seo({ data, runAction }: { data: ApiState; runAction: (action: string, payload?: Record<string, unknown>) => Promise<void> }) {
+  const summary = data.searchConsoleSummary || {};
   return (
-    <section className="admin-table-wrap">
-      <h2>站内 SEO 数据</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>对象</th>
-            <th>路径</th>
-            <th>标题</th>
-            <th>Robots</th>
-            <th>结构化数据</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody>
-          {(data.seoRecords || []).map((record: any) => (
-            <tr key={record.id}>
-              <td>{record.entity_type}</td>
-              <td>{record.path}</td>
-              <td>{record.seo_title}</td>
-              <td>{record.robots}</td>
-              <td><Status value={record.structured_data_status} /></td>
-              <td><button onClick={() => runAction("seo.save", { seoId: record.id, seoTitle: record.seo_title, seoDescription: record.seo_description, robots: "index,follow" })}>检测并保存</button></td>
+    <div className="admin-stack">
+      <section className="toolbar">
+        <button onClick={() => runAction("sync.google_search_console", { days: 28 })}><RefreshCw size={16} />同步 Google Search Console</button>
+      </section>
+      <section className="metric-grid">
+        <article><small>SEO 数据行</small><strong>{summary.rows || 0}</strong></article>
+        <article><small>自然点击</small><strong>{summary.clicks || 0}</strong></article>
+        <article><small>曝光量</small><strong>{summary.impressions || 0}</strong></article>
+        <article><small>平均排名</small><strong>{Number(summary.avg_position || 0).toFixed(1)}</strong></article>
+      </section>
+      <section className="admin-table-wrap">
+        <h2>站内 SEO 数据</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>对象</th>
+              <th>路径</th>
+              <th>标题</th>
+              <th>Robots</th>
+              <th>结构化数据</th>
+              <th>操作</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
+          </thead>
+          <tbody>
+            {(data.seoRecords || []).map((record: any) => (
+              <tr key={record.id}>
+                <td>{record.entity_type}</td>
+                <td>{record.path}</td>
+                <td>{record.seo_title}</td>
+                <td>{record.robots}</td>
+                <td><Status value={record.structured_data_status} /></td>
+                <td><button onClick={() => runAction("seo.save", { seoId: record.id, seoTitle: record.seo_title, seoDescription: record.seo_description, robots: "index,follow" })}>检测并保存</button></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+      <SimpleTable title="Google Search Console 搜索表现" rows={data.searchConsoleRows || []} columns={["data_date", "query", "page", "country", "device", "clicks", "impressions", "ctr", "position", "synced_at"]} />
+    </div>
   );
 }
 
 function Sync({ data, runAction }: { data: ApiState; runAction: (action: string, payload?: Record<string, unknown>) => Promise<void> }) {
+  const summary = data.searchConsoleSummary || {};
   return (
     <div className="admin-stack">
       <section className="sync-panel">
         <div>
           <h2>数据同步中心</h2>
-          <p>未配置外部 API 凭证时，不显示伪造数据；当前可执行本地 Amazon 商品快照入库同步。</p>
+          <p>未配置外部 API 凭证时，不显示伪造数据；当前支持 Amazon 商品快照和 Google Search Console SEO 数据同步。</p>
         </div>
-        <button onClick={() => runAction("sync.amazon_snapshot")}><RefreshCw size={16} />执行商品快照同步</button>
+        <div className="row-actions">
+          <button onClick={() => runAction("sync.amazon_snapshot")}><RefreshCw size={16} />执行商品快照同步</button>
+          <button onClick={() => runAction("sync.google_search_console", { days: 28 })}><Globe2 size={16} />同步 Google SEO</button>
+        </div>
+      </section>
+      <section className="metric-grid">
+        <article><small>SEO 数据行</small><strong>{summary.rows || 0}</strong></article>
+        <article><small>自然点击</small><strong>{summary.clicks || 0}</strong></article>
+        <article><small>曝光量</small><strong>{summary.impressions || 0}</strong></article>
+        <article><small>平均排名</small><strong>{Number(summary.avg_position || 0).toFixed(1)}</strong></article>
       </section>
       <SimpleTable title="同步任务记录" rows={data.syncJobs || []} columns={["id", "source_name", "job_type", "status", "records_total", "records_success", "records_failed", "message", "finished_at"]} />
     </div>

@@ -57,7 +57,7 @@ export async function POST(request: Request) {
     const body = await request.json().catch(() => ({}));
     const action = String(body.action || "");
     const payload = (body.payload || {}) as Record<string, unknown>;
-    const result = executeAction(user, action, payload, request);
+    const result = await executeAction(user, action, payload, request);
     return NextResponse.json({ ok: true, result });
   } catch (error) {
     return errorResponse(error);
