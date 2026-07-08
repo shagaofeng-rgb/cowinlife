@@ -1,0 +1,36 @@
+export const storeConfig = {
+  storeName: "QUCHENG",
+  legalCompanyName: "Quchengnet",
+  domain: "qucheng-home.test",
+  brandSlogan: "Peel, place, and make the room feel new.",
+  brandDescription:
+    "QUCHENG creates removable wall decals, window films, and peel-and-stick surfaces for nursery rooms, playrooms, cozy apartments, and quick home refresh projects.",
+  industry: "Home decor and DIY surface decoration",
+  headquartersCountry: "US",
+  address: "Configure business address before production launch",
+  supportEmail: "support@qucheng-home.test",
+  supportPhone: "+1 (000) 000-0000",
+  whatsapp: "",
+  businessHours: "Mon-Fri, 9:00-17:00",
+  defaultLocale: "en",
+  supportedLocales: ["en", "zh-CN", "de", "fr", "es", "pt", "ar"],
+  defaultCurrency: "USD",
+  supportedCurrencies: ["USD", "EUR", "GBP", "CAD", "AUD", "JPY", "CNY"],
+  primaryColor: "#263238",
+  secondaryColor: "#d66b4d",
+  accentColor: "#f6c65b",
+  freeShippingThreshold: 49,
+  defaultCountry: "US",
+  socialLinks: {
+    instagram: "",
+    tiktok: "",
+    youtube: "",
+    facebook: "",
+    pinterest: "",
+    x: ""
+  },
+  payments: ["Card via hosted payment element", "PayPal", "Gift card balance"],
+  returnsWindowDays: 30,
+  cookieMode: "analytics opt-in",
+  launchOfferCode: "WELCOME15"
+};
