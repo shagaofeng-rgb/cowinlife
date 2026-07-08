@@ -608,6 +608,142 @@ export function audit(user: AdminUser | null, action: string, entityType: string
     );
 }
 
+type PublicOrderInput = {
+  email: string;
+  name: string;
+  address: string;
+  country: string;
+  note?: string;
+  items: Array<Record<string, unknown>>;
+  subtotalCents: number;
+  shippingCents: number;
+  taxCents: number;
+  totalCents: number;
+  currency: string;
+  request?: Request;
+};
+
+function normalizeEmail(email: string) {
+  return email.trim().toLowerCase();
+}
+
+export function createPublicOrder(input: PublicOrderInput) {
+  const email = normalizeEmail(input.email);
+  const name = input.name.trim();
+  const address = input.address.trim();
+  const country = input.country.trim() || "US";
+  if (!email.includes("@")) throw new Error("Valid email is required");
+  if (!name) throw new Error("Customer name is required");
+  if (!address) throw new Error("Shipping address is required");
+  if (!input.items.length) throw new Error("At least one priced product is required");
+
+  const database = getDb();
+  const timestamp = now();
+  const orderNo = `CWL-${Date.now()}-${crypto.randomInt(1000, 9999)}`;
+  const customerSnapshot = { email, name, country, address };
+
+  database.exec("BEGIN IMMEDIATE");
+  try {
+    database
+      .prepare(
+        `INSERT INTO customers (email, name, country, tags_json, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?)
+         ON CONFLICT(email) DO UPDATE SET name = excluded.name, country = excluded.country, updated_at = excluded.updated_at`
+      )
+      .run(email, name, country, json(["storefront"]), timestamp, timestamp);
+    const customer = get("SELECT * FROM customers WHERE email = ?", email);
+    const customerId = Number(customer?.id || 0) || null;
+
+    database
+      .prepare(
+        `INSERT INTO carts (customer_id, email, items_json, currency, subtotal_cents, discount_cents, status, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+      )
+      .run(customerId, email, json(input.items), input.currency, input.subtotalCents, 0, "converted_to_order", timestamp, timestamp);
+
+    database
+      .prepare(
+        `INSERT INTO orders
+        (order_no, customer_id, customer_snapshot_json, items_snapshot_json, subtotal_cents, discount_cents, shipping_cents, tax_cents,
+         total_cents, order_currency, payment_currency, payment_status, order_status, fulfillment_status, source, customer_note, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+      )
+      .run(
+        orderNo,
+        customerId,
+        json(customerSnapshot),
+        json(input.items),
+        input.subtotalCents,
+        0,
+        input.shippingCents,
+        input.taxCents,
+        input.totalCents,
+        input.currency,
+        input.currency,
+        "pending",
+        "pending_payment",
+        "unfulfilled",
+        "storefront",
+        input.note || "",
+        timestamp,
+        timestamp
+      );
+
+    database
+      .prepare("UPDATE customers SET order_count = order_count + 1, updated_at = ? WHERE id = ?")
+      .run(timestamp, customerId);
+    database.exec("COMMIT");
+  } catch (error) {
+    database.exec("ROLLBACK");
+    throw error;
+  }
+
+  const order = get("SELECT * FROM orders WHERE order_no = ?", orderNo);
+  audit(null, "storefront_order_created", "order", String(order?.id || orderNo), null, order, input.request);
+  return order;
+}
+
+export function getPublicOrder(orderNo: string) {
+  return get("SELECT * FROM orders WHERE order_no = ?", orderNo);
+}
+
+export function createPublicForm(input: {
+  formType: string;
+  email: string;
+  name: string;
+  message: string;
+  relatedProductId?: string;
+  request?: Request;
+}) {
+  const email = normalizeEmail(input.email);
+  const name = input.name.trim();
+  const message = input.message.trim();
+  if (!email.includes("@")) throw new Error("Valid email is required");
+  if (!name) throw new Error("Name is required");
+  if (message.length < 3) throw new Error("Message is required");
+  const timestamp = now();
+  const database = getDb();
+  database
+    .prepare(
+      `INSERT INTO customer_forms (form_type, email, name, message, related_product_id, source, status, created_at, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    )
+    .run(
+      input.formType || "contact",
+      email,
+      name,
+      message,
+      input.relatedProductId || null,
+      "storefront",
+      "new",
+      timestamp,
+      timestamp
+    );
+  const form = get("SELECT * FROM customer_forms ORDER BY id DESC LIMIT 1");
+  audit(null, "storefront_form_created", "customer_form", String(form?.id || ""), null, form, input.request);
+  return form;
+}
+
 function parseRow<T extends Record<string, unknown>>(row: T) {
   const parsed: Record<string, unknown> = { ...row };
   for (const key of Object.keys(parsed)) {

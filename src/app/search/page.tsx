@@ -1,0 +1,29 @@
+import type { Metadata } from "next";
+import { ProductCard, PublicShell, RouteHero } from "@/components/storefront-shell";
+import { searchProducts } from "@/lib/storefront";
+
+export const metadata: Metadata = {
+  title: "Search",
+  description: "Search QUCHENG products by ASIN, collection, room, material, and feature.",
+  alternates: { canonical: "/search" }
+};
+
+export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+  const { q = "" } = await searchParams;
+  const results = searchProducts(q);
+  return (
+    <PublicShell>
+      <RouteHero eyebrow="Search" title="Find QUCHENG decor" text="Search by ASIN, product type, room, collection, or installation feature." />
+      <section className="section route-section">
+        <form className="route-search-form" action="/search">
+          <input name="q" defaultValue={q} placeholder="Search decals, film, wallpaper, ASIN..." aria-label="Search products" />
+          <button className="button primary">Search</button>
+        </form>
+        <p className="route-count">{results.length} result{results.length === 1 ? "" : "s"}</p>
+        <div className="product-grid">
+          {results.map((product) => <ProductCard product={product} key={product.id} />)}
+        </div>
+      </section>
+    </PublicShell>
+  );
+}
