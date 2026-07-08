@@ -479,7 +479,7 @@ function seedCatalog(database: Database) {
         moneyToCents(product.price),
         product.priceDisplay,
         product.priceSource,
-        product.amazonUrl,
+        product.externalUrl,
         product.image,
         json(product.gallery),
         json(product.tags),
@@ -499,7 +499,7 @@ function seedCatalog(database: Database) {
         (product_id, sku, total_quantity, available_quantity, amazon_availability, quantity_source, updated_at)
         VALUES (?, ?, ?, ?, ?, ?, ?)`
       )
-      .run(product.id, product.asin, 0, 0, product.availability, "amazon_status_only_quantity_pending", timestamp);
+      .run(product.id, product.asin, 0, 0, product.availability, "catalog_status_quantity_pending", timestamp);
 
     database
       .prepare(
@@ -518,7 +518,7 @@ function seedCatalog(database: Database) {
     .run("payment", json({ testProviderEnabled: true, liveProviderConfigured: false, saveCards: false }), timestamp);
   database
     .prepare("INSERT OR IGNORE INTO settings (key, value_json, updated_at) VALUES (?, ?, ?)")
-    .run("sync", json({ amazonSnapshot: "manual", seoExternal: "credentials_required", analyticsExternal: "credentials_required" }), timestamp);
+    .run("sync", json({ catalogSnapshot: "manual", seoExternal: "credentials_required", analyticsExternal: "credentials_required" }), timestamp);
 }
 
 function initialize(database: Database) {
@@ -785,7 +785,7 @@ export function getModuleData(module: DbModule) {
         totals,
         recentOrders: all("SELECT * FROM orders ORDER BY created_at DESC LIMIT 8"),
         lowStock: all(`
-          SELECT products_admin.name, products_admin.asin, inventory.available_quantity, inventory.low_stock_threshold, inventory.quantity_source
+          SELECT products_admin.name, products_admin.asin AS sku, inventory.available_quantity, inventory.low_stock_threshold, inventory.quantity_source
           FROM inventory JOIN products_admin ON products_admin.id = inventory.product_id
           WHERE inventory.available_quantity <= inventory.low_stock_threshold
           ORDER BY inventory.available_quantity ASC LIMIT 8
@@ -1012,7 +1012,7 @@ export async function executeAction(user: AdminUser, action: string, payload: Re
       audit(user, "修改SEO", "seo", String(payload.seoId), null, row, request);
       return row;
     }
-    case "sync.amazon_snapshot": {
+    case "sync.catalog_snapshot": {
       assertPermission(user, "sync.run");
       let success = 0;
       for (const product of products) {
@@ -1020,7 +1020,7 @@ export async function executeAction(user: AdminUser, action: string, payload: Re
         success += 1;
       }
       database.prepare("INSERT INTO sync_jobs (source_name, job_type, status, records_total, records_success, records_failed, message, started_at, finished_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
-        .run("Amazon Store 商品快照", "manual_snapshot", "success", products.length, success, 0, "已将当前本地 Amazon 商品快照同步到后台数据库", timestamp, now());
+        .run("商品目录快照", "manual_snapshot", "success", products.length, success, 0, "已将当前本地商品目录快照同步到后台数据库", timestamp, now());
       const row = get("SELECT * FROM sync_jobs ORDER BY id DESC LIMIT 1");
       audit(user, "手动同步商品快照", "sync", String(row?.id), null, row, request);
       return row;

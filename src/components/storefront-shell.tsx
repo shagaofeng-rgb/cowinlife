@@ -4,13 +4,13 @@ import { ArrowRight, Check, Search, ShoppingBag, Star } from "lucide-react";
 import { storeConfig } from "@/config/store.config";
 import type { Product } from "@/data/products";
 import { collections } from "@/data/products";
-import { collectionSlug, money, priceToUsd, productSlug } from "@/lib/storefront";
+import { availabilityText, collectionSlug, money, priceToUsd, productSlug, publicSku } from "@/lib/storefront";
 
 export function StorefrontHeader() {
   return (
     <>
       <header className="announcement">
-        <span>Amazon-synced QUCHENG catalog with real ASIN images, prices, and parameters.</span>
+        <span>QUCHENG home decor catalog with product images, prices, and room-ready specifications.</span>
         <span>Free shipping estimate over $49.00.</span>
       </header>
       <nav className="topbar route-topbar" aria-label="Primary navigation">
@@ -26,6 +26,7 @@ export function StorefrontHeader() {
             </Link>
           ))}
           <Link className="navlink" href="/blog">Blog</Link>
+          <Link className="navlink" href="/news">News</Link>
           <Link className="navlink" href="/contact">Support</Link>
         </div>
         <div className="nav-actions">
@@ -84,17 +85,17 @@ export function ProductCard({ product }: { product: Product }) {
         <Image src={product.image} alt={product.name} width={520} height={520} />
       </Link>
       <div className="product-info">
-        <span>{product.collection} / {product.asin}</span>
+        <span>{product.collection} / {publicSku(product)}</span>
         <h3>{product.name}</h3>
         <p>{product.tags.slice(0, 4).join(" / ")}</p>
         <div className="price-row">
           <strong>{price}</strong>
-          <small>{product.priceDisplay} source</small>
+          <small>Catalog price</small>
         </div>
         <div className="product-meta">
           <span><Star size={14} /> {product.ratingText || "Rating unavailable"}</span>
-          <span>{product.reviewCount ? `${product.reviewCount} source reviews` : "Reviews unavailable"}</span>
-          <span>{product.availability}</span>
+          <span>{product.reviewCount ? `${product.reviewCount} reviews` : "Reviews unavailable"}</span>
+          <span>{availabilityText(product)}</span>
         </div>
         <div className="card-actions">
           <Link className="button primary" href={`/products/${productSlug(product)}`}>

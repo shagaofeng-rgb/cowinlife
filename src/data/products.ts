@@ -17,7 +17,7 @@ export type Product = {
   availability: string;
   merchant: string;
   fulfilledBy: string;
-  amazonUrl: string;
+  externalUrl: string;
   sourcePage: string;
   promotion: string;
   shipping: string;
@@ -69,12 +69,12 @@ export const products: Product[] = [
     "price": 38.73,
     "currency": "CNY",
     "priceDisplay": "CNY 38.73",
-    "priceSource": "Amazon detail page localized offer",
-    "availability": "See Amazon detail page",
+    "priceSource": "Catalog price",
+    "availability": "Availability varies",
     "merchant": "Quchengnet",
-    "fulfilledBy": "Amazon product page",
-    "amazonUrl": "https://www.amazon.com/dp/B0CLY5Y23C",
-    "sourcePage": "Amazon product page",
+    "fulfilledBy": "Catalog record",
+    "externalUrl": "",
+    "sourcePage": "Catalog record",
     "promotion": "",
     "shipping": "",
     "unitPrice": "",
@@ -111,15 +111,11 @@ export const products: Product[] = [
     "details": "Roll Packging:Safe shipping;package layout size: 40cm*150cm/15.75*59.1inch*1pcs;Feature:Grainy Frosted PVC.ATTENTION: ACTUAL SIZE SHOWN IN IMAGE 2! PLEASE CHECK BEFORE BUYING! This is a SINGLE LARGE decal.",
     "parameters": [
       {
-        "label": "ASIN",
-        "value": "B0CLY5Y23C"
+        "label": "Availability",
+        "value": "Availability varies"
       },
       {
-        "label": "Amazon availability",
-        "value": "See Amazon detail page"
-      },
-      {
-        "label": "Source price",
+        "label": "Catalog price",
         "value": "CNY 38.73"
       },
       {
@@ -136,7 +132,7 @@ export const products: Product[] = [
       },
       {
         "label": "Fulfillment",
-        "value": "Amazon product page"
+        "value": "Catalog record"
       }
     ]
   },
@@ -150,12 +146,12 @@ export const products: Product[] = [
     "price": 38.73,
     "currency": "CNY",
     "priceDisplay": "CNY 38.73",
-    "priceSource": "Amazon detail page localized offer",
-    "availability": "See Amazon detail page",
+    "priceSource": "Catalog price",
+    "availability": "Availability varies",
     "merchant": "Quchengnet",
-    "fulfilledBy": "Amazon product page",
-    "amazonUrl": "https://www.amazon.com/dp/B0CLY66ZRB",
-    "sourcePage": "Amazon product page",
+    "fulfilledBy": "Catalog record",
+    "externalUrl": "",
+    "sourcePage": "Catalog record",
     "promotion": "",
     "shipping": "",
     "unitPrice": "",
@@ -192,15 +188,11 @@ export const products: Product[] = [
     "details": "Roll Packging:Safe shipping;package layout size: 40cm*150cm/15.75*59.1inch*1pcs;Feature:Grainy Frosted PVC.ATTENTION: ACTUAL SIZE SHOWN IN IMAGE 2! PLEASE CHECK BEFORE BUYING! This is a SINGLE LARGE decal.",
     "parameters": [
       {
-        "label": "ASIN",
-        "value": "B0CLY66ZRB"
+        "label": "Availability",
+        "value": "Availability varies"
       },
       {
-        "label": "Amazon availability",
-        "value": "See Amazon detail page"
-      },
-      {
-        "label": "Source price",
+        "label": "Catalog price",
         "value": "CNY 38.73"
       },
       {
@@ -217,7 +209,7 @@ export const products: Product[] = [
       },
       {
         "label": "Fulfillment",
-        "value": "Amazon product page"
+        "value": "Catalog record"
       }
     ]
   },
@@ -231,11 +223,11 @@ export const products: Product[] = [
     "price": 18.99,
     "currency": "USD",
     "priceDisplay": "$18.99",
-    "priceSource": "Amazon Store embedded offer",
+    "priceSource": "Catalog price",
     "availability": "In Stock",
     "merchant": "Quchengnet",
-    "fulfilledBy": "FULFILLED_BY_AMAZON",
-    "amazonUrl": "https://www.amazon.com/QUCHENG-Monochrome-Chinoiserie-Livingroon-Decoration/dp/B0CLY7818J",
+    "fulfilledBy": "Standard fulfillment",
+    "externalUrl": "",
     "sourcePage": "self adhesive",
     "promotion": "Save 5%",
     "shipping": "$6.99",
@@ -280,15 +272,11 @@ export const products: Product[] = [
     "details": "Roll Packging:Safe shipping;package layout size: 40cm*150cm/15.75*59.1inch*1pcs;Feature:Grainy Frosted PVC.ATTENTION: ACTUAL SIZE SHOWN IN IMAGE 2! PLEASE CHECK BEFORE BUYING! This is a SINGLE LARGE decal.",
     "parameters": [
       {
-        "label": "ASIN",
-        "value": "B0CLY7818J"
-      },
-      {
-        "label": "Amazon availability",
+        "label": "Availability",
         "value": "In Stock"
       },
       {
-        "label": "Source price",
+        "label": "Catalog price",
         "value": "$18.99"
       },
       {
@@ -309,7 +297,7 @@ export const products: Product[] = [
       },
       {
         "label": "Fulfillment",
-        "value": "FULFILLED_BY_AMAZON"
+        "value": "Standard fulfillment"
       },
       {
         "label": "Promotion",
@@ -331,11 +319,11 @@ export const products: Product[] = [
     "price": 19.99,
     "currency": "USD",
     "priceDisplay": "$19.99",
-    "priceSource": "Amazon Store embedded offer",
+    "priceSource": "Catalog price",
     "availability": "In Stock",
     "merchant": "Quchengnet",
-    "fulfilledBy": "FULFILLED_BY_AMAZON",
-    "amazonUrl": "https://www.amazon.com/QUCHENG-Wallpaper-Butterfly-Livingroon-Decoration/dp/B0CZ3B899P",
+    "fulfilledBy": "Standard fulfillment",
+    "externalUrl": "",
     "sourcePage": "best sellers",
     "promotion": "Save 5%",
     "shipping": "$6.99",
@@ -381,15 +369,11 @@ export const products: Product[] = [
     "details": "Roll Packaging:Safe shipping;package layout size: 40cm*160cm/15.75*62.99inch*1pcs;Feature:Grainy Frosted PVC.ATTENTION: ACTUAL SIZE SHOWN IN IMAGE 2! PLEASE CHECK BEFORE BUYING! This is a SINGLE LARGE decal.",
     "parameters": [
       {
-        "label": "ASIN",
-        "value": "B0CZ3B899P"
-      },
-      {
-        "label": "Amazon availability",
+        "label": "Availability",
         "value": "In Stock"
       },
       {
-        "label": "Source price",
+        "label": "Catalog price",
         "value": "$19.99"
       },
       {
@@ -410,7 +394,7 @@ export const products: Product[] = [
       },
       {
         "label": "Fulfillment",
-        "value": "FULFILLED_BY_AMAZON"
+        "value": "Standard fulfillment"
       },
       {
         "label": "Promotion",
@@ -432,11 +416,11 @@ export const products: Product[] = [
     "price": 23.99,
     "currency": "USD",
     "priceDisplay": "$23.99",
-    "priceSource": "Amazon Store embedded offer",
+    "priceSource": "Catalog price",
     "availability": "In Stock",
     "merchant": "Quchengnet",
-    "fulfilledBy": "FULFILLED_BY_AMAZON",
-    "amazonUrl": "https://www.amazon.com/QUCHENG-Wallpaper-Butterfly-Livingroon-Decoration/dp/B0CZ3BXZDT",
+    "fulfilledBy": "Standard fulfillment",
+    "externalUrl": "",
     "sourcePage": "best sellers",
     "promotion": "Save 5%",
     "shipping": "$6.99",
@@ -482,15 +466,11 @@ export const products: Product[] = [
     "details": "Roll Packaging:Safe shipping;package layout size: 40cm*160cm/15.75*62.99inch*1pcs;Feature:Grainy Frosted PVC.ATTENTION: ACTUAL SIZE SHOWN IN IMAGE 2! PLEASE CHECK BEFORE BUYING! This is a SINGLE LARGE decal.",
     "parameters": [
       {
-        "label": "ASIN",
-        "value": "B0CZ3BXZDT"
-      },
-      {
-        "label": "Amazon availability",
+        "label": "Availability",
         "value": "In Stock"
       },
       {
-        "label": "Source price",
+        "label": "Catalog price",
         "value": "$23.99"
       },
       {
@@ -511,7 +491,7 @@ export const products: Product[] = [
       },
       {
         "label": "Fulfillment",
-        "value": "FULFILLED_BY_AMAZON"
+        "value": "Standard fulfillment"
       },
       {
         "label": "Promotion",
@@ -533,11 +513,11 @@ export const products: Product[] = [
     "price": 29.99,
     "currency": "USD",
     "priceDisplay": "$29.99",
-    "priceSource": "Amazon Store embedded offer",
-    "availability": "See Amazon detail page",
+    "priceSource": "Catalog price",
+    "availability": "Availability varies",
     "merchant": "Quchengnet",
-    "fulfilledBy": "Amazon product page",
-    "amazonUrl": "https://www.amazon.com/QUCHENG-Butterfly-Wallpaper-Removable-Furniture/dp/B0G7GFMP78",
+    "fulfilledBy": "Catalog record",
+    "externalUrl": "",
     "sourcePage": "best sellers",
     "promotion": "",
     "shipping": "",
@@ -576,15 +556,11 @@ export const products: Product[] = [
     "details": "Roll Packaging:Safe shipping;package layout size: 40cm*250cm/15.75*98.43inch*1pcs;Feature:Grainy Frosted PVC.ATTENTION: ACTUAL SIZE SHOWN IN IMAGE 2! PLEASE CHECK BEFORE BUYING! This is a SINGLE LARGE decal.",
     "parameters": [
       {
-        "label": "ASIN",
-        "value": "B0CZ3L748N"
+        "label": "Availability",
+        "value": "Availability varies"
       },
       {
-        "label": "Amazon availability",
-        "value": "See Amazon detail page"
-      },
-      {
-        "label": "Source price",
+        "label": "Catalog price",
         "value": "$29.99"
       },
       {
@@ -601,7 +577,7 @@ export const products: Product[] = [
       },
       {
         "label": "Fulfillment",
-        "value": "Amazon product page"
+        "value": "Catalog record"
       }
     ]
   },
@@ -615,11 +591,11 @@ export const products: Product[] = [
     "price": 19.99,
     "currency": "USD",
     "priceDisplay": "$19.99",
-    "priceSource": "Amazon Store embedded offer",
+    "priceSource": "Catalog price",
     "availability": "In Stock",
     "merchant": "Quchengnet",
-    "fulfilledBy": "FULFILLED_BY_AMAZON",
-    "amazonUrl": "https://www.amazon.com/QUCHENG-Wallpaper-Butterfly-Livingroon-Decoration/dp/B0CZ3N28YD",
+    "fulfilledBy": "Standard fulfillment",
+    "externalUrl": "",
     "sourcePage": "best sellers",
     "promotion": "Save 5%",
     "shipping": "$6.99",
@@ -665,15 +641,11 @@ export const products: Product[] = [
     "details": "Roll Packaging:Safe shipping;package layout size: 40cm*160cm/15.75*62.99inch*1pcs;Feature:Grainy Frosted PVC.ATTENTION: ACTUAL SIZE SHOWN IN IMAGE 2! PLEASE CHECK BEFORE BUYING! This is a SINGLE LARGE decal.",
     "parameters": [
       {
-        "label": "ASIN",
-        "value": "B0CZ3N28YD"
-      },
-      {
-        "label": "Amazon availability",
+        "label": "Availability",
         "value": "In Stock"
       },
       {
-        "label": "Source price",
+        "label": "Catalog price",
         "value": "$19.99"
       },
       {
@@ -690,7 +662,7 @@ export const products: Product[] = [
       },
       {
         "label": "Fulfillment",
-        "value": "FULFILLED_BY_AMAZON"
+        "value": "Standard fulfillment"
       },
       {
         "label": "Promotion",
@@ -712,11 +684,11 @@ export const products: Product[] = [
     "price": 13.99,
     "currency": "USD",
     "priceDisplay": "$13.99",
-    "priceSource": "Amazon Store embedded offer",
+    "priceSource": "Catalog price",
     "availability": "In Stock",
     "merchant": "Quchengnet",
-    "fulfilledBy": "FULFILLED_BY_AMAZON",
-    "amazonUrl": "https://www.amazon.com/QUCHENG-Suncatcher-Watercolor-Blocking-Decorations/dp/B0D7M9MZ68",
+    "fulfilledBy": "Standard fulfillment",
+    "externalUrl": "",
     "sourcePage": "static adhesive",
     "promotion": "Save 5%",
     "shipping": "$6.99",
@@ -759,15 +731,11 @@ export const products: Product[] = [
     "details": "Value Package: 16.92*39.37 inch*1 pcs static film. Rolled design for easy transportation, needs to be laid flat before use",
     "parameters": [
       {
-        "label": "ASIN",
-        "value": "B0D7M9MZ68"
-      },
-      {
-        "label": "Amazon availability",
+        "label": "Availability",
         "value": "In Stock"
       },
       {
-        "label": "Source price",
+        "label": "Catalog price",
         "value": "$13.99"
       },
       {
@@ -784,7 +752,7 @@ export const products: Product[] = [
       },
       {
         "label": "Fulfillment",
-        "value": "FULFILLED_BY_AMAZON"
+        "value": "Standard fulfillment"
       },
       {
         "label": "Promotion",
@@ -806,12 +774,12 @@ export const products: Product[] = [
     "price": 41.5,
     "currency": "CNY",
     "priceDisplay": "CNY 41.50",
-    "priceSource": "Amazon detail page localized offer",
-    "availability": "See Amazon detail page",
+    "priceSource": "Catalog price",
+    "availability": "Availability varies",
     "merchant": "Quchengnet",
-    "fulfilledBy": "Amazon product page",
-    "amazonUrl": "https://www.amazon.com/dp/B0G7DCQ32S",
-    "sourcePage": "Amazon product page",
+    "fulfilledBy": "Catalog record",
+    "externalUrl": "",
+    "sourcePage": "Catalog record",
     "promotion": "",
     "shipping": "",
     "unitPrice": "",
@@ -846,15 +814,11 @@ export const products: Product[] = [
     "details": "Value Package: 12 Sheets Boho wall stickers, each measures 14.8 cm*21 cm (5.82 inch * 8.26 inch) wall stickers in total.",
     "parameters": [
       {
-        "label": "ASIN",
-        "value": "B0G7DCQ32S"
+        "label": "Availability",
+        "value": "Availability varies"
       },
       {
-        "label": "Amazon availability",
-        "value": "See Amazon detail page"
-      },
-      {
-        "label": "Source price",
+        "label": "Catalog price",
         "value": "CNY 41.50"
       },
       {
@@ -867,7 +831,7 @@ export const products: Product[] = [
       },
       {
         "label": "Fulfillment",
-        "value": "Amazon product page"
+        "value": "Catalog record"
       }
     ]
   },
@@ -881,12 +845,12 @@ export const products: Product[] = [
     "price": 38.73,
     "currency": "CNY",
     "priceDisplay": "CNY 38.73",
-    "priceSource": "Amazon detail page localized offer",
-    "availability": "See Amazon detail page",
+    "priceSource": "Catalog price",
+    "availability": "Availability varies",
     "merchant": "Quchengnet",
-    "fulfilledBy": "Amazon product page",
-    "amazonUrl": "https://www.amazon.com/dp/B0G7GFMP78",
-    "sourcePage": "Amazon product page",
+    "fulfilledBy": "Catalog record",
+    "externalUrl": "",
+    "sourcePage": "Catalog record",
     "promotion": "",
     "shipping": "",
     "unitPrice": "",
@@ -924,15 +888,11 @@ export const products: Product[] = [
     "details": "Roll Packaging:Safe shipping;package layout size: 40cm*250cm/15.75*98.43inch*1pcs;Feature:Grainy Frosted PVC.ATTENTION: ACTUAL SIZE SHOWN IN IMAGE 2! PLEASE CHECK BEFORE BUYING! This is a SINGLE LARGE decal.",
     "parameters": [
       {
-        "label": "ASIN",
-        "value": "B0G7GFMP78"
+        "label": "Availability",
+        "value": "Availability varies"
       },
       {
-        "label": "Amazon availability",
-        "value": "See Amazon detail page"
-      },
-      {
-        "label": "Source price",
+        "label": "Catalog price",
         "value": "CNY 38.73"
       },
       {
@@ -949,7 +909,7 @@ export const products: Product[] = [
       },
       {
         "label": "Fulfillment",
-        "value": "Amazon product page"
+        "value": "Catalog record"
       }
     ]
   }

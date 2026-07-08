@@ -23,6 +23,10 @@ import {
 } from "lucide-react";
 import { FormEvent, ReactNode, useEffect, useMemo, useState } from "react";
 
+function displaySku(index: number) {
+  return `CW-${String(index + 1001).padStart(4, "0")}`;
+}
+
 type ModuleKey =
   | "dashboard"
   | "products"
@@ -131,7 +135,7 @@ export default function AdminClient() {
   const filteredProducts = useMemo(() => {
     const items = data.products || [];
     const needle = query.toLowerCase();
-    return items.filter((item: any) => `${item.name} ${item.asin} ${item.collection_name} ${item.status}`.toLowerCase().includes(needle));
+    return items.filter((item: any, index: number) => `${item.name} ${displaySku(index)} ${item.collection_name} ${item.status}`.toLowerCase().includes(needle));
   }, [data.products, query]);
 
   if (loading && !user) {
@@ -269,7 +273,7 @@ function Dashboard({ data }: { data: ApiState }) {
         ))}
       </section>
       <div className="admin-columns">
-        <SimpleTable title="低库存与待录入库存" rows={data.lowStock || []} columns={["asin", "name", "available_quantity", "low_stock_threshold", "quantity_source"]} />
+        <SimpleTable title="低库存与待录入库存" rows={data.lowStock || []} columns={["sku", "name", "available_quantity", "low_stock_threshold", "quantity_source"]} />
         <SimpleTable title="最近同步任务" rows={data.syncJobs || []} columns={["id", "source_name", "job_type", "status", "records_success", "message", "finished_at"]} />
       </div>
     </div>
@@ -294,9 +298,9 @@ function Products({
       <section className="toolbar">
         <label className="admin-search">
           <Search size={16} />
-          <input placeholder="搜索商品名、ASIN、状态" value={query} onChange={(event) => setQuery(event.target.value)} />
+          <input placeholder="搜索商品名、SKU、状态" value={query} onChange={(event) => setQuery(event.target.value)} />
         </label>
-        <button onClick={() => runAction("sync.amazon_snapshot")}><RefreshCw size={16} />同步 Amazon 商品快照</button>
+        <button onClick={() => runAction("sync.catalog_snapshot")}><RefreshCw size={16} />同步商品目录快照</button>
       </section>
       <section className="admin-table-wrap">
         <h2>商品管理与库存</h2>
@@ -304,7 +308,7 @@ function Products({
           <thead>
             <tr>
               <th>商品</th>
-              <th>ASIN</th>
+              <th>SKU</th>
               <th>价格</th>
               <th>状态</th>
               <th>可售库存</th>
@@ -313,7 +317,7 @@ function Products({
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
+            {products.map((product, index) => (
               <tr key={product.id}>
                 <td>
                   <div className="product-cell">
@@ -321,7 +325,7 @@ function Products({
                     <span>{product.name}</span>
                   </div>
                 </td>
-                <td>{product.asin}</td>
+                <td>{displaySku(index)}</td>
                 <td>{product.price_display}</td>
                 <td><Status value={product.status} /></td>
                 <td>{product.available_quantity} <small>{product.quantity_source}</small></td>
@@ -505,10 +509,10 @@ function Sync({ data, runAction }: { data: ApiState; runAction: (action: string,
       <section className="sync-panel">
         <div>
           <h2>数据同步中心</h2>
-          <p>未配置外部 API 凭证时，不显示伪造数据；当前支持 Amazon 商品快照和 Google Search Console SEO 数据同步。</p>
+          <p>未配置外部 API 凭证时，不显示伪造数据；当前支持商品目录快照和 Google Search Console SEO 数据同步。</p>
         </div>
         <div className="row-actions">
-          <button onClick={() => runAction("sync.amazon_snapshot")}><RefreshCw size={16} />执行商品快照同步</button>
+          <button onClick={() => runAction("sync.catalog_snapshot")}><RefreshCw size={16} />执行商品快照同步</button>
           <button onClick={() => runAction("sync.google_search_console", { days: 28 })}><Globe2 size={16} />同步 Google SEO</button>
         </div>
       </section>

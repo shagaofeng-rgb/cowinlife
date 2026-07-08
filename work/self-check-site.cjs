@@ -36,8 +36,8 @@ async function main() {
   const firstCollectionSlug = "nursery-wall-decals";
   const pageChecks = [
     ["/", { mustContain: ["QUCHENG"] }],
-    ["/products", { mustContain: [firstProduct.asin] }],
-    [`/products/${firstProduct.slug}`, { mustContain: [firstProduct.asin, firstProduct.name] }],
+    ["/products", { mustContain: [firstProduct.sku] }],
+    [`/products/${firstProduct.slug}`, { mustContain: [firstProduct.sku, firstProduct.name] }],
     [`/collections/${firstCollectionSlug}`, { mustContain: ["Nursery Wall Decals"] }],
     ["/search?q=window", { mustContain: ["Search"] }],
     ["/cart", { mustContain: ["Cart"] }],

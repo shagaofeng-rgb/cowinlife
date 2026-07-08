@@ -4,7 +4,7 @@ import { ProductCard, PublicShell, RouteHero } from "@/components/storefront-she
 
 export const metadata: Metadata = {
   title: "QUCHENG Products",
-  description: "Browse QUCHENG products with Amazon-synced images, ASINs, source prices, parameters, and availability notes.",
+  description: "Browse QUCHENG products with images, catalog prices, parameters, and availability notes.",
   alternates: { canonical: "/products" }
 };
 
@@ -14,7 +14,7 @@ export default function ProductsPage() {
       <RouteHero
         eyebrow="Catalog"
         title="QUCHENG Products"
-        text={`${products.length} synced products with image galleries, prices, ASINs, parameters, and source fulfillment notes.`}
+        text={`${products.length} products with image galleries, catalog prices, room categories, parameters, and checkout entry points.`}
       />
       <section className="section route-section">
         <div className="product-grid">

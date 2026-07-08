@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     default: "Cowinlife | QUCHENG Home Decor",
     template: "%s | Cowinlife"
   },
-  description: "Shop QUCHENG removable wall decals, window privacy films, and peel-and-stick wallpaper synced from the Amazon catalog.",
+  description: "Shop QUCHENG removable wall decals, window privacy films, and peel-and-stick wallpaper from the Cowinlife catalog.",
   alternates: {
     canonical: "/"
   },

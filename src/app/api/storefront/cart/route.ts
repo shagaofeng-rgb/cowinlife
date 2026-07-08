@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { calculateCart, money, type PublicCartItem } from "@/lib/storefront";
+import { calculateCart, money, publicSku, type PublicCartItem } from "@/lib/storefront";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
       },
       items: cart.items.map((item) => ({
         productId: item.product.id,
-        asin: item.product.asin,
+        sku: publicSku(item.product),
         name: item.product.name,
         image: item.product.image,
         quantity: item.quantity,

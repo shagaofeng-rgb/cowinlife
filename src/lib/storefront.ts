@@ -33,13 +33,13 @@ export const contentPosts = [
   {
     type: "news",
     slug: "cowinlife-store-launch",
-    title: "Cowinlife independent store launches with synced QUCHENG catalog",
-    excerpt: "The independent storefront now displays Amazon-sourced QUCHENG products, images, prices, and specifications.",
+    title: "Cowinlife independent store launches with QUCHENG catalog",
+    excerpt: "The independent storefront now displays QUCHENG products, images, prices, and specifications.",
     image: products[0]?.image || "/images/qucheng-hero.png",
     relatedProductIds: products.slice(0, 4).map((product) => product.id),
     publishedAt: "2026-07-08",
     body:
-      "Cowinlife now presents the QUCHENG catalog with independent-site navigation, product detail pages, checkout simulation, and an operations backend for product, order, SEO, and sync management."
+      "Cowinlife now presents the QUCHENG catalog with independent-site navigation, product detail pages, checkout simulation, and an operations backend for product, order, SEO, and catalog management."
   }
 ];
 
@@ -52,7 +52,12 @@ export function slugify(value: string) {
 }
 
 export function productSlug(product: Product) {
-  return slugify(`${product.asin}-${product.name}`);
+  return slugify(`${publicSku(product)}-${product.name}`);
+}
+
+export function publicSku(product: Product) {
+  const index = products.findIndex((item) => item.id === product.id);
+  return `CW-${String(index + 1001).padStart(4, "0")}`;
 }
 
 export function collectionSlug(name: string) {
@@ -60,7 +65,10 @@ export function collectionSlug(name: string) {
 }
 
 export function findProduct(slugOrId: string) {
-  return products.find((product) => product.id === slugOrId || productSlug(product) === slugOrId || product.asin === slugOrId);
+  return products.find((product) => {
+    const legacySlug = slugify(`${product.asin}-${product.name}`);
+    return product.id === slugOrId || productSlug(product) === slugOrId || legacySlug === slugOrId || publicSku(product).toLowerCase() === slugOrId.toLowerCase();
+  });
 }
 
 export function findCollection(slug: string) {
@@ -79,7 +87,7 @@ export function searchProducts(query: string) {
   return products.filter((product) =>
     [
       product.name,
-      product.asin,
+      publicSku(product),
       product.collection,
       product.category,
       product.room,
@@ -87,6 +95,16 @@ export function searchProducts(query: string) {
       product.features.join(" ")
     ].join(" ").toLowerCase().includes(needle)
   );
+}
+
+export function productParameters(product: Product) {
+  return product.parameters
+    .filter((parameter) => !/sku|source price|merchant|fulfillment/i.test(parameter.label))
+    .map((parameter) => ({ ...parameter, label: parameter.label.replace(/^Source /i, "") }));
+}
+
+export function availabilityText(product: Product) {
+  return product.availability.toLowerCase().includes("in stock") ? "Available" : "Availability varies";
 }
 
 export function priceToUsd(product: Product) {
@@ -128,7 +146,7 @@ export function productJsonLd(product: Product) {
     "@type": "Product",
     name: product.name,
     image: product.gallery.map((image) => `${siteUrl}${image}`),
-    sku: product.asin,
+    sku: publicSku(product),
     brand: { "@type": "Brand", name: "QUCHENG" },
     description: product.details,
     offers: price

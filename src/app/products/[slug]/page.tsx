@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { products } from "@/data/products";
 import { JsonLd, ProductCard, PublicShell } from "@/components/storefront-shell";
-import { findProduct, money, priceToUsd, productJsonLd, productSlug } from "@/lib/storefront";
+import { availabilityText, findProduct, money, priceToUsd, productJsonLd, productParameters, productSlug, publicSku } from "@/lib/storefront";
 
 export function generateStaticParams() {
   return products.map((product) => ({ slug: productSlug(product) }));
@@ -46,16 +46,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           </div>
         </div>
         <div className="detail-copy">
-          <p className="eyebrow">{product.collection} / ASIN {product.asin}</p>
+          <p className="eyebrow">{product.collection} / SKU {publicSku(product)}</p>
           <h1>{product.name}</h1>
           <div className="price-row">
             <strong>{usdCents === null ? "Price unavailable" : money(usdCents)}</strong>
-            <small>{product.priceDisplay} from {product.priceSource}</small>
+            <small>Catalog price</small>
           </div>
           <div className="product-meta detail-meta">
             <span>{product.ratingText || "Rating unavailable"}</span>
-            <span>{product.reviewCount ? `${product.reviewCount} source reviews` : "Review count unavailable"}</span>
-            <span>{product.availability}</span>
+            <span>{product.reviewCount ? `${product.reviewCount} reviews` : "Review count unavailable"}</span>
+            <span>{availabilityText(product)}</span>
           </div>
           <p>{product.details}</p>
           <div className="detail-tags">
@@ -63,10 +63,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           </div>
           <div className="detail-actions">
             <Link className="button primary" href={`/checkout?product=${product.id}`}>Add to checkout</Link>
-            <a className="button secondary" href={product.amazonUrl} target="_blank" rel="noreferrer">View Amazon source</a>
+            <Link className="button secondary" href="/contact">Ask a question</Link>
           </div>
           <div className="parameter-grid" aria-label="Product parameters">
-            {product.parameters.map((parameter) => (
+            {productParameters(product).map((parameter) => (
               <span key={parameter.label}>
                 <small>{parameter.label}</small>
                 <strong>{parameter.value}</strong>

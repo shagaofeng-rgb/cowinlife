@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import type { Product } from "@/data/products";
-import { money, priceToUsd } from "@/lib/storefront";
+import { money, priceToUsd, publicSku } from "@/lib/storefront";
 
 type Props = {
   initialProduct?: Product;
@@ -74,7 +74,7 @@ export function CheckoutClient({ initialProduct, products }: Props) {
           <span>Product</span>
           <select value={productId} onChange={(event) => setProductId(event.target.value)} aria-label="Product">
             {products.filter((product) => product.price !== null).map((product) => (
-              <option value={product.id} key={product.id}>{product.asin} - {product.name}</option>
+              <option value={product.id} key={product.id}>{publicSku(product)} - {product.name}</option>
             ))}
           </select>
         </label>
@@ -92,7 +92,7 @@ export function CheckoutClient({ initialProduct, products }: Props) {
       <aside className="checkout-preview">
         <Image src={selected.image} alt={selected.name} width={360} height={360} />
         <h3>{selected.name}</h3>
-        <p>ASIN {selected.asin}</p>
+        <p>SKU {publicSku(selected)}</p>
         <div className="summary">
           <span>Item estimate <strong>{money(estimate)}</strong></span>
           <span>Shipping and tax <strong>Validated server-side</strong></span>
