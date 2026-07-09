@@ -9,7 +9,7 @@ type SmtpResponse = {
 };
 
 type EmailResult =
-  | { sent: true; to: string }
+  | { sent: true; to: string[] }
   | { sent: false; skipped: true; reason: string }
   | { sent: false; skipped: false; error: string };
 
@@ -20,6 +20,13 @@ const smtpPassword = process.env.SMTP_PASSWORD || "";
 const inquiryTo = process.env.INQUIRY_EMAIL_TO || storeConfig.inquiryEmail;
 const inquiryFrom = process.env.INQUIRY_EMAIL_FROM || smtpUser;
 const inquiryFromName = process.env.INQUIRY_EMAIL_FROM_NAME || storeConfig.legalCompanyName;
+
+function emailList(value: string) {
+  return value
+    .split(/[,\s;]+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
 
 function value(record: InquiryRecord, key: string) {
   const next = record[key];
@@ -112,9 +119,10 @@ function buildMessage(record: InquiryRecord) {
   const boundary = `cowinlife-${Date.now().toString(36)}`;
   const subject = inquirySubject(record);
   const replyTo = value(record, "email");
+  const recipients = emailList(inquiryTo);
   const headers = [
     `From: ${encodeHeader(inquiryFromName)} <${inquiryFrom}>`,
-    `To: <${inquiryTo}>`,
+    `To: ${recipients.map((recipient) => `<${recipient}>`).join(", ")}`,
     `Reply-To: ${replyTo ? `<${replyTo}>` : `<${inquiryFrom}>`}`,
     `Subject: ${encodeHeader(subject)}`,
     `Date: ${new Date().toUTCString()}`,
@@ -220,6 +228,7 @@ function connectSmtp() {
 async function sendViaSmtp(record: InquiryRecord) {
   const socket = await connectSmtp();
   const state = { buffer: "" };
+  const recipients = emailList(inquiryTo);
   try {
     await expectResponse(socket, state, 220);
     await command(socket, state, "EHLO cowinlife.com", 250);
@@ -227,7 +236,9 @@ async function sendViaSmtp(record: InquiryRecord) {
     await command(socket, state, Buffer.from(smtpUser).toString("base64"), 334);
     await command(socket, state, Buffer.from(smtpPassword).toString("base64"), 235);
     await command(socket, state, `MAIL FROM:<${inquiryFrom}>`, 250);
-    await command(socket, state, `RCPT TO:<${inquiryTo}>`, 250);
+    for (const recipient of recipients) {
+      await command(socket, state, `RCPT TO:<${recipient}>`, 250);
+    }
     await command(socket, state, "DATA", 354);
     socket.write(`${dotStuff(buildMessage(record))}\r\n.\r\n`);
     await expectResponse(socket, state, 250);
@@ -238,13 +249,14 @@ async function sendViaSmtp(record: InquiryRecord) {
 }
 
 export async function sendInquiryNotification(record: InquiryRecord): Promise<EmailResult> {
-  if (!smtpUser || !smtpPassword || !inquiryTo || !inquiryFrom) {
+  const recipients = emailList(inquiryTo);
+  if (!smtpUser || !smtpPassword || recipients.length === 0 || !inquiryFrom) {
     return { sent: false, skipped: true, reason: "SMTP environment is not configured" };
   }
 
   try {
     await sendViaSmtp(record);
-    return { sent: true, to: inquiryTo };
+    return { sent: true, to: recipients };
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown SMTP error";
     console.error("Inquiry email notification failed:", message);
