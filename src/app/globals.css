@@ -1043,34 +1043,39 @@ h3 {
 
 .detail-media {
   display: grid;
-  gap: 10px;
-  background: #f5f1ea;
+  align-content: start;
+  gap: 12px;
 }
 
-.detail-media img {
+.detail-primary-image,
+.gallery-thumb {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #f7f3eb;
+}
+
+.detail-primary-image {
+  aspect-ratio: 4 / 3;
+}
+
+.detail-primary-image img,
+.gallery-thumb img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .gallery-strip {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
-  padding: 10px;
-  background: var(--white);
 }
 
-.gallery-strip span {
+.gallery-thumb {
   display: block;
-  border: 1px solid var(--line);
-  background: #f5f1ea;
-}
-
-.gallery-strip img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
+  aspect-ratio: 4 / 3;
 }
 
 .detail-copy {

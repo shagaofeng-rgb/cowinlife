@@ -38,10 +38,25 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       <JsonLd value={productJsonLd(product)} />
       <section className="product-detail route-product-detail">
         <div className="detail-media">
-          <Image src={product.image} alt={product.name} width={720} height={720} priority />
+          <div className="detail-primary-image">
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              sizes="(max-width: 760px) calc(100vw - 40px), 52vw"
+              priority
+            />
+          </div>
           <div className="gallery-strip" aria-label="Product gallery">
-            {product.gallery.slice(0, 4).map((image) => (
-              <span key={image}><Image src={image} alt="" width={140} height={140} /></span>
+            {product.gallery.slice(0, 4).map((image, index) => (
+              <span className="gallery-thumb" key={image}>
+                <Image
+                  src={image}
+                  alt={`${product.name} gallery image ${index + 1}`}
+                  fill
+                  sizes="(max-width: 760px) 25vw, 13vw"
+                />
+              </span>
             ))}
           </div>
         </div>
