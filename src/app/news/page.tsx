@@ -6,7 +6,7 @@ import { contentPosts } from "@/lib/storefront";
 
 export const metadata: Metadata = {
   title: "News",
-  description: "Cowinlife and QUCHENG storefront updates.",
+  description: "Cowinlife and COWINLIFE storefront updates.",
   alternates: { canonical: "/news" }
 };
 

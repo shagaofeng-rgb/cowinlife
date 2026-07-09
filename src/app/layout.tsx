@@ -4,25 +4,25 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://cowinlife.com"),
   title: {
-    default: "Cowinlife | QUCHENG Home Decor",
+    default: "Cowinlife | Home Decor",
     template: "%s | Cowinlife"
   },
-  description: "Shop QUCHENG removable wall decals, window privacy films, and peel-and-stick wallpaper from the Cowinlife catalog.",
+  description: "Shop Cowinlife removable wall decals, window privacy films, and peel-and-stick wallpaper.",
   alternates: {
     canonical: "/"
   },
   openGraph: {
-    title: "Cowinlife | QUCHENG Home Decor",
-    description: "Independent QUCHENG storefront with product images, prices, parameters, checkout, support, and SEO-ready catalog pages.",
+    title: "Cowinlife | Home Decor",
+    description: "Independent Cowinlife storefront with product images, prices, parameters, checkout, support, and SEO-ready catalog pages.",
     url: "https://cowinlife.com",
     siteName: "Cowinlife",
-    images: ["/images/qucheng-hero.png"],
+    images: ["/images/cowinlife-hero.png"],
     type: "website"
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cowinlife | QUCHENG Home Decor",
-    description: "Shop QUCHENG wall decals, window films, and peel-and-stick decor."
+    title: "Cowinlife | Home Decor",
+    description: "Shop Cowinlife wall decals, window films, and peel-and-stick decor."
   },
   robots: {
     index: true,

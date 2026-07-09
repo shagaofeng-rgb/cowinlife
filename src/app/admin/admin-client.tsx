@@ -152,7 +152,7 @@ export default function AdminClient() {
         <div className="admin-brand">
           <span>Q</span>
           <div>
-            <strong>QUCHENG</strong>
+            <strong>COWINLIFE</strong>
             <small>B2C 管理后台</small>
           </div>
         </div>
@@ -228,7 +228,7 @@ function LoginScreen({ onLogin }: { onLogin: (user: User) => void }) {
     <main className="admin-login">
       <form onSubmit={submit}>
         <span className="login-mark">Q</span>
-        <h1>QUCHENG 管理后台</h1>
+        <h1>COWINLIFE 管理后台</h1>
         <p>本地默认账号用于开发预览，上线前请立即修改密码并配置正式数据库。</p>
         <label>
           账号
@@ -449,7 +449,7 @@ function Content({ data, runAction }: { data: ApiState; runAction: (action: stri
   return (
     <div className="admin-stack">
       <section className="toolbar">
-        <button onClick={() => runAction("content.save", { title: "How to apply peel and stick wall decals", contentType: "guide", locale: "en", status: "draft", excerpt: "Installation guide for QUCHENG decals.", body: "Clean the surface, preview the layout, then peel and apply slowly." })}><FileText size={16} />新增英文指南</button>
+        <button onClick={() => runAction("content.save", { title: "How to apply peel and stick wall decals", contentType: "guide", locale: "en", status: "draft", excerpt: "Installation guide for COWINLIFE decals.", body: "Clean the surface, preview the layout, then peel and apply slowly." })}><FileText size={16} />新增英文指南</button>
       </section>
       <SimpleTable title="新闻、博客、购买指南" rows={data.contents || []} columns={["id", "title", "content_type", "locale", "status", "seo_title", "updated_at"]} />
     </div>

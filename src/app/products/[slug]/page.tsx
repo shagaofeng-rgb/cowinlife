@@ -84,6 +84,21 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           {product.features.map((feature) => <li key={feature}>{feature}</li>)}
         </ul>
       </section>
+      {product.feedbackHighlights?.length > 0 && (
+        <section className="section route-section">
+          <div className="section-heading">
+            <p className="eyebrow">Feedback highlights</p>
+            <h2>What customers usually check</h2>
+          </div>
+          <div className="feedback-grid">
+            {product.feedbackHighlights.map((highlight) => (
+              <article key={highlight}>
+                <strong>{highlight}</strong>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
       {related.length > 0 && (
         <section className="section route-section">
           <div className="section-heading">

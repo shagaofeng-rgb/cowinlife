@@ -14,10 +14,10 @@ export default function Home() {
   return (
     <PublicShell>
       <section className="home-hero">
-        <Image src="/images/qucheng-hero.png" alt="QUCHENG removable home decor scene" fill priority />
+        <Image src="/images/cowinlife-hero.png" alt="COWINLIFE removable home decor scene" fill priority />
         <div className="home-hero-copy">
           <p className="eyebrow">Cowinlife home decor</p>
-          <h1>QUCHENG</h1>
+          <h1>COWINLIFE</h1>
           <p>Peel-and-stick wall decals, privacy films, and removable surface decor for fast room refresh projects.</p>
           <div className="button-row">
             <Link className="button primary" href="/products">
@@ -107,8 +107,8 @@ export default function Home() {
           <h2>Start from a room, then choose a product</h2>
           <p>Use the catalog by room and surface type: nursery walls, windows, cabinets, shelves, furniture panels, bathrooms, and rental-friendly refreshes.</p>
           <div className="button-row">
-            <Link className="button secondary" href="/collections/nursery-wall-decals">Nursery decals</Link>
-            <Link className="button secondary" href="/collections/window-privacy-films">Window films</Link>
+            <Link className="button secondary" href="/collections/nursery-wall-stickers">Nursery stickers</Link>
+            <Link className="button secondary" href="/collections/window-static-films">Window films</Link>
           </div>
         </div>
       </section>

@@ -2,7 +2,7 @@ import "./admin.css";
 import AdminClient from "./admin-client";
 
 export const metadata = {
-  title: "QUCHENG 管理后台",
+  title: "COWINLIFE 管理后台",
   robots: "noindex,nofollow"
 };
 

@@ -15,7 +15,7 @@ export function StorefrontHeader() {
       </header>
       <nav className="topbar route-topbar" aria-label="Primary navigation">
         <Link href="/" className="brand" aria-label="Cowinlife home">
-          <span className="brand-mark">Q</span>
+          <span className="brand-mark">C</span>
           <span>Cowinlife</span>
         </Link>
         <div className="navlinks route-navlinks">
@@ -47,7 +47,7 @@ export function StorefrontFooter() {
   return (
     <footer className="footer">
       <div>
-        <span className="brand footer-brand"><span className="brand-mark">Q</span>Cowinlife</span>
+        <span className="brand footer-brand"><span className="brand-mark">C</span>Cowinlife</span>
         <p>{storeConfig.brandDescription}</p>
         <p>{storeConfig.legalCompanyName}</p>
       </div>

@@ -4,7 +4,7 @@ import { audit, createSession, deleteSession, getAdminBySession, getAdminByUsern
 
 export const runtime = "nodejs";
 
-const cookieName = "qucheng_admin_session";
+const cookieName = "cowinlife_admin_session";
 
 function clientIp(request: Request) {
   return request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "local";

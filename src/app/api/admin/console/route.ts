@@ -4,7 +4,7 @@ import { executeAction, getAdminBySession, getDb, getModuleData, type DbModule }
 
 export const runtime = "nodejs";
 
-const cookieName = "qucheng_admin_session";
+const cookieName = "cowinlife_admin_session";
 const modules = new Set([
   "dashboard",
   "products",

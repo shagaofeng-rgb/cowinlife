@@ -1350,6 +1350,26 @@ h3 {
   padding-left: 20px;
 }
 
+.feedback-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.feedback-grid article {
+  min-height: 104px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+}
+
+.feedback-grid strong {
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
 .checkout-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 0.48fr);
@@ -1519,7 +1539,8 @@ h3 {
   .trust-strip,
   .policy-list,
   .account-grid,
-  .parameter-grid {
+  .parameter-grid,
+  .feedback-grid {
     grid-template-columns: 1fr;
   }
 

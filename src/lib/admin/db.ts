@@ -39,8 +39,8 @@ type DbModule =
 const sqlite = require("node:sqlite") as { DatabaseSync: new (file: string) => Database };
 
 const dbFile = process.env.VERCEL
-  ? path.join("/tmp", "qucheng-admin.sqlite")
-  : path.join(process.cwd(), "data", "qucheng-admin.sqlite");
+  ? path.join("/tmp", "cowinlife-admin.sqlite")
+  : path.join(process.cwd(), "data", "cowinlife-admin.sqlite");
 let db: Database | null = null;
 
 const now = () => new Date().toISOString();

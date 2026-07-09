@@ -4,7 +4,7 @@ import { searchProducts } from "@/lib/storefront";
 
 export const metadata: Metadata = {
   title: "Search",
-  description: "Search QUCHENG products by collection, room, material, surface type, and feature.",
+  description: "Search COWINLIFE products by collection, room, material, surface type, and feature.",
   alternates: { canonical: "/search" }
 };
 
@@ -13,7 +13,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
   const results = searchProducts(q);
   return (
     <PublicShell>
-      <RouteHero eyebrow="Search" title="Find QUCHENG decor" text="Search by product type, room, collection, material, or installation feature." />
+      <RouteHero eyebrow="Search" title="Find COWINLIFE decor" text="Search by product type, room, collection, material, or installation feature." />
       <section className="section route-section">
         <form className="route-search-form" action="/search">
           <input name="q" defaultValue={q} placeholder="Search decals, film, wallpaper, nursery, window..." aria-label="Search products" />

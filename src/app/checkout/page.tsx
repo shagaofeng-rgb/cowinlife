@@ -6,7 +6,7 @@ import { findProduct } from "@/lib/storefront";
 
 export const metadata: Metadata = {
   title: "Checkout",
-  description: "Create a QUCHENG order with server-side product, quantity, shipping, tax, and total validation.",
+  description: "Create a COWINLIFE order with server-side product, quantity, shipping, tax, and total validation.",
   alternates: { canonical: "/checkout" }
 };
 

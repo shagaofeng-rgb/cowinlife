@@ -35,7 +35,7 @@ export default async function CustomProductDetailPage({ params }: { params: Prom
         "@type": "Product",
         name: product.name,
         sku: product.sku,
-        brand: { "@type": "Brand", name: "ORON" },
+        brand: { "@type": "Brand", name: "COWINLIFE" },
         image: product.gallery.map((_, index) => `${siteUrl}${customProductImage(product, index)}`),
         description: product.details,
         category: product.category,

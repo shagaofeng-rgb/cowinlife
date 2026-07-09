@@ -6,7 +6,7 @@ import { contentPosts } from "@/lib/storefront";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "QUCHENG installation guides, buying guides, and home decor project notes.",
+  description: "Cowinlife installation guides, buying guides, and home decor project notes.",
   alternates: { canonical: "/blog" }
 };
 
@@ -14,7 +14,7 @@ export default function BlogPage() {
   const posts = contentPosts.filter((post) => post.type === "blog");
   return (
     <PublicShell>
-      <RouteHero eyebrow="Blog" title="QUCHENG guides" text="Installation and buying guides built from real product surfaces, materials, and use cases." />
+      <RouteHero eyebrow="Blog" title="Cowinlife guides" text="Installation and buying guides built from real product surfaces, materials, and use cases." />
       <section className="section route-section">
         <div className="blog-grid">
           {posts.map((post) => (

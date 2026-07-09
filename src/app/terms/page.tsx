@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <PublicShell>
-      <RouteHero eyebrow="Policy" title="Terms of Service" text="Store terms for QUCHENG products, catalog data, checkout, shipping, returns, and support." />
+      <RouteHero eyebrow="Policy" title="Terms of Service" text="Store terms for COWINLIFE products, catalog data, checkout, shipping, returns, and support." />
       <section className="section route-section legal-copy">
         <h2>Operating entity</h2>
         <p>{storeConfig.legalCompanyName} operates Cowinlife from {storeConfig.address}. Business inquiries can be sent to {storeConfig.supportEmail} or WhatsApp {storeConfig.whatsapp}.</p>

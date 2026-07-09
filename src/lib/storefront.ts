@@ -13,7 +13,7 @@ export const contentPosts = [
     slug: "how-to-apply-peel-and-stick-wall-decals",
     title: "How to apply peel and stick wall decals",
     excerpt: "A practical installation guide for smooth walls, cabinets, glass, and furniture surfaces.",
-    image: products[0]?.image || "/images/qucheng-hero.png",
+    image: products[0]?.image || "/images/cowinlife-hero.png",
     relatedProductIds: products.slice(0, 3).map((product) => product.id),
     publishedAt: "2026-07-08",
     body:
@@ -23,7 +23,7 @@ export const contentPosts = [
     type: "blog",
     slug: "window-film-vs-wallpaper",
     title: "Window film vs peel and stick wallpaper",
-    excerpt: "Choose the right QUCHENG surface product by room, material, privacy, and removal needs.",
+    excerpt: "Choose the right COWINLIFE surface product by room, material, privacy, and removal needs.",
     image: products.find((product) => product.collection.includes("Window"))?.image || products[0]?.image,
     relatedProductIds: products.slice(2, 6).map((product) => product.id),
     publishedAt: "2026-07-08",
@@ -33,13 +33,13 @@ export const contentPosts = [
   {
     type: "news",
     slug: "cowinlife-store-launch",
-    title: "Cowinlife independent store launches with QUCHENG catalog",
-    excerpt: "The independent storefront now displays QUCHENG products, images, prices, and specifications.",
-    image: products[0]?.image || "/images/qucheng-hero.png",
+    title: "Cowinlife independent store launches with full catalog",
+    excerpt: "The independent storefront now displays Cowinlife products, images, prices, and specifications.",
+    image: products[0]?.image || "/images/cowinlife-hero.png",
     relatedProductIds: products.slice(0, 4).map((product) => product.id),
     publishedAt: "2026-07-08",
     body:
-      "Cowinlife now presents the QUCHENG catalog with independent-site navigation, product detail pages, checkout simulation, and an operations backend for product, order, SEO, and catalog management."
+      "Cowinlife now presents the catalog with independent-site navigation, product detail pages, checkout simulation, and an operations backend for product, order, SEO, and catalog management."
   }
 ];
 
@@ -140,13 +140,14 @@ export function money(cents: number) {
 
 export function productJsonLd(product: Product) {
   const price = product.price === null ? undefined : priceToUsd(product).toFixed(2);
+  const images = product.gallery.map((image) => image.startsWith("http") ? image : `${siteUrl}${image}`);
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    image: product.gallery.map((image) => `${siteUrl}${image}`),
+    image: images,
     sku: publicSku(product),
-    brand: { "@type": "Brand", name: "QUCHENG" },
+    brand: { "@type": "Brand", name: "COWINLIFE" },
     description: product.details,
     offers: price
       ? {

@@ -36,18 +36,18 @@ async function main() {
   const customProductsResponse = await fetch(`${baseUrl}/custom-products`);
   const customProductsHtml = await customProductsResponse.text();
   const firstCustomHref = (customProductsHtml.match(/href="(\/custom-products\/[^"]+)"/) || [])[1];
-  const firstCollectionSlug = "nursery-wall-decals";
+  const firstCollectionSlug = "nursery-wall-stickers";
   const pageChecks = [
-    ["/", { mustContain: ["QUCHENG"] }],
+    ["/", { mustContain: ["COWINLIFE"] }],
     ["/products", { mustContain: [firstProduct.sku] }],
     [`/products/${firstProduct.slug}`, { mustContain: [firstProduct.sku, firstProduct.name] }],
     ["/custom-products", { mustContain: ["Custom Products", "products - Page", "No stock price"] }],
     [firstCustomHref || "/custom-products/missing", { mustContain: ["Request quote", "No stock price shown"] }],
-    [`/collections/${firstCollectionSlug}`, { mustContain: ["Nursery Wall Decals"] }],
+    [`/collections/${firstCollectionSlug}`, { mustContain: ["Nursery Wall Stickers"] }],
     ["/search?q=window", { mustContain: ["Search"] }],
     ["/cart", { mustContain: ["Cart"] }],
     ["/checkout", { mustContain: ["Validated checkout"] }],
-    ["/blog", { mustContain: ["QUCHENG guides"] }],
+    ["/blog", { mustContain: ["Cowinlife guides"] }],
     ["/blog/how-to-apply-peel-and-stick-wall-decals", { mustContain: ["How to apply"] }],
     ["/news", { mustContain: ["Store updates"] }],
     ["/about", { mustContain: ["Cowinlife"] }],

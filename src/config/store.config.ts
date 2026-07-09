@@ -1,10 +1,10 @@
 export const storeConfig = {
-  storeName: "QUCHENG",
+  storeName: "COWINLIFE",
   legalCompanyName: "Quzhou Qiying Import & Export Co., Ltd.",
   domain: "cowinlife.com",
   brandSlogan: "Peel, place, and make the room feel new.",
   brandDescription:
-    "QUCHENG creates removable wall decals, window films, and peel-and-stick surfaces for nursery rooms, playrooms, cozy apartments, and quick home refresh projects.",
+    "COWINLIFE creates removable wall decals, window films, and peel-and-stick surfaces for nursery rooms, playrooms, cozy apartments, and quick home refresh projects.",
   industry: "Home decor and DIY surface decoration",
   headquartersCountry: "China",
   address: "Room 110, 1st Floor, Building 2, Qushidai Future Building, Kecheng District, Quzhou City, Zhejiang Province, China",

@@ -5,7 +5,7 @@ import { ProductCard, PublicShell, RouteHero } from "@/components/storefront-she
 
 export const metadata: Metadata = {
   title: "Cart",
-  description: "Review QUCHENG products and continue to checkout with server-side price validation.",
+  description: "Review COWINLIFE products and continue to checkout with server-side price validation.",
   alternates: { canonical: "/cart" }
 };
 
