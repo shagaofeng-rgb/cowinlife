@@ -33,11 +33,16 @@ async function main() {
   const catalogResponse = await fetch(`${baseUrl}/api/storefront/products`);
   const catalog = await catalogResponse.json();
   const firstProduct = catalog.products[0];
+  const customProductsResponse = await fetch(`${baseUrl}/custom-products`);
+  const customProductsHtml = await customProductsResponse.text();
+  const firstCustomHref = (customProductsHtml.match(/href="(\/custom-products\/[^"]+)"/) || [])[1];
   const firstCollectionSlug = "nursery-wall-decals";
   const pageChecks = [
     ["/", { mustContain: ["QUCHENG"] }],
     ["/products", { mustContain: [firstProduct.sku] }],
     [`/products/${firstProduct.slug}`, { mustContain: [firstProduct.sku, firstProduct.name] }],
+    ["/custom-products", { mustContain: ["Custom Products", "products - Page", "No stock price"] }],
+    [firstCustomHref || "/custom-products/missing", { mustContain: ["Request quote", "No stock price shown"] }],
     [`/collections/${firstCollectionSlug}`, { mustContain: ["Nursery Wall Decals"] }],
     ["/search?q=window", { mustContain: ["Search"] }],
     ["/cart", { mustContain: ["Cart"] }],

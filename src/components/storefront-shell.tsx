@@ -10,8 +10,8 @@ export function StorefrontHeader() {
   return (
     <>
       <header className="announcement">
-        <span>QUCHENG home decor catalog with product images, prices, and room-ready specifications.</span>
-        <span>Free shipping estimate over $49.00.</span>
+        <span>Cowinlife home decor catalog with product images and room-ready specifications.</span>
+        <span>Shipping and quotation details are confirmed before checkout.</span>
       </header>
       <nav className="topbar route-topbar" aria-label="Primary navigation">
         <Link href="/" className="brand" aria-label="Cowinlife home">
@@ -20,6 +20,7 @@ export function StorefrontHeader() {
         </Link>
         <div className="navlinks route-navlinks">
           <Link className="navlink" href="/products">Products</Link>
+          <Link className="navlink" href="/custom-products">Custom Products</Link>
           {collections.map((collection) => (
             <Link className="navlink" href={`/collections/${collectionSlug(collection.name)}`} key={collection.name}>
               {collection.name}
@@ -52,6 +53,7 @@ export function StorefrontFooter() {
       <div>
         <h3>Shop</h3>
         <Link href="/products">Products</Link>
+        <Link href="/custom-products">Custom Products</Link>
         <Link href="/search">Search</Link>
         <Link href="/blog">Guides</Link>
         <Link href="/news">News</Link>

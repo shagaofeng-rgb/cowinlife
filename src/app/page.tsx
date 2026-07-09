@@ -4,10 +4,12 @@ import { ArrowRight, Check, PackageCheck, Search, ShieldCheck, Sparkles, Truck }
 import { collections, products } from "@/data/products";
 import { ProductCard, PublicShell } from "@/components/storefront-shell";
 import { collectionSlug, contentPosts } from "@/lib/storefront";
+import { customProducts } from "@/lib/custom-products";
 
 export default function Home() {
   const featured = products.slice(0, 6);
   const posts = contentPosts.filter((post) => post.type === "blog").slice(0, 2);
+  const customPreview = customProducts.slice(0, 4);
 
   return (
     <PublicShell>
@@ -61,6 +63,27 @@ export default function Home() {
         </div>
         <div className="center-actions">
           <Link className="button primary" href="/products">View all products</Link>
+        </div>
+      </section>
+
+      <section className="section custom-home-band">
+        <div className="section-heading">
+          <p className="eyebrow">Made to order</p>
+          <h2>Custom products without stock pricing</h2>
+          <p>Browse synchronized custom products for OEM, ODM, material, size, pattern, packaging, and sample-based projects. Pricing is handled by quotation after requirements are confirmed.</p>
+        </div>
+        <div className="custom-preview-grid">
+          {customPreview.map((product) => (
+            <Link className="custom-preview-card" href={`/custom-products/${product.slug}`} key={product.id}>
+              <img src={product.image} alt={product.name} loading="lazy" />
+              <span>{product.category} / {product.sku}</span>
+              <strong>{product.name}</strong>
+              <small>MOQ: {product.moq} - Quote required</small>
+            </Link>
+          ))}
+        </div>
+        <div className="center-actions">
+          <Link className="button primary" href="/custom-products">View custom products</Link>
         </div>
       </section>
 
