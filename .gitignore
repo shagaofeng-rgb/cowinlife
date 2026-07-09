@@ -14,4 +14,3 @@ pnpm-debug.log*
 *.sqlite-wal
 
 .vercel
-.env*

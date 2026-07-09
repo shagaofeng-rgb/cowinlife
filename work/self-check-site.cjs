@@ -69,7 +69,10 @@ async function main() {
   results.push(await postJson("/api/storefront/forms", {
     email: "audit@example.com",
     name: "Audit User",
+    phone: "+1 555 0100",
+    country: "US",
     formType: "product_question",
+    requestedProduct: firstProduct.sku,
     message: "Self-check support form"
   }, 201));
   results.push(await postJson("/api/storefront/orders", {

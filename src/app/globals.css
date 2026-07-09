@@ -926,6 +926,12 @@ h3 {
   gap: 12px;
 }
 
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
 .support-form input,
 .support-form select,
 .support-form textarea,
@@ -940,6 +946,21 @@ h3 {
 .support-form textarea {
   min-height: 132px;
   resize: vertical;
+}
+
+.contact-card {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  line-height: 1.55;
+}
+
+.contact-card a {
+  color: var(--clay);
+  font-weight: 800;
 }
 
 .success-note {
@@ -986,7 +1007,7 @@ h3 {
 
 .footer {
   display: grid;
-  grid-template-columns: 1.5fr 0.7fr 0.7fr;
+  grid-template-columns: 1.4fr 0.58fr 0.58fr 1fr;
   gap: 28px;
   padding: 60px 7vw;
   color: var(--white);
@@ -1538,6 +1559,10 @@ h3 {
   }
 
   .custom-filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
     grid-template-columns: 1fr;
   }
 

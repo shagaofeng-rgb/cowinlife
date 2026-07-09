@@ -16,6 +16,7 @@ export default function AboutPage() {
         <div>
           <h2>Store operating scope</h2>
           <p>The site presents QUCHENG products with independent-site catalog navigation, product detail pages, support intake, order creation, and admin operations.</p>
+          <p>{storeConfig.legalCompanyName} operates Cowinlife for home decor and DIY surface decoration inquiries from {storeConfig.address}.</p>
         </div>
         <PolicyList items={["Clean product catalog", "No fake reviews or inventory claims", "Server-side order validation", "SEO and Search Console sync ready"]} />
       </section>

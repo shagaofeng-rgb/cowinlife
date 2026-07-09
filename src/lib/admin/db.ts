@@ -325,6 +325,14 @@ function initSchema(database: Database) {
       form_type TEXT NOT NULL,
       email TEXT NOT NULL,
       name TEXT NOT NULL,
+      phone TEXT NOT NULL DEFAULT '',
+      country TEXT NOT NULL DEFAULT '',
+      company_name TEXT NOT NULL DEFAULT '',
+      whatsapp TEXT NOT NULL DEFAULT '',
+      requested_product TEXT NOT NULL DEFAULT '',
+      quantity TEXT NOT NULL DEFAULT '',
+      budget TEXT NOT NULL DEFAULT '',
+      timeline TEXT NOT NULL DEFAULT '',
       message TEXT NOT NULL,
       related_product_id TEXT REFERENCES products_admin(id),
       source TEXT NOT NULL DEFAULT 'site',
@@ -409,6 +417,22 @@ function initSchema(database: Database) {
       updated_at TEXT NOT NULL
     );
   `);
+
+  ensureColumn(database, "customer_forms", "phone", "phone TEXT NOT NULL DEFAULT ''");
+  ensureColumn(database, "customer_forms", "country", "country TEXT NOT NULL DEFAULT ''");
+  ensureColumn(database, "customer_forms", "company_name", "company_name TEXT NOT NULL DEFAULT ''");
+  ensureColumn(database, "customer_forms", "whatsapp", "whatsapp TEXT NOT NULL DEFAULT ''");
+  ensureColumn(database, "customer_forms", "requested_product", "requested_product TEXT NOT NULL DEFAULT ''");
+  ensureColumn(database, "customer_forms", "quantity", "quantity TEXT NOT NULL DEFAULT ''");
+  ensureColumn(database, "customer_forms", "budget", "budget TEXT NOT NULL DEFAULT ''");
+  ensureColumn(database, "customer_forms", "timeline", "timeline TEXT NOT NULL DEFAULT ''");
+}
+
+function ensureColumn(database: Database, table: string, column: string, definition: string) {
+  const existing = database.prepare(`PRAGMA table_info(${table})`).all() as Array<{ name?: string }>;
+  if (!existing.some((item) => item.name === column)) {
+    database.exec(`ALTER TABLE ${table} ADD COLUMN ${definition}`);
+  }
 }
 
 function seedRoles(database: Database) {
@@ -711,27 +735,54 @@ export function createPublicForm(input: {
   formType: string;
   email: string;
   name: string;
+  phone: string;
+  country: string;
+  companyName?: string;
+  whatsapp?: string;
+  requestedProduct?: string;
+  quantity?: string;
+  budget?: string;
+  timeline?: string;
   message: string;
   relatedProductId?: string;
   request?: Request;
 }) {
   const email = normalizeEmail(input.email);
   const name = input.name.trim();
+  const phone = input.phone.trim();
+  const country = input.country.trim();
+  const companyName = input.companyName?.trim() || "";
+  const whatsapp = input.whatsapp?.trim() || "";
+  const requestedProduct = input.requestedProduct?.trim() || "";
+  const quantity = input.quantity?.trim() || "";
+  const budget = input.budget?.trim() || "";
+  const timeline = input.timeline?.trim() || "";
   const message = input.message.trim();
   if (!email.includes("@")) throw new Error("Valid email is required");
   if (!name) throw new Error("Name is required");
+  if (!phone) throw new Error("Phone is required");
+  if (!country) throw new Error("Country is required");
   if (message.length < 3) throw new Error("Message is required");
   const timestamp = now();
   const database = getDb();
   database
     .prepare(
-      `INSERT INTO customer_forms (form_type, email, name, message, related_product_id, source, status, created_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+      `INSERT INTO customer_forms
+       (form_type, email, name, phone, country, company_name, whatsapp, requested_product, quantity, budget, timeline, message, related_product_id, source, status, created_at, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
     )
     .run(
       input.formType || "contact",
       email,
       name,
+      phone,
+      country,
+      companyName,
+      whatsapp,
+      requestedProduct,
+      quantity,
+      budget,
+      timeline,
       message,
       input.relatedProductId || null,
       "storefront",

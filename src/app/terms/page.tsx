@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PolicyList, PublicShell, RouteHero } from "@/components/storefront-shell";
+import { storeConfig } from "@/config/store.config";
 
 export const metadata: Metadata = {
   title: "Terms",
@@ -12,6 +13,8 @@ export default function TermsPage() {
     <PublicShell>
       <RouteHero eyebrow="Policy" title="Terms of Service" text="Store terms for QUCHENG products, catalog data, checkout, shipping, returns, and support." />
       <section className="section route-section legal-copy">
+        <h2>Operating entity</h2>
+        <p>{storeConfig.legalCompanyName} operates Cowinlife from {storeConfig.address}. Business inquiries can be sent to {storeConfig.supportEmail} or WhatsApp {storeConfig.whatsapp}.</p>
         <h2>Product data</h2>
         <p>Product images, prices, parameters, ratings, and availability notes are maintained in the Cowinlife catalog and should be reviewed before paid production transactions.</p>
         <h2>Checkout and fulfillment</h2>

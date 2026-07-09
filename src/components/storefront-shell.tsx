@@ -49,6 +49,7 @@ export function StorefrontFooter() {
       <div>
         <span className="brand footer-brand"><span className="brand-mark">Q</span>Cowinlife</span>
         <p>{storeConfig.brandDescription}</p>
+        <p>{storeConfig.legalCompanyName}</p>
       </div>
       <div>
         <h3>Shop</h3>
@@ -64,6 +65,12 @@ export function StorefrontFooter() {
         <Link href="/privacy">Privacy</Link>
         <Link href="/terms">Terms</Link>
         <Link href="/admin">Admin</Link>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <a href={`mailto:${storeConfig.supportEmail}`}>{storeConfig.supportEmail}</a>
+        <a href={`https://wa.me/${storeConfig.whatsapp.replace(/[^0-9]/g, "")}`}>WhatsApp {storeConfig.whatsapp}</a>
+        <p>{storeConfig.address}</p>
       </div>
     </footer>
   );

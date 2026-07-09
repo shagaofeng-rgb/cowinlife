@@ -189,7 +189,7 @@ export default function AdminClient() {
         {active === "marketing" && <Marketing data={data} runAction={runAction} />}
         {active === "reviews" && <Reviews data={data} runAction={runAction} />}
         {active === "content" && <Content data={data} runAction={runAction} />}
-        {active === "forms" && <SimpleTable title="客户表单与询盘" rows={data.forms || []} columns={["id", "form_type", "email", "name", "product_name", "status", "source", "created_at"]} />}
+        {active === "forms" && <SimpleTable title="客户表单与询盘" rows={data.forms || []} columns={["id", "form_type", "name", "phone", "email", "country", "requested_product", "product_name", "quantity", "budget", "timeline", "message", "status", "created_at"]} />}
         {active === "seo" && <Seo data={data} runAction={runAction} />}
         {active === "sync" && <Sync data={data} runAction={runAction} />}
         {active === "users" && <UsersPanel data={data} />}
