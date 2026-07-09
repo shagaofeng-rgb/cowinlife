@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd, PublicShell } from "@/components/storefront-shell";
-import { findCustomProduct } from "@/lib/custom-products";
+import { customProductImage, findCustomProduct } from "@/lib/custom-products";
 import { siteUrl } from "@/lib/storefront";
 
 export const dynamicParams = true;
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: product.name,
       description: `Made-to-order custom product. MOQ: ${product.moq}.`,
-      images: [product.image]
+      images: [`${siteUrl}${customProductImage(product)}`]
     }
   };
 }
@@ -36,7 +36,7 @@ export default async function CustomProductDetailPage({ params }: { params: Prom
         name: product.name,
         sku: product.sku,
         brand: { "@type": "Brand", name: "ORON" },
-        image: product.gallery,
+        image: product.gallery.map((_, index) => `${siteUrl}${customProductImage(product, index)}`),
         description: product.details,
         category: product.category,
         url: `${siteUrl}/custom-products/${product.slug}`,
@@ -48,9 +48,9 @@ export default async function CustomProductDetailPage({ params }: { params: Prom
       }} />
       <section className="custom-detail">
         <div className="custom-detail-media">
-          <img src={product.image} alt={product.name} />
+          <img src={customProductImage(product)} alt={product.name} />
           <div className="custom-gallery">
-            {product.gallery.slice(0, 8).map((image) => <img src={image} alt="" loading="lazy" key={image} />)}
+            {product.gallery.slice(0, 8).map((_, index) => <img src={customProductImage(product, index)} alt="" loading="lazy" key={`${product.id}-${index}`} />)}
           </div>
         </div>
         <div className="custom-detail-copy">

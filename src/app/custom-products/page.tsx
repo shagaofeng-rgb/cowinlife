@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { PackageCheck, Search, SlidersHorizontal } from "lucide-react";
 import { PublicShell, RouteHero } from "@/components/storefront-shell";
-import { customProductCategories, customProducts, searchCustomProducts } from "@/lib/custom-products";
+import { customProductCategories, customProductImage, customProducts, searchCustomProducts } from "@/lib/custom-products";
 
 export const metadata: Metadata = {
   title: "Custom Products",
@@ -65,7 +65,7 @@ export default async function CustomProductsPage({
           {visible.map((product) => (
             <article className="custom-card" key={product.id}>
               <Link href={`/custom-products/${product.slug}`} aria-label={`View ${product.name}`}>
-                <img src={product.image} alt={product.name} loading="lazy" />
+                <img src={customProductImage(product)} alt={product.name} loading="lazy" />
               </Link>
               <div>
                 <span>{product.category} / {product.sku}</span>

@@ -348,11 +348,10 @@ function Products({
 }
 
 function Orders({ data, runAction }: { data: ApiState; runAction: (action: string, payload?: Record<string, unknown>) => Promise<void> }) {
-  const firstProductId = "b0cly5y23c-qucheng-monochrome-wallpaper-wall-decal-chinoiserie-vintage-peel-and-";
   return (
     <div className="admin-stack">
       <section className="toolbar">
-        <button onClick={() => runAction("order.create_test", { productId: firstProductId, quantity: 1 })}><ClipboardList size={16} />创建本地测试订单</button>
+        <button onClick={() => runAction("order.create_test", { quantity: 1 })}><ClipboardList size={16} />创建本地测试订单</button>
       </section>
       <section className="admin-table-wrap">
         <h2>订单管理</h2>

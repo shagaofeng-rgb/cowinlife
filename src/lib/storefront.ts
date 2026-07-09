@@ -56,6 +56,7 @@ export function productSlug(product: Product) {
 }
 
 export function publicSku(product: Product) {
+  if (product.sku) return product.sku;
   const index = products.findIndex((item) => item.id === product.id);
   return `CW-${String(index + 1001).padStart(4, "0")}`;
 }
@@ -66,8 +67,7 @@ export function collectionSlug(name: string) {
 
 export function findProduct(slugOrId: string) {
   return products.find((product) => {
-    const legacySlug = slugify(`${product.asin}-${product.name}`);
-    return product.id === slugOrId || productSlug(product) === slugOrId || legacySlug === slugOrId || publicSku(product).toLowerCase() === slugOrId.toLowerCase();
+    return product.id === slugOrId || productSlug(product) === slugOrId || publicSku(product).toLowerCase() === slugOrId.toLowerCase();
   });
 }
 
@@ -99,8 +99,7 @@ export function searchProducts(query: string) {
 
 export function productParameters(product: Product) {
   return product.parameters
-    .filter((parameter) => !/sku|source price|merchant|fulfillment/i.test(parameter.label))
-    .map((parameter) => ({ ...parameter, label: parameter.label.replace(/^Source /i, "") }));
+    .filter((parameter) => !/sku|catalog price/i.test(parameter.label));
 }
 
 export function availabilityText(product: Product) {

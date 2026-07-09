@@ -4,7 +4,7 @@ import { ArrowRight, Check, PackageCheck, Search, ShieldCheck, Sparkles, Truck }
 import { collections, products } from "@/data/products";
 import { ProductCard, PublicShell } from "@/components/storefront-shell";
 import { collectionSlug, contentPosts } from "@/lib/storefront";
-import { customProducts } from "@/lib/custom-products";
+import { customProductImage, customProducts } from "@/lib/custom-products";
 
 export default function Home() {
   const featured = products.slice(0, 6);
@@ -75,7 +75,7 @@ export default function Home() {
         <div className="custom-preview-grid">
           {customPreview.map((product) => (
             <Link className="custom-preview-card" href={`/custom-products/${product.slug}`} key={product.id}>
-              <img src={product.image} alt={product.name} loading="lazy" />
+              <img src={customProductImage(product)} alt={product.name} loading="lazy" />
               <span>{product.category} / {product.sku}</span>
               <strong>{product.name}</strong>
               <small>MOQ: {product.moq} - Quote required</small>

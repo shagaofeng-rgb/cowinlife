@@ -120,7 +120,7 @@ function initSchema(database: Database) {
 
     CREATE TABLE IF NOT EXISTS products_admin (
       id TEXT PRIMARY KEY,
-      asin TEXT NOT NULL UNIQUE,
+      sku TEXT NOT NULL UNIQUE,
       name TEXT NOT NULL,
       subtitle TEXT NOT NULL DEFAULT '',
       slug TEXT NOT NULL UNIQUE,
@@ -133,7 +133,7 @@ function initSchema(database: Database) {
       price_cents INTEGER,
       price_display TEXT NOT NULL,
       price_source TEXT NOT NULL,
-      amazon_url TEXT NOT NULL,
+      product_url TEXT NOT NULL,
       image TEXT NOT NULL,
       gallery_json TEXT NOT NULL,
       tags_json TEXT NOT NULL,
@@ -157,7 +157,7 @@ function initSchema(database: Database) {
       inbound_quantity INTEGER NOT NULL DEFAULT 0,
       safety_quantity INTEGER NOT NULL DEFAULT 5,
       low_stock_threshold INTEGER NOT NULL DEFAULT 5,
-      amazon_availability TEXT NOT NULL DEFAULT '',
+      catalog_availability TEXT NOT NULL DEFAULT '',
       quantity_source TEXT NOT NULL DEFAULT 'manual',
       updated_at TEXT NOT NULL
     );
@@ -459,17 +459,17 @@ function seedCatalog(database: Database) {
     database
       .prepare(
         `INSERT OR IGNORE INTO products_admin
-        (id, asin, name, subtitle, slug, product_type, category_id, category_name, collection_name, status, currency, price_cents,
-         price_display, price_source, amazon_url, image, gallery_json, tags_json, features_json, parameters_json, seo_title,
+        (id, sku, name, subtitle, slug, product_type, category_id, category_name, collection_name, status, currency, price_cents,
+         price_display, price_source, product_url, image, gallery_json, tags_json, features_json, parameters_json, seo_title,
          seo_description, source_snapshot_json, published_at, created_at, updated_at)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
       )
       .run(
         product.id,
-        product.asin,
+        product.sku,
         product.name,
         product.tags.slice(0, 3).join(" / "),
-        slugify(`${product.asin}-${product.name}`),
+        slugify(`${product.sku}-${product.name}`),
         productType,
         categoryId,
         product.category,
@@ -479,7 +479,7 @@ function seedCatalog(database: Database) {
         moneyToCents(product.price),
         product.priceDisplay,
         product.priceSource,
-        product.externalUrl,
+        "",
         product.image,
         json(product.gallery),
         json(product.tags),
@@ -496,10 +496,10 @@ function seedCatalog(database: Database) {
     database
       .prepare(
         `INSERT OR IGNORE INTO inventory
-        (product_id, sku, total_quantity, available_quantity, amazon_availability, quantity_source, updated_at)
+        (product_id, sku, total_quantity, available_quantity, catalog_availability, quantity_source, updated_at)
         VALUES (?, ?, ?, ?, ?, ?, ?)`
       )
-      .run(product.id, product.asin, 0, 0, product.availability, "catalog_status_quantity_pending", timestamp);
+      .run(product.id, product.sku, 0, 0, product.availability, "catalog_status_quantity_pending", timestamp);
 
     database
       .prepare(
@@ -507,7 +507,7 @@ function seedCatalog(database: Database) {
         (entity_type, entity_id, path, seo_title, seo_description, structured_data_status, issues_json, updated_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
       )
-      .run("product", product.id, `/products/${slugify(`${product.asin}-${product.name}`)}`, product.name.slice(0, 70), product.details.slice(0, 160), "pending", json([]), timestamp);
+      .run("product", product.id, `/products/${slugify(`${product.sku}-${product.name}`)}`, product.name.slice(0, 70), product.details.slice(0, 160), "pending", json([]), timestamp);
   }
 
   database
@@ -785,7 +785,7 @@ export function getModuleData(module: DbModule) {
         totals,
         recentOrders: all("SELECT * FROM orders ORDER BY created_at DESC LIMIT 8"),
         lowStock: all(`
-          SELECT products_admin.name, products_admin.asin AS sku, inventory.available_quantity, inventory.low_stock_threshold, inventory.quantity_source
+          SELECT products_admin.name, products_admin.sku, inventory.available_quantity, inventory.low_stock_threshold, inventory.quantity_source
           FROM inventory JOIN products_admin ON products_admin.id = inventory.product_id
           WHERE inventory.available_quantity <= inventory.low_stock_threshold
           ORDER BY inventory.available_quantity ASC LIMIT 8
@@ -796,7 +796,7 @@ export function getModuleData(module: DbModule) {
     case "products":
       return {
         products: all(`
-          SELECT products_admin.*, inventory.total_quantity, inventory.available_quantity, inventory.locked_quantity, inventory.amazon_availability, inventory.quantity_source
+          SELECT products_admin.*, inventory.total_quantity, inventory.available_quantity, inventory.locked_quantity, inventory.catalog_availability, inventory.quantity_source
           FROM products_admin LEFT JOIN inventory ON inventory.product_id = products_admin.id
           ORDER BY products_admin.updated_at DESC
         `),
@@ -816,7 +816,7 @@ export function getModuleData(module: DbModule) {
     case "reviews":
       return {
         reviews: all(`
-          SELECT reviews.*, products_admin.name AS product_name, products_admin.asin
+          SELECT reviews.*, products_admin.name AS product_name, products_admin.sku
           FROM reviews JOIN products_admin ON products_admin.id = reviews.product_id
           ORDER BY reviews.created_at DESC
         `)
@@ -923,7 +923,7 @@ export async function executeAction(user: AdminUser, action: string, payload: Re
       const total = subtotal + shipping;
       const orderNo = `QCH-${Date.now()}`;
       const customerSnapshot = { name: "本地测试客户", email: "local-customer@example.com", country: "US" };
-      const items = [{ productId: product.id, asin: product.asin, name: product.name, sku: product.asin, unitPriceCents: priceCents, quantity }];
+      const items = [{ productId: product.id, sku: product.sku, name: product.name, unitPriceCents: priceCents, quantity }];
       database.prepare(`
         INSERT INTO orders (order_no, customer_snapshot_json, items_snapshot_json, subtotal_cents, shipping_cents, total_cents, order_currency, payment_currency, source, created_at, updated_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)

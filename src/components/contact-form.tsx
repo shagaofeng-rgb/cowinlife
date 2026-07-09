@@ -33,7 +33,7 @@ export function ContactForm() {
       </select>
       <select name="relatedProductId" aria-label="Related product">
         <option value="">No product selected</option>
-        {products.map((product) => <option value={product.id} key={product.id}>{product.asin} - {product.name}</option>)}
+        {products.map((product) => <option value={product.id} key={product.id}>{product.sku} - {product.name}</option>)}
       </select>
       <textarea name="message" required placeholder="How can we help?" aria-label="Message" />
       <button className="button primary" disabled={status === "loading"}>{status === "loading" ? "Sending..." : "Create support ticket"}</button>
