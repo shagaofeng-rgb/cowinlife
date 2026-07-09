@@ -16,7 +16,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
     headers: {
       "User-Agent": "Cowinlife image sync"
     },
-    next: { revalidate: 60 * 60 * 24 * 30 }
+    cache: "no-store"
   });
 
   if (!upstream.ok || !upstream.body) {
