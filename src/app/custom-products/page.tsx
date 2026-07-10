@@ -5,18 +5,34 @@ import { PackageCheck, Search, SlidersHorizontal } from "lucide-react";
 import { PublicShell, RouteHero } from "@/components/storefront-shell";
 import { customProductCategories, customProductImage, customProducts, searchCustomProducts } from "@/lib/custom-products";
 
-export const metadata: Metadata = {
-  title: "Custom Products",
-  description: "Browse made-to-order custom decor products. No stock pricing is displayed; contact Cowinlife for quotation and customization.",
-  alternates: { canonical: "/custom-products" }
-};
-
 const pageSize = 48;
+
+type CustomProductSearchParams = { q?: string; category?: string; page?: string };
+
+export async function generateMetadata({
+  searchParams
+}: {
+  searchParams: Promise<CustomProductSearchParams>;
+}): Promise<Metadata> {
+  const { q = "", category = "", page = "1" } = await searchParams;
+  const isFiltered = Boolean(q || category);
+  const requestedPage = Math.max(1, Number(page) || 1);
+  const totalPages = Math.max(1, Math.ceil(customProducts.length / pageSize));
+  const currentPage = Math.min(requestedPage, totalPages);
+  const canonical = !isFiltered && currentPage > 1 ? `/custom-products?page=${currentPage}` : "/custom-products";
+
+  return {
+    title: currentPage > 1 && !isFiltered ? `Custom Products - Page ${currentPage}` : "Custom Products",
+    description: "Browse made-to-order custom decor products. No stock pricing is displayed; contact Cowinlife for quotation and customization.",
+    alternates: { canonical },
+    robots: isFiltered ? { index: false, follow: true } : { index: true, follow: true }
+  };
+}
 
 export default async function CustomProductsPage({
   searchParams
 }: {
-  searchParams: Promise<{ q?: string; category?: string; page?: string }>;
+  searchParams: Promise<CustomProductSearchParams>;
 }) {
   const { q = "", category = "", page = "1" } = await searchParams;
   const currentPage = Math.max(1, Number(page) || 1);
@@ -29,8 +45,9 @@ export default async function CustomProductsPage({
     const params = new URLSearchParams();
     if (q) params.set("q", q);
     if (category) params.set("category", category);
-    params.set("page", String(nextPage));
-    return `/custom-products?${params.toString()}`;
+    if (nextPage > 1) params.set("page", String(nextPage));
+    const query = params.toString();
+    return query ? `/custom-products?${query}` : "/custom-products";
   };
 
   return (

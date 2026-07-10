@@ -9,7 +9,7 @@ export type SitemapKind = "pages" | "products" | "categories" | "posts";
 const pageLastModified: Record<string, string> = {
   "": "2026-07-10",
   "/products": "2026-07-09",
-  "/custom-products": "2026-07-09",
+  "/custom-products": "2026-07-10",
   "/blog": "2026-07-10",
   "/news": "2026-07-10",
   "/about": "2026-07-08",
@@ -31,7 +31,7 @@ export function buildSitemapEntries() {
     entries.push({ url: absolute(`/products/${productSlug(product)}`), lastmod: "2026-07-09", kind: "products", status: 200, published: true, canonicalSelf: true });
   }
   for (const product of customProducts) {
-    entries.push({ url: absolute(`/custom-products/${product.slug}`), lastmod: "2026-07-09", kind: "products", status: 200, published: true, canonicalSelf: true });
+    entries.push({ url: absolute(`/custom-products/${product.slug}`), lastmod: "2026-07-10", kind: "products", status: 200, published: true, canonicalSelf: true });
   }
   for (const collection of collections) {
     entries.push({ url: absolute(`/collections/${collectionSlug(collection.name)}`), lastmod: "2026-07-09", kind: "categories", status: 200, published: true, canonicalSelf: true });

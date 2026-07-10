@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd, PublicShell } from "@/components/storefront-shell";
-import { customProductImage, findCustomProduct } from "@/lib/custom-products";
+import { customProductDescription, customProductImage, customProductMetaDescription, findCustomProduct } from "@/lib/custom-products";
 import { siteUrl } from "@/lib/storefront";
 
 export const dynamicParams = true;
@@ -13,12 +13,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const product = findCustomProduct(slug);
   if (!product) return {};
   return {
-    title: product.name,
-    description: `${product.name}. Made-to-order custom product with MOQ ${product.moq}. Contact Cowinlife for quotation.`,
+    title: `${product.name.slice(0, 58)} | ${product.sku}`,
+    description: customProductMetaDescription(product),
     alternates: { canonical: `/custom-products/${product.slug}` },
     openGraph: {
       title: product.name,
-      description: `Made-to-order custom product. MOQ: ${product.moq}.`,
+      description: customProductMetaDescription(product),
       images: [`${siteUrl}${customProductImage(product)}`]
     }
   };
@@ -28,6 +28,7 @@ export default async function CustomProductDetailPage({ params }: { params: Prom
   const { slug } = await params;
   const product = findCustomProduct(slug);
   if (!product) notFound();
+  const productDescription = customProductDescription(product);
 
   return (
     <PublicShell>
@@ -38,7 +39,7 @@ export default async function CustomProductDetailPage({ params }: { params: Prom
         sku: product.sku,
         brand: { "@type": "Brand", name: "COWINLIFE" },
         image: product.gallery.map((_, index) => `${siteUrl}${customProductImage(product, index)}`),
-        description: product.details,
+        description: productDescription,
         category: product.category,
         url: `${siteUrl}/custom-products/${product.slug}`,
         additionalProperty: product.parameters.map((parameter) => ({
@@ -57,7 +58,7 @@ export default async function CustomProductDetailPage({ params }: { params: Prom
         <div className="custom-detail-copy">
           <p className="eyebrow">Custom Products / {product.sku}</p>
           <h1>{product.name}</h1>
-          <p>{product.details}</p>
+          <p>{productDescription}</p>
           <div className="custom-quote-box">
             <strong>No stock price shown</strong>
             <span>This item is made to order. Submit requirements for material, size, pattern, quantity, packaging, samples, and lead time.</span>
