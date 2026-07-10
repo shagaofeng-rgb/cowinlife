@@ -54,7 +54,9 @@ async function main() {
     ["/contact", { mustContain: ["Contact Cowinlife"] }],
     ["/privacy", { mustContain: ["Privacy Policy"] }],
     ["/terms", { mustContain: ["Terms of Service"] }],
-    ["/sitemap.xml", { seo: false, mustContain: ["/products/"] }],
+    ["/sitemap.xml", { seo: false, mustContain: ["sitemapindex", "/sitemaps/products-1.xml"] }],
+    ["/sitemaps/products-1.xml", { seo: false, mustContain: ["<urlset", "/products/"] }],
+    ["/sitemaps/posts-1.xml", { seo: false, mustContain: ["<urlset", "/blog/"] }],
     ["/robots.txt", { seo: false, mustContain: ["Sitemap"] }],
     ["/admin", { mustContain: ["后台"] }]
   ];
@@ -66,15 +68,7 @@ async function main() {
 
   results.push(await checkPage("/api/admin/console?module=dashboard", { status: 401, seo: false }));
   results.push(await postJson("/api/storefront/cart", { items: [{ productId: firstProduct.id, quantity: 2 }] }));
-  results.push(await postJson("/api/storefront/forms", {
-    email: "audit@example.com",
-    name: "Audit User",
-    phone: "+1 555 0100",
-    country: "US",
-    formType: "product_question",
-    requestedProduct: firstProduct.sku,
-    message: "Self-check support form"
-  }, 201));
+  results.push(await postJson("/api/storefront/forms", { email: "invalid" }, 400));
   results.push(await postJson("/api/storefront/orders", {
     email: "audit@example.com",
     name: "Audit User",

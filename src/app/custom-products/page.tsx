@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { PackageCheck, Search, SlidersHorizontal } from "lucide-react";
 import { PublicShell, RouteHero } from "@/components/storefront-shell";
@@ -65,7 +66,7 @@ export default async function CustomProductsPage({
           {visible.map((product) => (
             <article className="custom-card" key={product.id}>
               <Link href={`/custom-products/${product.slug}`} aria-label={`View ${product.name}`}>
-                <img src={customProductImage(product)} alt={product.name} loading="lazy" />
+                <Image src={customProductImage(product)} alt={product.name} width={520} height={520} />
               </Link>
               <div>
                 <span>{product.category} / {product.sku}</span>

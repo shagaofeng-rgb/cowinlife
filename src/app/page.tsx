@@ -3,12 +3,12 @@ import Link from "next/link";
 import { ArrowRight, Check, PackageCheck, Search, ShieldCheck, Sparkles, Truck } from "lucide-react";
 import { collections, products } from "@/data/products";
 import { ProductCard, PublicShell } from "@/components/storefront-shell";
-import { collectionSlug, contentPosts } from "@/lib/storefront";
+import { collectionSlug, getPublishedContentPosts } from "@/lib/storefront";
 import { customProductImage, customProducts } from "@/lib/custom-products";
 
 export default function Home() {
   const featured = products.slice(0, 6);
-  const posts = contentPosts.filter((post) => post.type === "blog").slice(0, 2);
+  const posts = getPublishedContentPosts().filter((post) => post.type === "blog").slice(0, 2);
   const customPreview = customProducts.slice(0, 4);
 
   return (
@@ -75,7 +75,7 @@ export default function Home() {
         <div className="custom-preview-grid">
           {customPreview.map((product) => (
             <Link className="custom-preview-card" href={`/custom-products/${product.slug}`} key={product.id}>
-              <img src={customProductImage(product)} alt={product.name} loading="lazy" />
+              <Image src={customProductImage(product)} alt={product.name} width={520} height={520} />
               <span>{product.category} / {product.sku}</span>
               <strong>{product.name}</strong>
               <small>MOQ: {product.moq} - Quote required</small>
@@ -144,7 +144,7 @@ export default function Home() {
         <div className="blog-grid">
           {posts.map((post) => (
             <Link className="blog-card content-card" href={`/blog/${post.slug}`} key={post.slug}>
-              <Image src={post.image} alt="" width={520} height={340} />
+              <Image src={post.image} alt={post.title} width={520} height={340} />
               <span>{post.publishedAt}</span>
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>

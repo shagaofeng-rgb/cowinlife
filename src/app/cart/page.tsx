@@ -6,7 +6,8 @@ import { ProductCard, PublicShell, RouteHero } from "@/components/storefront-she
 export const metadata: Metadata = {
   title: "Cart",
   description: "Review COWINLIFE products and continue to checkout with server-side price validation.",
-  alternates: { canonical: "/cart" }
+  alternates: { canonical: "/cart" },
+  robots: { index: false, follow: false }
 };
 
 export default function CartPage() {

@@ -1,4 +1,5 @@
 import { collections, products, type Product } from "@/data/products";
+export { findContentPost, getAllContentPosts, getPublishedContentPosts } from "@/lib/content-automation";
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://cowinlife.com";
 
@@ -6,42 +7,6 @@ export type PublicCartItem = {
   productId: string;
   quantity: number;
 };
-
-export const contentPosts = [
-  {
-    type: "blog",
-    slug: "how-to-apply-peel-and-stick-wall-decals",
-    title: "How to apply peel and stick wall decals",
-    excerpt: "A practical installation guide for smooth walls, cabinets, glass, and furniture surfaces.",
-    image: products[0]?.image || "/images/cowinlife-hero.png",
-    relatedProductIds: products.slice(0, 3).map((product) => product.id),
-    publishedAt: "2026-07-08",
-    body:
-      "Clean the surface, dry it fully, preview the layout with painter tape, then peel and apply slowly from one edge. Use a card to push air bubbles outward. Avoid textured walls and freshly painted surfaces."
-  },
-  {
-    type: "blog",
-    slug: "window-film-vs-wallpaper",
-    title: "Window film vs peel and stick wallpaper",
-    excerpt: "Choose the right COWINLIFE surface product by room, material, privacy, and removal needs.",
-    image: products.find((product) => product.collection.includes("Window"))?.image || products[0]?.image,
-    relatedProductIds: products.slice(2, 6).map((product) => product.id),
-    publishedAt: "2026-07-08",
-    body:
-      "Static window film is designed for smooth glass and privacy. Peel and stick wallpaper is better for walls, cabinets, shelves, and furniture panels. Both should be installed on clean, dry, smooth surfaces."
-  },
-  {
-    type: "news",
-    slug: "cowinlife-store-launch",
-    title: "Cowinlife independent store launches with full catalog",
-    excerpt: "The independent storefront now displays Cowinlife products, images, prices, and specifications.",
-    image: products[0]?.image || "/images/cowinlife-hero.png",
-    relatedProductIds: products.slice(0, 4).map((product) => product.id),
-    publishedAt: "2026-07-08",
-    body:
-      "Cowinlife now presents the catalog with independent-site navigation, product detail pages, checkout simulation, and an operations backend for product, order, SEO, and catalog management."
-  }
-];
 
 export function slugify(value: string) {
   return value
@@ -99,7 +64,11 @@ export function searchProducts(query: string) {
 
 export function productParameters(product: Product) {
   return product.parameters
-    .filter((parameter) => !/sku|catalog price/i.test(parameter.label));
+    .filter((parameter) => !/sku|catalog price|best sellers rank|review|rating/i.test(parameter.label))
+    .map((parameter) => ({
+      label: parameter.label.replace(/&#34;|&quot;/g, '"').replace(/&amp;/g, "&"),
+      value: parameter.value.replace(/&#34;|&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&amp;/g, "&")
+    }));
 }
 
 export function availabilityText(product: Product) {
@@ -160,12 +129,6 @@ export function productJsonLd(product: Product) {
           url: `${siteUrl}/products/${productSlug(product)}`
         }
       : undefined,
-    aggregateRating: product.rating && product.reviewCount
-      ? {
-          "@type": "AggregateRating",
-          ratingValue: product.rating,
-          reviewCount: product.reviewCount
-        }
-      : undefined
+    category: product.category
   };
 }

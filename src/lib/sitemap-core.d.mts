@@ -1,0 +1,12 @@
+export type SitemapEntry = { url: string; lastmod: string; kind?: string; status?: number; published?: boolean; noindex?: boolean; canonicalSelf?: boolean };
+export const DEFAULT_MAX_URLS: number;
+export const DEFAULT_MAX_BYTES: number;
+export function escapeXml(value: unknown): string;
+export function normalizeEntries(entries: SitemapEntry[]): Array<{ url: string; lastmod: string; kind?: string }>;
+export function renderUrlSet(entries: SitemapEntry[]): string;
+export function renderSitemapIndex(files: Array<{ url: string; lastmod: string }>): string;
+export function splitEntries(entries: SitemapEntry[], maxUrls?: number, maxBytes?: number): SitemapEntry[][];
+export function validateSitemapXml(xml: string): true;
+export function atomicWriteFile(filePath: string, contents: string): void;
+export function withFileLock<T>(lockPath: string, task: () => Promise<T> | T, staleMs?: number): Promise<T>;
+export function submitWhenEnabled<T>(options: { enabled: boolean; submit: () => Promise<T> | T }): Promise<{ submitted: boolean; reason: string }>;

@@ -1,17 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { products } from "@/data/products";
+import { useState } from "react";
 
-export function ContactForm() {
+type ContactProductOption = { id: string; label: string };
+
+export function ContactForm({ products, initialRequestedProduct = "" }: { products: ContactProductOption[]; initialRequestedProduct?: string }) {
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
-  const [requestedProduct, setRequestedProduct] = useState("");
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setRequestedProduct(params.get("product") || "");
-  }, []);
+  const [requestedProduct, setRequestedProduct] = useState(initialRequestedProduct);
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -49,7 +45,7 @@ export function ContactForm() {
       </select>
       <select name="relatedProductId" aria-label="Related product">
         <option value="">No product selected</option>
-        {products.map((product) => <option value={product.id} key={product.id}>{product.sku} - {product.name}</option>)}
+        {products.map((product) => <option value={product.id} key={product.id}>{product.label}</option>)}
       </select>
       <input name="requestedProduct" value={requestedProduct} onChange={(event) => setRequestedProduct(event.target.value)} placeholder="Product name or SKU" aria-label="Product name or SKU" />
       <div className="form-grid">

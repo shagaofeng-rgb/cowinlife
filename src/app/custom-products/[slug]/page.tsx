@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd, PublicShell } from "@/components/storefront-shell";
@@ -48,9 +49,9 @@ export default async function CustomProductDetailPage({ params }: { params: Prom
       }} />
       <section className="custom-detail">
         <div className="custom-detail-media">
-          <img src={customProductImage(product)} alt={product.name} />
+          <Image src={customProductImage(product)} alt={product.name} width={900} height={900} priority />
           <div className="custom-gallery">
-            {product.gallery.slice(0, 8).map((_, index) => <img src={customProductImage(product, index)} alt="" loading="lazy" key={`${product.id}-${index}`} />)}
+            {product.gallery.slice(0, 8).map((_, index) => <Image src={customProductImage(product, index)} alt={`${product.name} detail ${index + 1}`} width={360} height={360} key={`${product.id}-${index}`} />)}
           </div>
         </div>
         <div className="custom-detail-copy">

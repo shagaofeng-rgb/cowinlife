@@ -24,7 +24,7 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--paper);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
   letter-spacing: 0;
 }
 
@@ -184,6 +184,36 @@ select {
 
 .mobile-only {
   display: none;
+}
+
+.mobile-navigation {
+  position: relative;
+  display: none;
+  justify-self: end;
+}
+
+.mobile-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 40;
+  display: grid;
+  width: min(340px, calc(100vw - 32px));
+  padding: 8px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.mobile-menu a {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.mobile-menu a:last-child {
+  border-bottom: 0;
 }
 
 .mega-menu {
@@ -1303,11 +1333,16 @@ h3 {
 }
 
 .route-hero h1,
-.article-page h1,
-.route-product-detail h1 {
+.article-page h1 {
   max-width: 1100px;
   font-size: clamp(34px, 4vw, 62px);
   line-height: 1.02;
+}
+
+.route-product-detail h1 {
+  max-width: 760px;
+  font-size: clamp(32px, 3.2vw, 50px);
+  line-height: 1.08;
 }
 
 .route-hero p:not(.eyebrow),
@@ -1349,6 +1384,13 @@ h3 {
   max-width: 960px;
   color: var(--muted);
   line-height: 1.7;
+}
+
+.article-updated {
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
 }
 
 .feature-list {
@@ -1462,7 +1504,7 @@ h3 {
 
 @media (max-width: 1120px) {
   .topbar {
-    grid-template-columns: auto auto 1fr;
+    grid-template-columns: auto 1fr auto;
   }
 
   .mobile-only {
@@ -1471,6 +1513,10 @@ h3 {
 
   .navlinks {
     display: none;
+  }
+
+  .mobile-navigation {
+    display: block;
   }
 
   .nav-actions {
@@ -1498,9 +1544,7 @@ h3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .route-navlinks {
-    display: flex;
-  }
+  .route-navlinks { display: none; }
 }
 
 @media (max-width: 760px) {
@@ -1511,13 +1555,23 @@ h3 {
   }
 
   .topbar {
-    grid-template-columns: auto auto;
+    grid-template-columns: auto 1fr auto;
     padding: 12px 16px;
   }
 
   .nav-actions {
-    grid-column: 1 / -1;
-    justify-content: stretch;
+    grid-column: auto;
+    justify-content: flex-end;
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 62px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    max-height: calc(100vh - 170px);
+    overflow-y: auto;
   }
 
   .search-box {

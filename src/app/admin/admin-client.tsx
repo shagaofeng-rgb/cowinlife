@@ -139,7 +139,7 @@ export default function AdminClient() {
   }, [data.products, query]);
 
   if (loading && !user) {
-    return <div className="admin-loading">正在启动本地后台数据库...</div>;
+    return <div className="admin-loading">正在连接管理后台...</div>;
   }
 
   if (!user) {
@@ -169,7 +169,7 @@ export default function AdminClient() {
       <section className="admin-main">
         <header className="admin-topbar">
           <div>
-            <p>本地持久化后台</p>
+            <p>Cowinlife 运营后台</p>
             <h1>{nav.find((item) => item.key === active)?.label}</h1>
           </div>
           <div className="admin-user">
@@ -201,8 +201,8 @@ export default function AdminClient() {
 }
 
 function LoginScreen({ onLogin }: { onLogin: (user: User) => void }) {
-  const [username, setUsername] = useState("admin");
-  const [password, setPassword] = useState("Admin@2026!");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -229,7 +229,7 @@ function LoginScreen({ onLogin }: { onLogin: (user: User) => void }) {
       <form onSubmit={submit}>
         <span className="login-mark">Q</span>
         <h1>COWINLIFE 管理后台</h1>
-        <p>本地默认账号用于开发预览，上线前请立即修改密码并配置正式数据库。</p>
+        <p>请输入服务器中配置的管理员账号和密码。</p>
         <label>
           账号
           <input value={username} onChange={(event) => setUsername(event.target.value)} autoComplete="username" />

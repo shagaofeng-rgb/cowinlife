@@ -2,21 +2,29 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import type { Product } from "@/data/products";
-import { money, priceToUsd, publicSku } from "@/lib/storefront";
 
-type Props = {
-  initialProduct?: Product;
-  products: Product[];
+export type CheckoutProduct = {
+  id: string;
+  sku: string;
+  name: string;
+  price: number;
+  image: string;
 };
 
-export function CheckoutClient({ initialProduct, products }: Props) {
-  const [productId, setProductId] = useState(initialProduct?.id || products[0]?.id || "");
+type Props = {
+  initialProductId?: string;
+  products: CheckoutProduct[];
+};
+
+const money = (cents: number) => `$${(cents / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+export function CheckoutClient({ initialProductId, products }: Props) {
+  const [productId, setProductId] = useState(initialProductId || products[0]?.id || "");
   const [quantity, setQuantity] = useState(1);
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
   const selected = useMemo(() => products.find((product) => product.id === productId) || products[0], [productId, products]);
-  const estimate = selected.price === null ? 0 : Math.round(priceToUsd(selected) * 100) * quantity;
+  const estimate = Math.round(selected.price * 100) * quantity;
 
   async function createOrder(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -73,8 +81,8 @@ export function CheckoutClient({ initialProduct, products }: Props) {
         <label>
           <span>Product</span>
           <select value={productId} onChange={(event) => setProductId(event.target.value)} aria-label="Product">
-            {products.filter((product) => product.price !== null).map((product) => (
-              <option value={product.id} key={product.id}>{publicSku(product)} - {product.name}</option>
+            {products.map((product) => (
+              <option value={product.id} key={product.id}>{product.sku} - {product.name}</option>
             ))}
           </select>
         </label>
@@ -92,7 +100,7 @@ export function CheckoutClient({ initialProduct, products }: Props) {
       <aside className="checkout-preview">
         <Image src={selected.image} alt={selected.name} width={360} height={360} />
         <h3>{selected.name}</h3>
-        <p>SKU {publicSku(selected)}</p>
+        <p>SKU {selected.sku}</p>
         <div className="summary">
           <span>Item estimate <strong>{money(estimate)}</strong></span>
           <span>Shipping and tax <strong>Validated server-side</strong></span>

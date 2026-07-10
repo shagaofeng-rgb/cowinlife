@@ -9,7 +9,10 @@
     "dev": "next dev --hostname 127.0.0.1 --port 3000",
     "build": "next build",
     "start": "next start --hostname 127.0.0.1 --port 3000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "npm run test:sitemap",
+    "test:sitemap": "node --test tests/sitemap-core.test.mjs",
+    "sitemap:generate": "node --env-file-if-exists=.env.local scripts/sitemap-generate.mjs"
   },
   "dependencies": {
     "googleapis": "^173.0.0",

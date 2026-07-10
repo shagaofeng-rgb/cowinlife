@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const product = findProduct(slug);
   if (!product) return {};
   return {
-    title: product.name,
+    title: `${product.name.slice(0, 58)} | ${publicSku(product)}`,
     description: product.details.slice(0, 155),
     alternates: { canonical: `/products/${productSlug(product)}` },
     openGraph: {
@@ -68,9 +68,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             <small>Catalog price</small>
           </div>
           <div className="product-meta detail-meta">
-            <span>{product.ratingText || "Rating unavailable"}</span>
-            <span>{product.reviewCount ? `${product.reviewCount} reviews` : "Review count unavailable"}</span>
             <span>{availabilityText(product)}</span>
+            <span>SKU {publicSku(product)}</span>
+            <span>{product.shipping}</span>
           </div>
           <p>{product.details}</p>
           <div className="detail-tags">
@@ -99,21 +99,6 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           {product.features.map((feature) => <li key={feature}>{feature}</li>)}
         </ul>
       </section>
-      {product.feedbackHighlights?.length > 0 && (
-        <section className="section route-section">
-          <div className="section-heading">
-            <p className="eyebrow">Feedback highlights</p>
-            <h2>What customers usually check</h2>
-          </div>
-          <div className="feedback-grid">
-            {product.feedbackHighlights.map((highlight) => (
-              <article key={highlight}>
-                <strong>{highlight}</strong>
-              </article>
-            ))}
-          </div>
-        </section>
-      )}
       {related.length > 0 && (
         <section className="section route-section">
           <div className="section-heading">

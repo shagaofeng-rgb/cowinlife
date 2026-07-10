@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { products, collections } from "@/data/products";
 import { fetchSearchConsoleData } from "@/lib/admin/google-search-console";
+import { getAllContentPosts } from "@/lib/content-automation";
 
 type Database = {
   exec: (sql: string) => void;
@@ -453,7 +454,10 @@ function seedRoles(database: Database) {
 }
 
 function seedAdmin(database: Database) {
-  const existing = database.prepare("SELECT id FROM admins WHERE username = ?").get("admin");
+  const username = process.env.ADMIN_USERNAME || "admin";
+  const password = process.env.ADMIN_PASSWORD || "";
+  if (!password) return;
+  const existing = database.prepare("SELECT id FROM admins WHERE username = ?").get(username);
   if (existing) return;
   const timestamp = now();
   database
@@ -461,7 +465,44 @@ function seedAdmin(database: Database) {
       `INSERT INTO admins (username, password_hash, display_name, role_code, created_at, updated_at)
        VALUES (?, ?, ?, ?, ?, ?)`
     )
-    .run("admin", hashPassword("Admin@2026!"), "本地超级管理员", "super_admin", timestamp, timestamp);
+    .run(username, hashPassword(password), "Cowinlife Administrator", "super_admin", timestamp, timestamp);
+}
+
+function seedContent(database: Database) {
+  const today = new Date().toISOString().slice(0, 10);
+  const statement = database.prepare(`
+    INSERT INTO contents
+    (title, slug, content_type, locale, status, excerpt, body, related_products_json, seo_title, seo_description, published_at, created_at, updated_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ON CONFLICT(slug) DO UPDATE SET
+      title = excluded.title,
+      content_type = excluded.content_type,
+      status = excluded.status,
+      excerpt = excluded.excerpt,
+      body = excluded.body,
+      related_products_json = excluded.related_products_json,
+      seo_title = excluded.seo_title,
+      seo_description = excluded.seo_description,
+      published_at = excluded.published_at,
+      updated_at = excluded.updated_at
+  `);
+  for (const post of getAllContentPosts()) {
+    statement.run(
+      post.title,
+      post.slug,
+      post.type,
+      "en",
+      post.publishedAt <= today ? "published" : "scheduled",
+      post.excerpt,
+      post.body.join("\n\n"),
+      json(post.relatedProductIds),
+      post.title.slice(0, 70),
+      post.excerpt.slice(0, 160),
+      post.publishedAt,
+      post.publishedAt,
+      post.updatedAt
+    );
+  }
 }
 
 function seedCatalog(database: Database) {
@@ -550,6 +591,7 @@ function initialize(database: Database) {
   seedRoles(database);
   seedAdmin(database);
   seedCatalog(database);
+  seedContent(database);
 }
 
 export function getDb() {
@@ -651,15 +693,27 @@ function normalizeEmail(email: string) {
   return email.trim().toLowerCase();
 }
 
+function validEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 254;
+}
+
+function bounded(value: string, field: string, max: number) {
+  if (value.length > max) throw new Error(`${field} is too long`);
+}
+
 export function createPublicOrder(input: PublicOrderInput) {
   const email = normalizeEmail(input.email);
   const name = input.name.trim();
   const address = input.address.trim();
   const country = input.country.trim() || "US";
-  if (!email.includes("@")) throw new Error("Valid email is required");
+  if (!validEmail(email)) throw new Error("Valid email is required");
   if (!name) throw new Error("Customer name is required");
   if (!address) throw new Error("Shipping address is required");
   if (!input.items.length) throw new Error("At least one priced product is required");
+  bounded(name, "Customer name", 120);
+  bounded(address, "Shipping address", 500);
+  bounded(country, "Country", 80);
+  bounded(input.note || "", "Order note", 2000);
 
   const database = getDb();
   const timestamp = now();
@@ -758,13 +812,26 @@ export function createPublicForm(input: {
   const budget = input.budget?.trim() || "";
   const timeline = input.timeline?.trim() || "";
   const message = input.message.trim();
-  if (!email.includes("@")) throw new Error("Valid email is required");
+  if (!validEmail(email)) throw new Error("Valid email is required");
   if (!name) throw new Error("Name is required");
   if (!phone) throw new Error("Phone is required");
   if (!country) throw new Error("Country is required");
   if (message.length < 3) throw new Error("Message is required");
+  bounded(name, "Name", 120);
+  bounded(phone, "Phone", 60);
+  bounded(country, "Country", 80);
+  bounded(companyName, "Company name", 160);
+  bounded(whatsapp, "WhatsApp", 80);
+  bounded(requestedProduct, "Requested product", 240);
+  bounded(quantity, "Quantity", 80);
+  bounded(budget, "Budget", 80);
+  bounded(timeline, "Timeline", 120);
+  bounded(message, "Message", 5000);
   const timestamp = now();
   const database = getDb();
+  const duplicate = database.prepare("SELECT id FROM customer_forms WHERE email = ? AND message = ? AND created_at >= ? LIMIT 1")
+    .get(email, message, new Date(Date.now() - 5 * 60 * 1000).toISOString());
+  if (duplicate) throw new Error("This inquiry was already received. Please wait before sending it again.");
   database
     .prepare(
       `INSERT INTO customer_forms

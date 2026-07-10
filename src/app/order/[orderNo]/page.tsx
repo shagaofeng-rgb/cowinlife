@@ -9,7 +9,8 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Order Status",
-  description: "Review a Cowinlife order status snapshot."
+  description: "Review a Cowinlife order status snapshot.",
+  robots: { index: false, follow: false }
 };
 
 export default async function OrderPage({ params }: { params: Promise<{ orderNo: string }> }) {

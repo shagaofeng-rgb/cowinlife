@@ -14,7 +14,7 @@ export const storeConfig = {
   whatsapp: "+8613157073736",
   businessHours: "Mon-Fri, 9:00-17:00 China Standard Time",
   defaultLocale: "en",
-  supportedLocales: ["en", "zh-CN", "de", "fr", "es", "pt", "ar"],
+  supportedLocales: ["en"],
   defaultCurrency: "USD",
   supportedCurrencies: ["USD", "EUR", "GBP", "CAD", "AUD", "JPY", "CNY"],
   primaryColor: "#263238",

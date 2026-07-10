@@ -5,7 +5,8 @@ import { searchProducts } from "@/lib/storefront";
 export const metadata: Metadata = {
   title: "Search",
   description: "Search COWINLIFE products by collection, room, material, surface type, and feature.",
-  alternates: { canonical: "/search" }
+  alternates: { canonical: "/search" },
+  robots: { index: false, follow: true }
 };
 
 export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {

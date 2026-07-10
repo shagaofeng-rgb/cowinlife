@@ -1,12 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, Search, ShoppingBag, Star } from "lucide-react";
+import { ArrowRight, Check, Search, ShoppingBag } from "lucide-react";
 import { storeConfig } from "@/config/store.config";
 import type { Product } from "@/data/products";
 import { collections } from "@/data/products";
 import { availabilityText, collectionSlug, money, priceToUsd, productSlug, publicSku } from "@/lib/storefront";
+import { MobileNavigation } from "@/components/mobile-navigation";
 
 export function StorefrontHeader() {
+  const mobileLinks = [
+    { href: "/products", label: "Products" },
+    { href: "/custom-products", label: "Custom Products" },
+    ...collections.map((collection) => ({ href: `/collections/${collectionSlug(collection.name)}`, label: collection.name })),
+    { href: "/blog", label: "Blog" },
+    { href: "/news", label: "News" },
+    { href: "/contact", label: "Support" }
+  ];
   return (
     <>
       <header className="announcement">
@@ -30,6 +39,7 @@ export function StorefrontHeader() {
           <Link className="navlink" href="/news">News</Link>
           <Link className="navlink" href="/contact">Support</Link>
         </div>
+        <MobileNavigation links={mobileLinks} />
         <div className="nav-actions">
           <Link className="icon-button" href="/search" aria-label="Search">
             <Search size={19} />
@@ -102,9 +112,8 @@ export function ProductCard({ product }: { product: Product }) {
           <small>Catalog price</small>
         </div>
         <div className="product-meta">
-          <span><Star size={14} /> {product.ratingText || "Rating unavailable"}</span>
-          <span>{product.reviewCount ? `${product.reviewCount} reviews` : "Reviews unavailable"}</span>
           <span>{availabilityText(product)}</span>
+          <span>SKU {publicSku(product)}</span>
         </div>
         <div className="card-actions">
           <Link className="button primary" href={`/products/${productSlug(product)}`}>

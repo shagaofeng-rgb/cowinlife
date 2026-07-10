@@ -3,6 +3,10 @@
     {
       "path": "/api/cron/inquiry-email-test",
       "schedule": "0 1 1,16 * *"
+    },
+    {
+      "path": "/api/cron/site-maintenance",
+      "schedule": "15 2 * * *"
     }
   ]
 }

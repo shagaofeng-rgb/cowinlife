@@ -1,7 +1,9 @@
 import fs from "node:fs";
 import { google } from "googleapis";
+import { siteUrl as publicSiteUrl } from "@/lib/storefront";
 
-const scope = "https://www.googleapis.com/auth/webmasters.readonly";
+const readScope = "https://www.googleapis.com/auth/webmasters.readonly";
+const writeScope = "https://www.googleapis.com/auth/webmasters";
 const defaultCredentialPath = "D:/maximal-relic-498108-e9-766f87fb0668.json";
 
 type Credential = {
@@ -23,6 +25,15 @@ export type SearchConsoleSyncResult = {
   toDate: string;
   rows: SearchConsoleRow[];
   availableSites: string[];
+};
+
+export type SitemapSubmissionResult = {
+  enabled: boolean;
+  submitted: boolean;
+  siteUrl: string;
+  sitemapUrl: string;
+  attempts: number;
+  message: string;
 };
 
 function parseCredentials(): Credential {
@@ -52,23 +63,23 @@ function candidateSites() {
   ].filter(Boolean) as string[];
 }
 
-export async function fetchSearchConsoleData(days = 28): Promise<SearchConsoleSyncResult> {
+function createAuth(scopes: string[]) {
   const credentials = parseCredentials();
-  const auth = new google.auth.JWT({
-    email: credentials.client_email,
-    key: credentials.private_key,
-    scopes: [scope]
-  });
-  const searchconsole = google.searchconsole({ version: "v1", auth });
-  const sitesResponse = await searchconsole.sites.list();
-  const availableSites = (sitesResponse.data.siteEntry || [])
-    .map((site) => site.siteUrl)
-    .filter((site): site is string => Boolean(site));
+  return new google.auth.JWT({ email: credentials.client_email, key: credentials.private_key, scopes });
+}
 
+async function availableSiteUrl(searchconsole: ReturnType<typeof google.searchconsole>) {
+  const sitesResponse = await searchconsole.sites.list({}, { timeout: 10_000 });
+  const availableSites = (sitesResponse.data.siteEntry || []).map((site) => site.siteUrl).filter((site): site is string => Boolean(site));
   const siteUrl = candidateSites().find((site) => availableSites.includes(site)) || availableSites[0];
-  if (!siteUrl) {
-    throw new Error("Google Search Console 当前没有返回可访问站点。请在 Search Console 中把服务账号添加为 cowinlife.com 属性用户。");
-  }
+  if (!siteUrl) throw new Error("Google Search Console 当前没有返回可访问站点。请确认服务账号已添加到 cowinlife.com 属性。");
+  return { siteUrl, availableSites };
+}
+
+export async function fetchSearchConsoleData(days = 28): Promise<SearchConsoleSyncResult> {
+  const auth = createAuth([readScope]);
+  const searchconsole = google.searchconsole({ version: "v1", auth });
+  const { siteUrl, availableSites } = await availableSiteUrl(searchconsole);
 
   const end = new Date();
   end.setUTCDate(end.getUTCDate() - 2);
@@ -98,4 +109,35 @@ export async function fetchSearchConsoleData(days = 28): Promise<SearchConsoleSy
     })),
     availableSites
   };
+}
+
+export async function submitSitemapToSearchConsole(options: { force?: boolean } = {}): Promise<SitemapSubmissionResult> {
+  const enabled = options.force || process.env.GOOGLE_SEARCH_CONSOLE_ENABLED === "true";
+  const configuredSite = process.env.GOOGLE_SEARCH_CONSOLE_SITE_URL || "sc-domain:cowinlife.com";
+  const sitemapUrl = process.env.GOOGLE_SEARCH_CONSOLE_SITEMAP_URL || `${publicSiteUrl}/sitemap.xml`;
+  if (!enabled) return { enabled: false, submitted: false, siteUrl: configuredSite, sitemapUrl, attempts: 0, message: "Search Console sitemap submission is disabled" };
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 10_000);
+  try {
+    const response = await fetch(sitemapUrl, { headers: { accept: "application/xml" }, signal: controller.signal, cache: "no-store" });
+    if (!response.ok) throw new Error(`Sitemap URL returned HTTP ${response.status}`);
+  } finally {
+    clearTimeout(timer);
+  }
+
+  const auth = createAuth([writeScope]);
+  const searchconsole = google.searchconsole({ version: "v1", auth });
+  const { siteUrl } = await availableSiteUrl(searchconsole);
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
+    try {
+      await searchconsole.sitemaps.submit({ siteUrl, feedpath: sitemapUrl }, { timeout: 10_000 });
+      return { enabled: true, submitted: true, siteUrl, sitemapUrl, attempts: attempt, message: "Google Search Console accepted the sitemap submission" };
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  const message = lastError instanceof Error ? lastError.message : "Unknown Search Console API error";
+  throw new Error(`Google Search Console sitemap submission failed after 2 attempts: ${message}`);
 }

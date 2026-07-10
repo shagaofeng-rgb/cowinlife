@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact-form";
 import { PublicShell, RouteHero } from "@/components/storefront-shell";
 import { storeConfig } from "@/config/store.config";
+import { products } from "@/data/products";
+import { publicSku } from "@/lib/storefront";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -9,7 +11,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" }
 };
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ product?: string }> }) {
+  const { product = "" } = await searchParams;
+  const productOptions = products.map((item) => ({ id: item.id, label: `${publicSku(item)} - ${item.name}` }));
   return (
     <PublicShell>
       <RouteHero eyebrow="Support" title="Contact Cowinlife" text="Send product questions, custom requirements, order questions, installation issues, return requests, and refund messages into the admin backend." />
@@ -24,7 +28,7 @@ export default function ContactPage() {
             <span>{storeConfig.address}</span>
           </div>
         </div>
-        <ContactForm />
+        <ContactForm products={productOptions} initialRequestedProduct={product} />
       </section>
     </PublicShell>
   );

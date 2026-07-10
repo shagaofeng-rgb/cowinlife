@@ -12,5 +12,6 @@ pnpm-debug.log*
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
+.sitemap-cache/
 
 .vercel

@@ -28,6 +28,9 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (process.env.NODE_ENV === "production" && !process.env.ADMIN_PASSWORD) {
+    return NextResponse.json({ error: "后台管理员密码尚未在服务器环境变量中配置" }, { status: 503 });
+  }
   getDb();
   const body = await request.json().catch(() => ({}));
   const username = String(body.username || "").trim();
@@ -72,7 +75,7 @@ export async function POST(request: Request) {
   response.cookies.set(cookieName, session.token, {
     httpOnly: true,
     sameSite: "lax",
-    secure: false,
+    secure: process.env.NODE_ENV === "production",
     path: "/",
     expires: new Date(session.expiresAt)
   });
