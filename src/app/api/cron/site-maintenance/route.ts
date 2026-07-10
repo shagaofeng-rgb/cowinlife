@@ -29,12 +29,24 @@ function writeState(value: unknown) {
 }
 
 function diffEntries(previous: Array<{ url: string; lastmod: string }>, current: Array<{ url: string; lastmod: string }>) {
+  if (previous.length === 0) {
+    return { baseline: true, addedCount: 0, modifiedCount: 0, deletedCount: 0, added: [], modified: [], deleted: [], truncated: false };
+  }
   const before = new Map(previous.map((entry) => [entry.url, entry.lastmod]));
   const after = new Map(current.map((entry) => [entry.url, entry.lastmod]));
+  const added = [...after.keys()].filter((url) => !before.has(url));
+  const modified = [...after].filter(([url, lastmod]) => before.has(url) && before.get(url) !== lastmod).map(([url]) => url);
+  const deleted = [...before.keys()].filter((url) => !after.has(url));
+  const sampleLimit = 50;
   return {
-    added: [...after.keys()].filter((url) => !before.has(url)),
-    modified: [...after].filter(([url, lastmod]) => before.has(url) && before.get(url) !== lastmod).map(([url]) => url),
-    deleted: [...before.keys()].filter((url) => !after.has(url))
+    baseline: false,
+    addedCount: added.length,
+    modifiedCount: modified.length,
+    deletedCount: deleted.length,
+    added: added.slice(0, sampleLimit),
+    modified: modified.slice(0, sampleLimit),
+    deleted: deleted.slice(0, sampleLimit),
+    truncated: added.length > sampleLimit || modified.length > sampleLimit || deleted.length > sampleLimit
   };
 }
 
