@@ -57,5 +57,5 @@ export const products = retailProducts as Product[];
 export const collections: Collection[] = Array.from(new Set(products.map((product) => product.collection))).map((name) => ({
   name,
   description: collectionDescriptions[name] || "Home decor products for simple, considered room updates.",
-  image: products.find((product) => product.collection === name)?.image || "/images/products/cw-product-0001.jpg"
+  image: products.find((product) => product.collection === name)?.image || "/images/retail-products/qcus230847/gallery/gallery-01.jpg"
 }));
