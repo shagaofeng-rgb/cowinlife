@@ -12,6 +12,7 @@ export const storeConfig = {
   inquiryEmail: "davidsha@cowinlife.com",
   supportPhone: "+86 131 5707 3736",
   whatsapp: "+8613157073736",
+  whatsappChatUrl: "https://wa.me/message/4W2MTNLSRDN6I1",
   businessHours: "Mon-Fri, 9:00-17:00 China Standard Time",
   defaultLocale: "en",
   supportedLocales: ["en"],

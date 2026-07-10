@@ -6,6 +6,7 @@ import type { Product } from "@/data/products";
 import { collections } from "@/data/products";
 import { availabilityText, collectionSlug, money, priceToUsd, productSlug, publicSku } from "@/lib/storefront";
 import { MobileNavigation } from "@/components/mobile-navigation";
+import { WhatsAppFloat } from "@/components/whatsapp-float";
 
 export function StorefrontHeader() {
   const mobileLinks = [
@@ -79,7 +80,7 @@ export function StorefrontFooter() {
       <div>
         <h3>Contact</h3>
         <a href={`mailto:${storeConfig.supportEmail}`}>{storeConfig.supportEmail}</a>
-        <a href={`https://wa.me/${storeConfig.whatsapp.replace(/[^0-9]/g, "")}`}>WhatsApp {storeConfig.whatsapp}</a>
+        <a href={storeConfig.whatsappChatUrl} target="_blank" rel="noreferrer">WhatsApp {storeConfig.whatsapp}</a>
         <p>{storeConfig.address}</p>
       </div>
     </footer>
@@ -92,6 +93,7 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
       <StorefrontHeader />
       {children}
       <StorefrontFooter />
+      <WhatsAppFloat />
     </main>
   );
 }
@@ -109,7 +111,7 @@ export function ProductCard({ product }: { product: Product }) {
         <p>{product.tags.slice(0, 4).join(" / ")}</p>
         <div className="price-row">
           <strong>{price}</strong>
-          <small>Catalog price</small>
+          <small>{product.priceSource}</small>
         </div>
         <div className="product-meta">
           <span>{availabilityText(product)}</span>

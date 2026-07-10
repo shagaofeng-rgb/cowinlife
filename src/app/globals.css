@@ -1139,6 +1139,307 @@ h3 {
   line-height: 1.8;
 }
 
+.retail-preview-banner {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 7vw;
+  background: #fff3df;
+  border-bottom: 1px solid #efcf9e;
+  color: #6c421b;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.retail-preview-detail {
+  align-items: start;
+}
+
+.retail-preview-media {
+  display: grid;
+  gap: 12px;
+}
+
+.retail-preview-media > img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  background: #f7f3eb;
+}
+
+.retail-preview-thumbs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.retail-preview-thumbs a {
+  border: 1px solid var(--line);
+  background: #f7f3eb;
+}
+
+.retail-preview-thumbs img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.retail-gallery-primary {
+  overflow: hidden;
+}
+
+.retail-gallery-main {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.retail-gallery-main img {
+  transition: transform 260ms ease;
+}
+
+.retail-gallery-primary.is-zoomed .retail-gallery-main {
+  cursor: zoom-out;
+}
+
+.retail-gallery-primary.is-zoomed .retail-gallery-main img {
+  transform: scale(1.35);
+}
+
+.retail-gallery-main span {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 7px 9px;
+  background: rgba(38, 50, 56, 0.82);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.retail-gallery-primary:hover .retail-gallery-main span,
+.retail-gallery-primary:focus-within .retail-gallery-main span {
+  opacity: 1;
+}
+
+.retail-gallery-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--ink);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.retail-gallery-arrow.previous {
+  left: 12px;
+}
+
+.retail-gallery-arrow.next {
+  right: 12px;
+}
+
+.retail-gallery-thumbs .gallery-thumb {
+  padding: 0;
+  cursor: pointer;
+}
+
+.retail-gallery-thumbs .gallery-thumb.is-active {
+  border: 2px solid var(--clay);
+}
+
+.retail-detail-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.retail-detail-links a,
+.text-action {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.text-action {
+  width: max-content;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.retail-feedback {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  gap: 48px;
+  align-items: start;
+  border-top: 1px solid var(--line);
+  background: #f8fbf9;
+}
+
+.retail-feedback-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.5fr) minmax(0, 1fr);
+  gap: 24px;
+}
+
+.retail-rating-summary,
+.retail-feedback-copy {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.retail-rating-summary {
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.retail-rating-summary > strong {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.retail-rating-summary > span,
+.retail-feedback-copy p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.retail-stars {
+  display: flex;
+  color: var(--gold);
+}
+
+.retail-feedback-copy h3 {
+  font-size: 20px;
+}
+
+.retail-feedback-note {
+  padding: 12px;
+  border-left: 3px solid var(--clay);
+  background: var(--white);
+}
+
+.whatsapp-float {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 30;
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  padding: 0;
+  border: 2px solid #25d366;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 14px 28px rgba(18, 119, 65, 0.27);
+  color: #123f28;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.whatsapp-float::before {
+  position: absolute;
+  inset: -6px;
+  z-index: -1;
+  border: 1px solid rgba(37, 211, 102, 0.72);
+  border-radius: 50%;
+  content: "";
+  animation: whatsapp-pulse 2.4s ease-out infinite;
+}
+
+.whatsapp-float:hover,
+.whatsapp-float:focus-visible {
+  color: #123f28;
+  box-shadow: 0 18px 34px rgba(18, 119, 65, 0.34);
+  transform: translateY(-3px);
+}
+
+.whatsapp-float img {
+  width: 32px;
+  height: 32px;
+}
+
+.whatsapp-float span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes whatsapp-pulse {
+  0%, 45% { opacity: 0; transform: scale(0.9); }
+  60% { opacity: 0.85; }
+  100% { opacity: 0; transform: scale(1.15); }
+}
+
+.retail-preview-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  gap: 48px;
+  align-items: start;
+}
+
+.retail-preview-benefits {
+  display: grid;
+  gap: 12px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.retail-preview-benefits span {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.retail-preview-benefits svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--clay);
+}
+
+.retail-preview-story {
+  display: grid;
+  gap: 24px;
+  padding: 0 7vw 76px;
+  background: var(--white);
+}
+
+.retail-preview-story figure {
+  margin: 0;
+  border: 1px solid var(--line);
+  background: #f7f3eb;
+}
+
+.retail-preview-story img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .parameter-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1626,11 +1927,24 @@ h3 {
     padding: 52px 20px;
   }
 
+  .retail-preview-banner {
+    padding: 10px 20px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .retail-preview-story {
+    gap: 14px;
+    padding: 0 20px 52px;
+  }
+
   .split-band,
   .shoppable,
   .support-grid,
   .dashboard-band,
   .product-detail,
+  .retail-preview-overview,
+  .retail-feedback,
   .custom-detail,
   .footer,
   .checkout-layout,
@@ -1648,8 +1962,20 @@ h3 {
 
   .custom-preview-grid,
   .custom-product-grid,
-  .custom-gallery {
+  .custom-gallery,
+  .retail-feedback-grid {
     grid-template-columns: 1fr;
+  }
+
+  .retail-detail-links {
+    display: grid;
+  }
+
+  .whatsapp-float {
+    right: 16px;
+    bottom: 16px;
+    width: 52px;
+    height: 52px;
   }
 
   .route-hero,

@@ -72,7 +72,7 @@ export function productParameters(product: Product) {
 }
 
 export function availabilityText(product: Product) {
-  return product.availability.toLowerCase().includes("in stock") ? "Available" : "Availability varies";
+  return /available|in stock/i.test(product.availability) ? "Available" : "Availability varies";
 }
 
 export function priceToUsd(product: Product) {
