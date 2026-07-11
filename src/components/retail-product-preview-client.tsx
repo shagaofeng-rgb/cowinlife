@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Search, Star } from "lucide-react";
-import { useState } from "react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 type GalleryImage = { src: string; alt: string };
 
@@ -10,6 +10,13 @@ export function RetailProductGallery({ images, productName }: { images: GalleryI
   const [activeIndex, setActiveIndex] = useState(0);
   const [zoomed, setZoomed] = useState(false);
   const activeImage = images[activeIndex];
+
+  useEffect(() => {
+    if (!zoomed) return;
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setZoomed(false); };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [zoomed]);
 
   const selectImage = (index: number) => {
     setActiveIndex(index);
@@ -43,36 +50,22 @@ export function RetailProductGallery({ images, productName }: { images: GalleryI
           </button>
         ))}
       </div>
+      {zoomed && <div className="retail-lightbox" role="dialog" aria-modal="true" aria-label={`${productName} image preview`} onClick={() => setZoomed(false)}>
+        <button type="button" className="retail-lightbox-close" aria-label="Close image preview" onClick={() => setZoomed(false)}><X size={20} /></button>
+        <Image src={activeImage.src} alt={activeImage.alt} width={1600} height={1600} sizes="96vw" onClick={(event) => event.stopPropagation()} />
+      </div>}
     </div>
   );
 }
 
-export function ProductFeedback({ rating, ratingCount }: { rating: number; ratingCount: number }) {
-  const [isOpen, setIsOpen] = useState(false);
-
+export function ProductFeedback() {
   return (
     <section id="reviews" className="section retail-feedback" aria-labelledby="feedback-title">
       <div className="section-heading">
         <p className="eyebrow">Customer feedback</p>
         <h2 id="feedback-title">Product ratings</h2>
       </div>
-      <div className="retail-feedback-grid">
-        <div className="retail-rating-summary">
-          <strong>{rating.toFixed(1)}</strong>
-          <div className="retail-stars" aria-label={`${rating.toFixed(1)} out of 5 stars`}>
-            {[1, 2, 3, 4, 5].map((star) => <Star key={star} size={21} fill={star <= Math.round(rating) ? "currentColor" : "none"} />)}
-          </div>
-          <span>Based on {ratingCount.toLocaleString("en-US")} product ratings</span>
-        </div>
-        <div className="retail-feedback-copy">
-          <h3>Feedback is synced separately from the product catalog</h3>
-          <p>The rating summary is matched to this product source. Individual review text is not reproduced until verified customer-feedback synchronization is enabled for the independent site.</p>
-          <button type="button" className="text-action" onClick={() => setIsOpen((value) => !value)} aria-expanded={isOpen}>
-            {isOpen ? "Hide rating details" : "How ratings are handled"}
-          </button>
-          {isOpen && <p className="retail-feedback-note">Only approved, product-specific feedback will be shown here. Platform names, seller details, and external links are excluded from the storefront.</p>}
-        </div>
-      </div>
+      <div className="retail-feedback-copy"><h3>Customer reviews will be available soon.</h3><p>Only verified customer feedback will be displayed on this independent storefront.</p></div>
     </section>
   );
 }

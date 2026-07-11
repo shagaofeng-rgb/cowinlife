@@ -11,8 +11,8 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false }
 };
 
-export default async function CheckoutPage({ searchParams }: { searchParams: Promise<{ product?: string }> }) {
-  const { product } = await searchParams;
+export default async function CheckoutPage({ searchParams }: { searchParams: Promise<{ product?: string; quantity?: string }> }) {
+  const { product, quantity } = await searchParams;
   const initialProduct = product ? findProduct(product) : undefined;
   const checkoutProducts: CheckoutProduct[] = products
     .filter((item) => item.price !== null)
@@ -21,7 +21,7 @@ export default async function CheckoutPage({ searchParams }: { searchParams: Pro
     <PublicShell>
       <RouteHero eyebrow="Checkout" title="Validated checkout" text="Customer data, product IDs, quantities, and totals are validated on the server before the order reaches the admin backend." />
       <section className="section route-section">
-        <CheckoutClient products={checkoutProducts} initialProductId={initialProduct?.id} />
+        <CheckoutClient products={checkoutProducts} initialProductId={initialProduct?.id} initialQuantity={Math.max(1, Math.min(20, Number(quantity) || 1))} />
       </section>
     </PublicShell>
   );

@@ -123,7 +123,7 @@ export function productJsonLd(product: Product) {
           "@type": "Offer",
           price,
           priceCurrency: "USD",
-          availability: product.availability.toLowerCase().includes("in stock")
+          availability: /available|in stock/i.test(product.availability)
             ? "https://schema.org/InStock"
             : "https://schema.org/LimitedAvailability",
           url: `${siteUrl}/products/${productSlug(product)}`

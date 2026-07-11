@@ -13,14 +13,15 @@ export type CheckoutProduct = {
 
 type Props = {
   initialProductId?: string;
+  initialQuantity?: number;
   products: CheckoutProduct[];
 };
 
 const money = (cents: number) => `$${(cents / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-export function CheckoutClient({ initialProductId, products }: Props) {
+export function CheckoutClient({ initialProductId, initialQuantity = 1, products }: Props) {
   const [productId, setProductId] = useState(initialProductId || products[0]?.id || "");
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(initialQuantity);
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
   const selected = useMemo(() => products.find((product) => product.id === productId) || products[0], [productId, products]);
