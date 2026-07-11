@@ -1423,15 +1423,14 @@ h3 {
 
 .retail-preview-story {
   display: grid;
-  gap: 24px;
+  gap: 0;
   padding: 0 7vw 76px;
   background: var(--white);
 }
 
 .retail-preview-story figure {
   margin: 0;
-  border: 1px solid var(--line);
-  background: #f7f3eb;
+  line-height: 0;
 }
 
 .retail-preview-story img {
@@ -2036,7 +2035,7 @@ h3 {
   }
 
   .retail-preview-story {
-    gap: 14px;
+    gap: 0;
     padding: 0 20px 52px;
   }
 
