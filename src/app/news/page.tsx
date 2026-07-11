@@ -21,7 +21,7 @@ export default function NewsPage() {
         <div className="blog-grid">
           {posts.map((post) => (
             <Link className="blog-card content-card" href={`/news/${post.slug}`} key={post.slug}>
-              <Image src={post.image} alt={post.title} width={520} height={340} />
+              <Image src={post.image} alt={post.imageAlt} width={520} height={340} />
               <span>{post.publishedAt}</span>
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>

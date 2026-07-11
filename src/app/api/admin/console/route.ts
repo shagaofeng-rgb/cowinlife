@@ -43,9 +43,9 @@ export async function GET(request: Request) {
   try {
     await requireUser();
     const { searchParams } = new URL(request.url);
-    const module = searchParams.get("module") || "dashboard";
-    if (!modules.has(module)) return NextResponse.json({ error: "未知模块" }, { status: 404 });
-    return NextResponse.json({ module, data: getModuleData(module as DbModule) });
+    const moduleKey = searchParams.get("module") || "dashboard";
+    if (!modules.has(moduleKey)) return NextResponse.json({ error: "未知模块" }, { status: 404 });
+    return NextResponse.json({ module: moduleKey, data: getModuleData(moduleKey as DbModule) });
   } catch (error) {
     return errorResponse(error);
   }

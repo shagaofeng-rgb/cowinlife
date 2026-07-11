@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { DatabaseSync } from "node:sqlite";
 import { products, collections } from "@/data/products";
 import { fetchSearchConsoleData } from "@/lib/admin/google-search-console";
 import { getAllContentPosts } from "@/lib/content-automation";
@@ -36,8 +37,6 @@ type DbModule =
   | "users"
   | "settings"
   | "logs";
-
-const sqlite = require("node:sqlite") as { DatabaseSync: new (file: string) => Database };
 
 const dbFile = process.env.VERCEL
   ? path.join("/tmp", "cowinlife-admin.sqlite")
@@ -597,7 +596,7 @@ function initialize(database: Database) {
 export function getDb() {
   if (!db) {
     fs.mkdirSync(path.dirname(dbFile), { recursive: true });
-    db = new sqlite.DatabaseSync(dbFile);
+    db = new DatabaseSync(dbFile) as unknown as Database;
     initialize(db);
   }
   return db;

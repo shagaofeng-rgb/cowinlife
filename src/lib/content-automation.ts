@@ -7,6 +7,9 @@ export type ContentPost = {
   title: string;
   excerpt: string;
   image: string;
+  imageAlt: string;
+  imageSourceUrl: string;
+  imagePageUrl: string;
   relatedProductIds: string[];
   publishedAt: string;
   updatedAt: string;
@@ -14,13 +17,34 @@ export type ContentPost = {
   author: string;
 };
 
+const editorialImages = [
+  {
+    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1600&q=85",
+    imageAlt: "A bright home interior with framed wall decor",
+    imageSourceUrl: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace",
+    imagePageUrl: "https://unsplash.com/"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1600&q=85",
+    imageAlt: "A sunlit room with large windows and a calm interior",
+    imageSourceUrl: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea",
+    imagePageUrl: "https://unsplash.com/"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=85",
+    imageAlt: "A styled home living space with decorative finishes",
+    imageSourceUrl: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0",
+    imagePageUrl: "https://unsplash.com/"
+  }
+] as const;
+
 const editorialPosts: ContentPost[] = [
   {
     type: "blog",
     slug: "how-to-apply-peel-and-stick-wall-decals",
     title: "How to apply peel-and-stick wall decals",
     excerpt: "A practical installation guide for smooth walls, cabinets, glass, and furniture surfaces.",
-    image: products[0]?.image || "/images/cowinlife-hero.png",
+    ...editorialImages[0],
     relatedProductIds: products.slice(0, 3).map((product) => product.id),
     publishedAt: "2026-07-08",
     updatedAt: "2026-07-10",
@@ -36,7 +60,7 @@ const editorialPosts: ContentPost[] = [
     slug: "window-film-vs-peel-and-stick-wallpaper",
     title: "Window film vs. peel-and-stick wallpaper",
     excerpt: "Choose the right removable surface product by room, base material, privacy need, and removal method.",
-    image: products.find((product) => product.collection.includes("Window"))?.image || products[0]?.image,
+    ...editorialImages[1],
     relatedProductIds: products.filter((product) => product.collection.includes("Window")).slice(0, 3).map((product) => product.id),
     publishedAt: "2026-07-09",
     updatedAt: "2026-07-10",
@@ -52,7 +76,7 @@ const editorialPosts: ContentPost[] = [
     slug: "cowinlife-catalog-and-custom-products-update",
     title: "Cowinlife catalog and custom product collections are now organized online",
     excerpt: `The site now separates ${products.length} catalog products from ${customProducts.length} made-to-order custom products.`,
-    image: "/images/cowinlife-hero.png",
+    ...editorialImages[2],
     relatedProductIds: products.slice(0, 4).map((product) => product.id),
     publishedAt: "2026-07-10",
     updatedAt: "2026-07-10",
@@ -71,13 +95,14 @@ function scheduledCollectionPosts(): ContentPost[] {
     const publishDate = new Date(Date.UTC(2026, 6, 13 + index * 3));
     const date = publishDate.toISOString().slice(0, 10);
     const slug = collection.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    const image = editorialImages[index % editorialImages.length];
     return [
       {
         type: "blog" as const,
         slug: `how-to-choose-${slug}`,
         title: `How to choose ${collection.name.toLowerCase()} for your project`,
         excerpt: `${collection.description} Compare the surface, dimensions, installation method, and intended room before selecting a design.`,
-        image: collection.image,
+        ...image,
         relatedProductIds: related.slice(0, 3).map((product) => product.id),
         publishedAt: date,
         updatedAt: date,
@@ -93,7 +118,7 @@ function scheduledCollectionPosts(): ContentPost[] {
         slug: `${slug}-catalog-navigation-update`,
         title: `${collection.name} catalog navigation update`,
         excerpt: `${related.length} products are grouped in one collection with direct links to images, specifications, and inquiry options.`,
-        image: collection.image,
+        ...image,
         relatedProductIds: related.slice(0, 3).map((product) => product.id),
         publishedAt: date,
         updatedAt: date,

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createPublicOrder } from "@/lib/admin/db";
+import { checkRateLimit } from "@/lib/request-rate-limit";
 import { calculateCart, money, publicSku, type PublicCartItem } from "@/lib/storefront";
 
 export const runtime = "nodejs";
@@ -7,6 +8,13 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   try {
+    const rateLimit = checkRateLimit(request, "storefront-order", { limit: 8, windowMs: 10 * 60 * 1000 });
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { error: "Too many order requests from this network. Please wait before trying again." },
+        { status: 429, headers: { "Retry-After": String(rateLimit.retryAfterSeconds) } }
+      );
+    }
     const body = await request.json();
     const cart = calculateCart((body.items || []) as PublicCartItem[]);
     if (!cart.items.length) return NextResponse.json({ error: "Cart has no priced products" }, { status: 400 });

@@ -21,7 +21,7 @@ import {
   Users,
   WalletCards
 } from "lucide-react";
-import { FormEvent, ReactNode, useEffect, useMemo, useState } from "react";
+import { FormEvent, ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 
 function displaySku(index: number) {
   return `CW-${String(index + 1001).padStart(4, "0")}`;
@@ -50,7 +50,16 @@ type User = {
   permissions: string[];
 };
 
-type ApiState = Record<string, any>;
+type AdminRow = Record<string, string | number | boolean | null | undefined>;
+type ApiState = Record<string, unknown>;
+
+function asRows(value: unknown): AdminRow[] {
+  return Array.isArray(value) ? value.filter((item): item is Record<string, unknown> => Boolean(item) && typeof item === "object").map((item) => item as AdminRow) : [];
+}
+
+function asRecord(value: unknown): AdminRow {
+  return value && typeof value === "object" && !Array.isArray(value) ? value as AdminRow : {};
+}
 
 const nav: Array<{ key: ModuleKey; label: string; icon: ReactNode }> = [
   { key: "dashboard", label: "数据概览", icon: <BarChart3 size={18} /> },
@@ -91,7 +100,7 @@ export default function AdminClient() {
     setLoading(false);
   };
 
-  const loadModule = async (module: ModuleKey = active) => {
+  const loadModule = useCallback(async (module: ModuleKey = active) => {
     if (!user) return;
     setLoading(true);
     const response = await fetch(`/api/admin/console?module=${module}`, { cache: "no-store" });
@@ -103,7 +112,7 @@ export default function AdminClient() {
       setMessage("");
     }
     setLoading(false);
-  };
+  }, [active, user]);
 
   useEffect(() => {
     loadSession();
@@ -111,7 +120,7 @@ export default function AdminClient() {
 
   useEffect(() => {
     loadModule(active);
-  }, [active, user]);
+  }, [active, loadModule]);
 
   const runAction = async (action: string, payload: Record<string, unknown> = {}) => {
     setLoading(true);
@@ -133,9 +142,9 @@ export default function AdminClient() {
   };
 
   const filteredProducts = useMemo(() => {
-    const items = data.products || [];
+    const items = asRows(data.products);
     const needle = query.toLowerCase();
-    return items.filter((item: any, index: number) => `${item.name} ${displaySku(index)} ${item.collection_name} ${item.status}`.toLowerCase().includes(needle));
+    return items.filter((item, index) => `${String(item.name || "")} ${displaySku(index)} ${String(item.collection_name || "")} ${String(item.status || "")}`.toLowerCase().includes(needle));
   }, [data.products, query]);
 
   if (loading && !user) {
@@ -251,16 +260,16 @@ function LoginScreen({ onLogin }: { onLogin: (user: User) => void }) {
 }
 
 function Dashboard({ data }: { data: ApiState }) {
-  const totals = data.totals || {};
-  const metrics = [
-    ["商品总数", totals.products || 0],
-    ["已发布商品", totals.published_products || 0],
-    ["低库存商品", totals.low_stock_products || 0],
-    ["订单数量", totals.orders || 0],
-    ["已支付订单", totals.paid_orders || 0],
-    ["待支付订单", totals.pending_orders || 0],
-    ["待发货订单", totals.unfulfilled_orders || 0],
-    ["销售额", formatCents(totals.sales_cents)]
+  const totals = asRecord(data.totals);
+  const metrics: Array<[string, string | number]> = [
+    ["商品总数", Number(totals.products || 0)],
+    ["已发布商品", Number(totals.published_products || 0)],
+    ["低库存商品", Number(totals.low_stock_products || 0)],
+    ["订单数量", Number(totals.orders || 0)],
+    ["已支付订单", Number(totals.paid_orders || 0)],
+    ["待支付订单", Number(totals.pending_orders || 0)],
+    ["待发货订单", Number(totals.unfulfilled_orders || 0)],
+    ["销售额", formatCents(Number(totals.sales_cents || 0))]
   ];
   return (
     <div className="admin-stack">
@@ -288,7 +297,7 @@ function Products({
   runAction
 }: {
   data: ApiState;
-  products: any[];
+  products: AdminRow[];
   query: string;
   setQuery: (value: string) => void;
   runAction: (action: string, payload?: Record<string, unknown>) => Promise<void>;
@@ -318,16 +327,18 @@ function Products({
           </thead>
           <tbody>
             {products.map((product, index) => (
-              <tr key={product.id}>
+              <tr key={String(product.id || index)}>
                 <td>
                   <div className="product-cell">
-                    <img src={product.image} alt="" />
+                    {/* Product media can originate from multiple supplier CDNs, so it is intentionally not passed through Next's image optimizer. */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={String(product.image || "")} alt="" />
                     <span>{product.name}</span>
                   </div>
                 </td>
                 <td>{displaySku(index)}</td>
                 <td>{product.price_display}</td>
-                <td><Status value={product.status} /></td>
+                <td><Status value={String(product.status || "")} /></td>
                 <td>{product.available_quantity} <small>{product.quantity_source}</small></td>
                 <td>{product.price_source}</td>
                 <td>
@@ -368,14 +379,14 @@ function Orders({ data, runAction }: { data: ApiState; runAction: (action: strin
             </tr>
           </thead>
           <tbody>
-            {(data.orders || []).map((order: any) => (
-              <tr key={order.id}>
+            {asRows(data.orders).map((order) => (
+              <tr key={String(order.id || order.order_no || "order")}>
                 <td>{order.order_no}</td>
-                <td>{formatCents(order.total_cents, order.order_currency)}</td>
-                <td><Status value={order.payment_status} /></td>
-                <td><Status value={order.order_status} /></td>
-                <td><Status value={order.fulfillment_status} /></td>
-                <td>{formatCents(order.refunded_cents, order.order_currency)}</td>
+                <td>{formatCents(Number(order.total_cents || 0), String(order.order_currency || "USD"))}</td>
+                <td><Status value={String(order.payment_status || "")} /></td>
+                <td><Status value={String(order.order_status || "")} /></td>
+                <td><Status value={String(order.fulfillment_status || "")} /></td>
+                <td>{formatCents(Number(order.refunded_cents || 0), String(order.order_currency || "USD"))}</td>
                 <td>
                   <div className="row-actions">
                     <button onClick={() => runAction("order.pay_test", { orderId: order.id })}>测试支付</button>
@@ -424,13 +435,13 @@ function Reviews({ data, runAction }: { data: ApiState; runAction: (action: stri
           </tr>
         </thead>
         <tbody>
-          {(data.reviews || []).map((review: any) => (
-            <tr key={review.id}>
+          {asRows(data.reviews).map((review) => (
+            <tr key={String(review.id || "review")}>
               <td>{review.product_name}</td>
               <td>{review.customer_name}</td>
               <td>{review.rating}</td>
               <td>{review.content}</td>
-              <td><Status value={review.status} /></td>
+              <td><Status value={String(review.status || "")} /></td>
               <td>
                 <div className="row-actions">
                   <button onClick={() => runAction("review.moderate", { reviewId: review.id, status: "approved" })}>通过</button>
@@ -457,7 +468,7 @@ function Content({ data, runAction }: { data: ApiState; runAction: (action: stri
 }
 
 function Seo({ data, runAction }: { data: ApiState; runAction: (action: string, payload?: Record<string, unknown>) => Promise<void> }) {
-  const summary = data.searchConsoleSummary || {};
+  const summary = asRecord(data.searchConsoleSummary);
   return (
     <div className="admin-stack">
       <section className="toolbar">
@@ -483,13 +494,13 @@ function Seo({ data, runAction }: { data: ApiState; runAction: (action: string, 
             </tr>
           </thead>
           <tbody>
-            {(data.seoRecords || []).map((record: any) => (
-              <tr key={record.id}>
+            {asRows(data.seoRecords).map((record) => (
+              <tr key={String(record.id || "seo")}>
                 <td>{record.entity_type}</td>
                 <td>{record.path}</td>
                 <td>{record.seo_title}</td>
                 <td>{record.robots}</td>
-                <td><Status value={record.structured_data_status} /></td>
+                <td><Status value={String(record.structured_data_status || "")} /></td>
                 <td><button onClick={() => runAction("seo.save", { seoId: record.id, seoTitle: record.seo_title, seoDescription: record.seo_description, robots: "index,follow" })}>检测并保存</button></td>
               </tr>
             ))}
@@ -502,7 +513,7 @@ function Seo({ data, runAction }: { data: ApiState; runAction: (action: string, 
 }
 
 function Sync({ data, runAction }: { data: ApiState; runAction: (action: string, payload?: Record<string, unknown>) => Promise<void> }) {
-  const summary = data.searchConsoleSummary || {};
+  const summary = asRecord(data.searchConsoleSummary);
   return (
     <div className="admin-stack">
       <section className="sync-panel">
@@ -546,7 +557,8 @@ function SettingsPanel({ data, runAction }: { data: ApiState; runAction: (action
   );
 }
 
-function SimpleTable({ title, rows, columns }: { title: string; rows: any[]; columns: string[] }) {
+function SimpleTable({ title, rows, columns }: { title: string; rows: unknown; columns: string[] }) {
+  const normalizedRows = asRows(rows);
   return (
     <section className="admin-table-wrap">
       <h2>{title}</h2>
@@ -557,10 +569,10 @@ function SimpleTable({ title, rows, columns }: { title: string; rows: any[]; col
           </tr>
         </thead>
         <tbody>
-          {rows.length === 0 ? (
+          {normalizedRows.length === 0 ? (
             <tr><td colSpan={columns.length}>暂无数据。可通过后台操作或前台流程写入数据库。</td></tr>
-          ) : rows.map((row, index) => (
-            <tr key={row.id || index}>
+          ) : normalizedRows.map((row, index) => (
+            <tr key={String(row.id || index)}>
               {columns.map((column) => (
                 <td key={column}>{formatCell(row[column], column)}</td>
               ))}

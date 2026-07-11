@@ -28,15 +28,16 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
   const related = products.filter((product) => post.relatedProductIds.includes(product.id)).slice(0, 3);
   return (
     <PublicShell>
-      <JsonLd value={{ "@context": "https://schema.org", "@type": "BlogPosting", headline: post.title, datePublished: post.publishedAt, dateModified: post.updatedAt, image: `${siteUrl}${post.image}`, description: post.excerpt, author: { "@type": "Organization", name: post.author, url: siteUrl }, publisher: { "@type": "Organization", name: "Cowinlife", url: siteUrl }, mainEntityOfPage: `${siteUrl}/blog/${post.slug}` }} />
+      <JsonLd value={{ "@context": "https://schema.org", "@type": "BlogPosting", headline: post.title, datePublished: post.publishedAt, dateModified: post.updatedAt, image: post.image.startsWith("http") ? post.image : `${siteUrl}${post.image}`, description: post.excerpt, author: { "@type": "Organization", name: post.author, url: siteUrl }, publisher: { "@type": "Organization", name: "Cowinlife", url: siteUrl }, mainEntityOfPage: { "@type": "WebPage", "@id": `${siteUrl}/blog/${post.slug}` } }} />
       <article className="article-page">
         <p className="eyebrow">Guide / {post.publishedAt}</p>
         <h1>{post.title}</h1>
         <p>{post.excerpt}</p>
-        <Image src={post.image} alt={post.title} width={980} height={560} priority />
+        <Image src={post.image} alt={post.imageAlt} width={980} height={560} priority />
         <div className="article-body">
           {post.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           <p className="article-updated">Last reviewed: {post.updatedAt}</p>
+          <p className="article-updated">Cover image source: <a href={post.imagePageUrl} rel="noreferrer" target="_blank">Unsplash</a></p>
         </div>
       </article>
       <section className="section route-section">

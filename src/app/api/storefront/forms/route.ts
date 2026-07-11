@@ -1,12 +1,20 @@
 import { NextResponse } from "next/server";
 import { createPublicForm } from "@/lib/admin/db";
 import { sendInquiryNotification } from "@/lib/email/inquiry";
+import { checkRateLimit } from "@/lib/request-rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   try {
+    const rateLimit = checkRateLimit(request, "storefront-form", { limit: 5, windowMs: 10 * 60 * 1000 });
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { error: "Too many inquiries from this network. Please wait before trying again." },
+        { status: 429, headers: { "Retry-After": String(rateLimit.retryAfterSeconds) } }
+      );
+    }
     const body = await request.json();
     const form = createPublicForm({
       formType: String(body.formType || "contact"),

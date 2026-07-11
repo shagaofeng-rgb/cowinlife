@@ -79,6 +79,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         <section id="sku-images" className="retail-preview-story" aria-label="SKU-specific product detail images">
           {product.detailImages.map((image) => (
             <figure key={image.src}>
+              {/* SKU detail artwork is sourced per product and rendered as a continuous image sequence. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={image.src} alt={image.alt} />
             </figure>
           ))}
