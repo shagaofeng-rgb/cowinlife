@@ -34,10 +34,11 @@ export default async function CustomProductDetailPage({ params }: { params: Prom
     <PublicShell>
       <JsonLd value={{
         "@context": "https://schema.org",
-        "@type": "Product",
+        "@type": "Service",
         name: product.name,
         sku: product.sku,
-        brand: { "@type": "Brand", name: "COWINLIFE" },
+        serviceType: "Made-to-order custom product",
+        provider: { "@type": "Organization", name: "COWINLIFE", url: siteUrl },
         image: product.gallery.map((_, index) => `${siteUrl}${customProductImage(product, index)}`),
         description: productDescription,
         category: product.category,

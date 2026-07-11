@@ -118,6 +118,7 @@ export function productJsonLd(product: Product) {
     sku: publicSku(product),
     brand: { "@type": "Brand", name: "COWINLIFE" },
     description: product.details,
+    url: `${siteUrl}/products/${productSlug(product)}`,
     offers: price
       ? {
           "@type": "Offer",
