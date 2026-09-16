@@ -1,0 +1,12 @@
+
+    #module-Yu7oF1aDGFLYR {
+      padding-top: 3vw;
+      padding-bottom: 4vw;
+      background-color: rgba(255, 255, 255, 1);
+    }
+    @media(max-width:1199px) {
+      #module-Yu7oF1aDGFLYR {
+        padding-top: 4vw;
+      }
+    }
+  

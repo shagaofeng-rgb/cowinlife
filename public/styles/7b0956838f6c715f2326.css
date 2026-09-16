@@ -1,0 +1,11 @@
+
+        #cell-OL1x4Xzv0gRE1e9 {
+          padding-left: 1.5vw;
+        }
+        @media(max-width:767px) {
+          #cell-OL1x4Xzv0gRE1e9 {
+            padding-left: 0vw;
+            padding-right: 0;
+          }
+        }
+      

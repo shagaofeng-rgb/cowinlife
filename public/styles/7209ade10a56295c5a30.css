@@ -1,0 +1,7 @@
+
+  [package-group="widget"]{
+    --FAQ-B:0px;    --social-height:136px;  }
+  @media (max-width:768px){
+    [package-group="widget"]{
+      --social-height:70px;    }
+  }

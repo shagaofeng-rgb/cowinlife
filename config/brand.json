@@ -1,0 +1,17 @@
+{
+  "name": "NEW BRAND",
+  "companyName": "[New company name]",
+  "contactPerson": "[Contact person]",
+  "email": "[New company email]",
+  "phone": "[New company phone]",
+  "address": "28.965204, 118.839750",
+  "whatsapp": "",
+  "logo": "",
+  "website": "",
+  "previewOnly": true,
+  "location": {
+    "latitude": 28.965204,
+    "longitude": 118.83975,
+    "googleMapsUrl": "https://maps.app.goo.gl/P1YyVHoCdGBd9ef37"
+  }
+}

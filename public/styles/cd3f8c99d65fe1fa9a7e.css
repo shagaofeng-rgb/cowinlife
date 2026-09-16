@@ -1,0 +1,12 @@
+
+    #module-qqqcBxNP0fy3k {
+      padding-top: 2vw;
+      padding-bottom: 0vw;
+      background-color: rgba(255, 255, 255, 1);
+    }
+    @media(max-width:1199px) {
+      #module-qqqcBxNP0fy3k {
+        padding-bottom: 2vw;
+      }
+    }
+  

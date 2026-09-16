@@ -1,0 +1,38 @@
+
+          #unit-RlxFr450Q2KFkdv {
+            padding-top: 2vw;
+          }
+          #unit-RlxFr450Q2KFkdv [ce-data-type="inner"] {
+            flex-direction: column;
+          }
+          #unit-RlxFr450Q2KFkdv .ce-image_inner {
+            justify-content: center;
+          }
+          #unit-RlxFr450Q2KFkdv .ce-image {
+            transition: .3s;
+            border-top-left-radius: 0;
+            border-top-right-radius: 50px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 0;
+            --image-effect: 1;
+          }
+          #unit-RlxFr450Q2KFkdv .ce-image:hover {
+            transform: scale(1.1);
+            border-radius: 0;
+          }
+          @media(max-width:1199px) {
+            #unit-RlxFr450Q2KFkdv {
+              padding-bottom: 0vw;
+            }
+            #unit-RlxFr450Q2KFkdv .ce-image {
+              border-top-right-radius: 30px;
+              border-bottom-left-radius: 30px;
+            }
+          }
+          @media(max-width:767px) {
+            #unit-RlxFr450Q2KFkdv .ce-image {
+              border-top-right-radius: 20px;
+              border-bottom-left-radius: 20px;
+            }
+          }
+        

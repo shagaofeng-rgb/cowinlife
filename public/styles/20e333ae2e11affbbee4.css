@@ -1,0 +1,12 @@
+
+        #cell-f7OgYyyTzqfEw7I {
+          padding-left: 1.5vw;
+          background-color: rgba(245, 245, 245, 0);
+        }
+        @media(max-width:767px) {
+          #cell-f7OgYyyTzqfEw7I {
+            padding-left: 0vw;
+            padding-right: 0;
+          }
+        }
+      

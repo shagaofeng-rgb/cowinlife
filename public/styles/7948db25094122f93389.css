@@ -1,0 +1,19 @@
+
+    #module-iocq52qOahlEY {
+      padding-top: 4vw;
+      padding-bottom: 4vw;
+      background-color: rgba(245, 245, 245, 1);
+    }
+    @media(max-width:1199px) {
+      #module-iocq52qOahlEY {
+        padding-top: 6vw;
+        padding-bottom: 6vw;
+      }
+    }
+    @media(max-width:767px) {
+      #module-iocq52qOahlEY {
+        padding-top: 4vw;
+        padding-bottom: 4vw;
+      }
+    }
+  

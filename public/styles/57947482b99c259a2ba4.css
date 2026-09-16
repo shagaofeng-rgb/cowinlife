@@ -1,0 +1,11 @@
+
+        #cell-DuuOQqDvLINsIbw {
+          padding-right: 1.5vw;
+        }
+        @media(max-width:767px) {
+          #cell-DuuOQqDvLINsIbw {
+            padding-right: 0vw;
+            padding-top: 2vw;
+          }
+        }
+      

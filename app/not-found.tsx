@@ -1,0 +1,1 @@
+export default function NotFound() { return <main style={{maxWidth:760,margin:'100px auto',padding:24,fontFamily:'sans-serif'}}><h1>Page not available in this preview</h1><p>This page has not yet been imported into the local site.</p><a href="/">Return to home</a></main>; }

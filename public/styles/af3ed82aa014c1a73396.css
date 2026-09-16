@@ -1,0 +1,10 @@
+
+      #grid-VGKqAJfkHHpF9Tf {
+        padding-top: 2vw;
+      }
+      @media(max-width:767px) {
+        #grid-VGKqAJfkHHpF9Tf {
+          padding-top: 0vw;
+        }
+      }
+    
