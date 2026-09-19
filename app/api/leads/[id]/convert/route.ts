@@ -1,0 +1,5 @@
+import { NextResponse } from 'next/server';
+import { log, requireAdmin } from '@/lib/admin-api';
+import { query } from '@/lib/database';
+export const runtime = 'nodejs';
+export async function POST(_request:Request,{params}:{params:Promise<{id:string}>}) { const blocked=await requireAdmin(); if(blocked)return blocked; const {id}=await params; const lead=await query<{company:string;country:string}>('SELECT company,country FROM leads WHERE id=$1',[id]); if(!lead.rows[0])return NextResponse.json({error:'Lead not found'},{status:404}); const customer=await query<{id:string}>('INSERT INTO customers (company,country) VALUES ($1,$2) RETURNING id',[lead.rows[0].company||'Unnamed customer',lead.rows[0].country||'']); await query('UPDATE leads SET status=$1,updated_at=now() WHERE id=$2',['won',id]); await query('INSERT INTO lead_activities (lead_id,action,body) VALUES ($1,$2,$3)',[id,'converted','Converted to customer']); await log('converted','lead',id); return NextResponse.json({customerId:customer.rows[0].id}); }
