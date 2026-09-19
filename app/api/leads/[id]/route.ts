@@ -1,0 +1,5 @@
+import { NextResponse } from 'next/server';
+import { leadInput, log, requireAdmin } from '@/lib/admin-api';
+import { query } from '@/lib/database';
+export const runtime = 'nodejs';
+export async function PATCH(request:Request,{params}:{params:Promise<{id:string}>}) { const blocked=await requireAdmin(); if(blocked)return blocked; const parsed=leadInput.partial().safeParse(await request.json()); if(!parsed.success)return NextResponse.json({error:'Invalid lead'},{status:400}); const {id}=await params; const data=parsed.data; await query('UPDATE leads SET name=COALESCE($1,name),company=COALESCE($2,company),email=COALESCE($3,email),country=COALESCE($4,country),product=COALESCE($5,product),message=COALESCE($6,message),status=COALESCE($7,status),score=COALESCE($8,score),updated_at=now() WHERE id=$9',[data.name,data.company,data.email,data.country,data.product,data.message,data.status,data.score,id]); await query('INSERT INTO lead_activities (lead_id,action,body) VALUES ($1,$2,$3)',[id,'updated','Lead updated']); await log('updated','lead',id); return NextResponse.json({ok:true}); }
