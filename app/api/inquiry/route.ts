@@ -71,7 +71,10 @@ export async function POST(request: Request) {
       text: textLines.join('\n'),
       html: `<h2>New inquiry from cowinlife.com</h2>${pageTitle ? `<p><strong>Page:</strong> ${escapeHtml(pageTitle)}</p>` : ''}${page ? `<p><strong>URL path:</strong> ${escapeHtml(page)}</p>` : ''}<table>${htmlRows}</table>${productList.length ? `<p><strong>Products:</strong> ${productList.map(escapeHtml).join(', ')}</p>` : ''}`,
     });
-    await query('INSERT INTO inquiries (name,email,message,page_path,products,fields) VALUES ($1,$2,$3,$4,$5,$6)', [name, email || '', entries.find(([field]) => /message|comment|inquiry/i.test(field))?.[1] || '', page, JSON.stringify(productList), JSON.stringify(Object.fromEntries(entries))]);
+    const message = entries.find(([field]) => /message|comment|inquiry/i.test(field))?.[1] || '';
+    await query('INSERT INTO inquiries (name,email,message,page_path,products,fields) VALUES ($1,$2,$3,$4,$5,$6)', [name, email || '', message, page, JSON.stringify(productList), JSON.stringify(Object.fromEntries(entries))]);
+    const lead = await query<{ id: string }>('INSERT INTO leads (name,email,message,product,source,metadata) VALUES ($1,$2,$3,$4,$5,$6) RETURNING id', [name, email || '', message, productList.join(', '), 'Website form', JSON.stringify({ page, pageTitle, fields: Object.fromEntries(entries), products: productList })]);
+    if (lead.rows[0]) await query('INSERT INTO lead_activities (lead_id,action,body) VALUES ($1,$2,$3)', [lead.rows[0].id, 'submitted', 'Website inquiry submitted']);
 
     return NextResponse.json({ ok: true });
   } catch (error) {
