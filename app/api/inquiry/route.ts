@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import { NextResponse } from 'next/server';
+import { query } from '@/lib/database';
 
 export const runtime = 'nodejs';
 
@@ -45,6 +46,7 @@ export async function POST(request: Request) {
     const productList = Array.isArray(body.products) ? body.products.map(cleanValue).filter(Boolean).slice(0, 20) : [];
     const page = cleanValue(body.page);
     const pageTitle = cleanValue(body.pageTitle);
+    const name = entries.find(([field]) => /name/i.test(field))?.[1] || '';
     const textLines = [
       'New inquiry from cowinlife.com',
       pageTitle ? `Page: ${pageTitle}` : '',
@@ -69,6 +71,7 @@ export async function POST(request: Request) {
       text: textLines.join('\n'),
       html: `<h2>New inquiry from cowinlife.com</h2>${pageTitle ? `<p><strong>Page:</strong> ${escapeHtml(pageTitle)}</p>` : ''}${page ? `<p><strong>URL path:</strong> ${escapeHtml(page)}</p>` : ''}<table>${htmlRows}</table>${productList.length ? `<p><strong>Products:</strong> ${productList.map(escapeHtml).join(', ')}</p>` : ''}`,
     });
+    await query('INSERT INTO inquiries (name,email,message,page_path,products,fields) VALUES ($1,$2,$3,$4,$5,$6)', [name, email || '', entries.find(([field]) => /message|comment|inquiry/i.test(field))?.[1] || '', page, JSON.stringify(productList), JSON.stringify(Object.fromEntries(entries))]);
 
     return NextResponse.json({ ok: true });
   } catch (error) {

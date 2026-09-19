@@ -1,0 +1,3 @@
+'use client';
+import { useState } from 'react';
+export default function Login() { const [email,setEmail] = useState(''); const [sent,setSent] = useState(false); const submit = async (event: React.FormEvent) => { event.preventDefault(); await fetch('/api/admin/request-link',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})}); setSent(true); }; return <main className="admin-login"><form onSubmit={submit}><p>COWINLIFE</p><h1>企业后台</h1><label>企业邮箱<input required type="email" value={email} onChange={event => setEmail(event.target.value)} /></label><button>{sent ? '登录链接已发送' : '发送登录链接'}</button></form></main>; }
