@@ -130,12 +130,33 @@ export default function Website({ page }: { page: PageData }) {
       if ((event.key === 'Enter' || event.key === ' ') && input.matches('[data-keyboard-control]')) { event.preventDefault(); input.click(); }
     };
     all('.faq-title,.unit-header-menu__switch,.unit-header-menu__close,.unit-header-menu__nav__item-drop,.unit-header-search__btn,.unit-header-search__modal-close,.widget-social-media-chat__server').forEach(el => { el.tabIndex = 0; el.setAttribute('role', 'button'); el.dataset.keyboardControl = 'true'; });
-    const submit = (event: SubmitEvent) => {
+    const submit = async (event: SubmitEvent) => {
       const form = event.target as HTMLFormElement; event.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
       let result = form.querySelector<HTMLElement>('.form-preview-result');
       if (!result) { result = document.createElement('p'); result.className = 'form-preview-result'; result.setAttribute('role','status'); form.append(result); }
-      result.textContent = 'Local preview: your inquiry has not been sent. New company delivery settings are pending.';
+      const submitters = Array.from(form.querySelectorAll<HTMLButtonElement | HTMLInputElement>('button[type="submit"], input[type="submit"]'));
+      const fields = Object.fromEntries(Array.from(new FormData(form)).filter((entry): entry is [string, string] => typeof entry[1] === 'string'));
+      const products = Array.from(dialog?.querySelectorAll<HTMLElement>('.preview-inquiry-product') || [])
+        .filter(item => item.querySelector<HTMLInputElement>('input')?.checked)
+        .map(item => item.querySelector('span')?.textContent?.trim())
+        .filter((product): product is string => Boolean(product));
+      submitters.forEach(button => { button.disabled = true; });
+      result.textContent = 'Sending your inquiry…';
+      try {
+        const response = await fetch('/api/inquiry', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fields, products, page: window.location.pathname, pageTitle: document.title }),
+        });
+        if (!response.ok) throw new Error('Inquiry request failed');
+        result.textContent = 'Thank you. Your inquiry has been sent successfully.';
+        form.reset();
+      } catch {
+        result.textContent = 'We could not send your inquiry. Please try again shortly.';
+      } finally {
+        submitters.forEach(button => { button.disabled = false; });
+      }
     };
     const focusChanged = (event: FocusEvent) => { const target = event.target as Element; if (!target.closest('.unit-header-nav__item,.preview-nav-dropdown')) dropdowns.forEach(p => p.classList.remove('show')); };
     host.addEventListener('focusin', focusChanged);
