@@ -20,13 +20,14 @@ export async function recordEvent(input: { visitorId: string; sessionId: string;
 export async function dashboardData(range: string) {
   const days = range === '30d' ? 30 : range === '90d' ? 90 : 7;
   const values = [days];
-  const [summary, trend, sources, pages, journeys, inquiries] = await Promise.all([
+  const [summary, trend, sources, pages, journeys, inquiries, recentLeads] = await Promise.all([
     query<{ pv: string; visitors: string; sessions: string }>('SELECT count(*)::text pv, count(DISTINCT visitor_id)::text visitors, count(DISTINCT session_id)::text sessions FROM analytics_events WHERE event_time >= now() - ($1::text || \' days\')::interval', values),
     query<{ date: string; pv: string; uv: string }>('SELECT to_char(event_time AT TIME ZONE \'Asia/Shanghai\', \'MM-DD\') date, count(*)::text pv, count(DISTINCT visitor_id)::text uv FROM analytics_events WHERE event_time >= now() - ($1::text || \' days\')::interval GROUP BY 1 ORDER BY 1', values),
     query<{ label: string; value: string }>('SELECT source label, count(*)::text value FROM analytics_events WHERE event_time >= now() - ($1::text || \' days\')::interval GROUP BY 1 ORDER BY count(*) DESC LIMIT 8', values),
     query<{ label: string; value: string }>('SELECT page_path label, count(*)::text value FROM analytics_events WHERE event_time >= now() - ($1::text || \' days\')::interval GROUP BY 1 ORDER BY count(*) DESC LIMIT 8', values),
     query<{ label: string; value: string }>('SELECT concat(coalesce(previous_path, \'入口\'), \' → \', page_path) label, count(*)::text value FROM analytics_events WHERE event_time >= now() - ($1::text || \' days\')::interval AND event_type=\'page_view\' GROUP BY 1 ORDER BY count(*) DESC LIMIT 8', values),
     query<{ count: string }>('SELECT count(*)::text count FROM inquiries WHERE created_at >= now() - ($1::text || \' days\')::interval', values),
+    query<{ id:string; name:string; company:string; email:string; country:string; product:string; source:string; status:string; created_at:string }>('SELECT id,name,company,email,country,product,source,status,created_at FROM leads ORDER BY created_at DESC LIMIT 10'),
   ]);
-  return { summary: { ...summary.rows[0], inquiries: inquiries.rows[0]?.count || '0' }, trend: trend.rows, sources: sources.rows, pages: pages.rows, journeys: journeys.rows, range: days };
+  return { summary: { ...summary.rows[0], inquiries: inquiries.rows[0]?.count || '0' }, trend: trend.rows, sources: sources.rows, pages: pages.rows, journeys: journeys.rows, recentLeads: recentLeads.rows, range: days };
 }
