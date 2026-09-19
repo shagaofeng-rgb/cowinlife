@@ -75,6 +75,8 @@ export async function POST(request: Request) {
     await query('INSERT INTO inquiries (name,email,message,page_path,products,fields) VALUES ($1,$2,$3,$4,$5,$6)', [name, email || '', message, page, JSON.stringify(productList), JSON.stringify(Object.fromEntries(entries))]);
     const lead = await query<{ id: string }>('INSERT INTO leads (name,email,message,product,source,metadata) VALUES ($1,$2,$3,$4,$5,$6) RETURNING id', [name, email || '', message, productList.join(', '), 'Website form', JSON.stringify({ page, pageTitle, fields: Object.fromEntries(entries), products: productList })]);
     if (lead.rows[0]) await query('INSERT INTO lead_activities (lead_id,action,body) VALUES ($1,$2,$3)', [lead.rows[0].id, 'submitted', 'Website inquiry submitted']);
+    if (lead.rows[0]) await query('INSERT INTO form_submissions(lead_id,payload,source,landing_page) VALUES($1,$2,$3,$4)', [lead.rows[0].id, JSON.stringify({ fields: Object.fromEntries(entries), products: productList }), 'Website form', page]);
+    await query('INSERT INTO notifications(type,title,body) VALUES($1,$2,$3)', ['lead', 'New website inquiry', name || email || 'New customer inquiry']);
 
     return NextResponse.json({ ok: true });
   } catch (error) {
