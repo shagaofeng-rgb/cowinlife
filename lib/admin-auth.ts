@@ -34,3 +34,10 @@ export async function isAdmin() {
   const result = await query('SELECT 1 FROM admin_sessions WHERE token_hash=$1 AND expires_at > now()', [hash(token)]);
   return result.rowCount === 1;
 }
+
+export async function signOut() {
+  const jar = await cookies();
+  const token = jar.get(COOKIE)?.value;
+  if (token) await query('DELETE FROM admin_sessions WHERE token_hash=$1', [hash(token)]);
+  jar.set(COOKIE, '', { httpOnly:true, secure:true, sameSite:'lax', path:'/', maxAge:0 });
+}
