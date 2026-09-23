@@ -1,0 +1,5 @@
+import { requirePermission } from '@/lib/admin-api';
+import { query } from '@/lib/database';
+export const runtime='nodejs';
+const safe=(v:string)=>`"${String(v||'').replaceAll('"','""')}"`;
+export async function GET(request:Request){const blocked=await requirePermission('growth');if(blocked)return blocked;const days=Math.min(90,Math.max(1,Number(new URL(request.url).searchParams.get('days'))||30));const r=await query<{event_time:string;page_path:string;source:string;channel:string;device:string;country:string}>('SELECT event_time::text,page_path,source,channel,device,country FROM analytics_events WHERE event_time>=now()-($1::text||\' days\')::interval ORDER BY event_time DESC LIMIT 10000',[days]);const csv=['time,page,source,channel,device,country',...r.rows.map(x=>[x.event_time,x.page_path,x.source,x.channel,x.device,x.country].map(safe).join(','))].join('\n');return new Response(csv,{headers:{'Content-Type':'text/csv; charset=utf-8','Content-Disposition':'attachment; filename="cowinlife-analytics.csv"'}})}
