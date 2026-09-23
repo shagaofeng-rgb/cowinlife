@@ -35,6 +35,13 @@ export async function isAdmin() {
   return result.rowCount === 1;
 }
 
+export async function adminRole() {
+  const token = (await cookies()).get(COOKIE)?.value;
+  if (!token) return null;
+  const result = await query<{email:string;role:string}>('SELECT s.email,coalesce(r.name,\'Super Admin\') role FROM admin_sessions s LEFT JOIN users u ON lower(u.email)=lower(s.email) LEFT JOIN user_roles ur ON ur.user_id=u.id LEFT JOIN roles r ON r.id=ur.role_id WHERE s.token_hash=$1 AND s.expires_at>now() LIMIT 1',[hash(token)]);
+  return result.rows[0] || null;
+}
+
 export async function signOut() {
   const jar = await cookies();
   const token = jar.get(COOKIE)?.value;
