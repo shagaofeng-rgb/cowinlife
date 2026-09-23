@@ -8,7 +8,7 @@ type Group = readonly [string, readonly Item[]];
 const groups: readonly Group[] = [
   ['运营', [['/admin', '数据总览'], ['/admin/analytics', '流量分析']]],
   ['销售', [['/admin/leads', '客户询盘'], ['/admin/customers', '客户'], ['/admin/follow-ups', '跟进任务']]],
-  ['网站', [['/admin/products', '产品'], ['/admin/content', '内容'], ['/admin/seo', 'SEO / GEO']]],
+  ['网站', [['/admin/products', '产品'], ['/admin/content', '内容'], ['/admin/forms', '网站表单'], ['/admin/seo', 'SEO / GEO']]],
   ['系统', [['/admin/settings', '设置与日志']]],
 ];
 

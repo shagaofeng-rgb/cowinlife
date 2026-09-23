@@ -1,0 +1,1 @@
+import { redirect } from 'next/navigation'; import { isAdmin } from '@/lib/admin-auth'; import OperationsWorkspace from '@/components/OperationsWorkspace'; export const dynamic='force-dynamic'; export default async function Forms(){if(!await isAdmin())redirect('/admin/login');return <OperationsWorkspace kind="forms"/>}
