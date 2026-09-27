@@ -1,38 +1,21 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import Swiper from 'swiper';
-import { Autoplay, Pagination, Navigation, Thumbs, FreeMode, A11y } from 'swiper/modules';
+import type Swiper from 'swiper';
 import type { PageData } from '@/lib/content';
 
-export default function Website({ page }: { page: PageData }) {
+export type WebsiteData = Pick<PageData, 'html' | 'styles' | 'carousels' | 'inquiryHtml' | 'thumbnail' | 'displayTitle'>;
+
+export default function Website({ page }: { page: WebsiteData }) {
   const root = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const host = root.current!;
     const $ = <T extends HTMLElement = HTMLElement>(selector: string, parent: ParentNode = host) => parent.querySelector<T>(selector);
     const all = (selector: string) => Array.from(host.querySelectorAll<HTMLElement>(selector));
     const instances: Swiper[] = [];
-    for (const config of page.carousels) {
-      const unit = document.getElementById(config.id);
-      const el = unit?.querySelector<HTMLElement>('.swiper-container');
-      if (!unit || !el) continue;
-      const count = el.querySelectorAll('.swiper-slide').length;
-      instances.push(new Swiper(el, {
-        modules: [Autoplay, Pagination, Navigation, A11y],
-        slidesPerView: Number(config.cols_col) || 1,
-        breakpoints: { 768: { slidesPerView: Number(config.cols_md) || 2 }, 1200: { slidesPerView: Number(config.cols_xl) || 3 } },
-        spaceBetween: Number(config.space_between) || 0,
-        loop: !!config.loop && count > Number(config.cols_xl || 3),
-        speed: Number(config.speed) || 300, autoHeight: !!config.auto_height,
-        autoplay: config.autoplay && !matchMedia('(prefers-reduced-motion: reduce)').matches ? { delay: Number(config.autoplay), disableOnInteraction: false, pauseOnMouseEnter: true } : false,
-        pagination: { el: unit.querySelector<HTMLElement>('.swiper-pagination'), clickable: true },
-        navigation: { nextEl: unit.querySelector<HTMLElement>('.swiper-button-next'), prevEl: unit.querySelector<HTMLElement>('.swiper-button-prev') },
-      }));
-    }
+    let active = true;
     const dropdowns: HTMLElement[] = [];
     const removeNavListeners: (() => void)[] = [];
     all('.unit-header-nav').forEach(nav => {
-      const container = $<HTMLElement>('.swiper-container', nav);
-      if (container) instances.push(new Swiper(container, { modules: [Navigation, FreeMode, A11y], slidesPerView: 'auto', freeMode: true, navigation: { nextEl: $<HTMLElement>('.swiper-button-next', nav), prevEl: $<HTMLElement>('.swiper-button-prev', nav) } }));
       nav.querySelectorAll<HTMLElement>('.unit-header-nav__item').forEach(item => {
         const content = item.querySelector<HTMLElement>(':scope > .unit-header-nav__item-content');
         if (!content) return;
@@ -47,14 +30,41 @@ export default function Website({ page }: { page: PageData }) {
         removeNavListeners.push(() => { clearTimeout(timer); item.removeEventListener('mouseenter', open); item.removeEventListener('mouseleave', leave); item.removeEventListener('focusin', open); });
       });
     });
-    all('.unit-detail-album').forEach(album => {
-      album.closest('[package-type="product-detail"]')?.classList.add('unit-detail-album--y', 'unit-detail-album--bottom');
-      const thumb = $<HTMLElement>('.unit-detail-album__thumb-container', album);
-      const picture = $<HTMLElement>('.unit-detail-album__picture-container', album);
-      let thumbs: Swiper | undefined;
-      if (thumb) { thumbs = new Swiper(thumb, { modules: [FreeMode], slidesPerView: 'auto', spaceBetween: 10, centerInsufficientSlides: true, watchSlidesProgress: true, freeMode: true }); instances.push(thumbs); }
-      if (picture) instances.push(new Swiper(picture, { modules: [Thumbs, Navigation, A11y], autoHeight: true, thumbs: { swiper: thumbs }, navigation: { nextEl: $<HTMLElement>('.swiper-button-next', album), prevEl: $<HTMLElement>('.swiper-button-prev', album) } }));
-    });
+    void (async () => {
+      if (!page.carousels.length && !all('.unit-header-nav .swiper-container,.unit-detail-album').length) return;
+      const [{ default: SwiperClass }, { Autoplay, Pagination, Navigation, Thumbs, FreeMode, A11y }] =
+        await Promise.all([import('swiper'), import('swiper/modules')]);
+      if (!active) return;
+      for (const config of page.carousels) {
+        const unit = document.getElementById(config.id);
+        const el = unit?.querySelector<HTMLElement>('.swiper-container');
+        if (!unit || !el) continue;
+        const count = el.querySelectorAll('.swiper-slide').length;
+        instances.push(new SwiperClass(el, {
+          modules: [Autoplay, Pagination, Navigation, A11y],
+          slidesPerView: Number(config.cols_col) || 1,
+          breakpoints: { 768: { slidesPerView: Number(config.cols_md) || 2 }, 1200: { slidesPerView: Number(config.cols_xl) || 3 } },
+          spaceBetween: Number(config.space_between) || 0,
+          loop: !!config.loop && count > Number(config.cols_xl || 3),
+          speed: Number(config.speed) || 300, autoHeight: !!config.auto_height,
+          autoplay: config.autoplay && !matchMedia('(prefers-reduced-motion: reduce)').matches ? { delay: Number(config.autoplay), disableOnInteraction: false, pauseOnMouseEnter: true } : false,
+          pagination: { el: unit.querySelector<HTMLElement>('.swiper-pagination'), clickable: true },
+          navigation: { nextEl: unit.querySelector<HTMLElement>('.swiper-button-next'), prevEl: unit.querySelector<HTMLElement>('.swiper-button-prev') },
+        }));
+      }
+      all('.unit-header-nav').forEach(nav => {
+        const container = $<HTMLElement>('.swiper-container', nav);
+        if (container) instances.push(new SwiperClass(container, { modules: [Navigation, FreeMode, A11y], slidesPerView: 'auto', freeMode: true, navigation: { nextEl: $<HTMLElement>('.swiper-button-next', nav), prevEl: $<HTMLElement>('.swiper-button-prev', nav) } }));
+      });
+      all('.unit-detail-album').forEach(album => {
+        album.closest('[package-type="product-detail"]')?.classList.add('unit-detail-album--y', 'unit-detail-album--bottom');
+        const thumb = $<HTMLElement>('.unit-detail-album__thumb-container', album);
+        const picture = $<HTMLElement>('.unit-detail-album__picture-container', album);
+        let thumbs: Swiper | undefined;
+        if (thumb) { thumbs = new SwiperClass(thumb, { modules: [FreeMode], slidesPerView: 'auto', spaceBetween: 10, centerInsufficientSlides: true, watchSlidesProgress: true, freeMode: true }); instances.push(thumbs); }
+        if (picture) instances.push(new SwiperClass(picture, { modules: [Thumbs, Navigation, A11y], autoHeight: true, thumbs: { swiper: thumbs }, navigation: { nextEl: $<HTMLElement>('.swiper-button-next', album), prevEl: $<HTMLElement>('.swiper-button-prev', album) } }));
+      });
+    })();
     all('.unit-detail-button-inquiry').forEach(el => el.classList.add('show'));
     all('[animate]').forEach(el => { el.style.visibility = 'visible'; el.style.opacity = '1'; });
     const header = $('[package-type="header"]');
@@ -161,7 +171,7 @@ export default function Website({ page }: { page: PageData }) {
     const focusChanged = (event: FocusEvent) => { const target = event.target as Element; if (!target.closest('.unit-header-nav__item,.preview-nav-dropdown')) dropdowns.forEach(p => p.classList.remove('show')); };
     host.addEventListener('focusin', focusChanged);
     host.addEventListener('click', click); host.addEventListener('keydown', keydown); host.addEventListener('submit', submit);
-    return () => { removeNavListeners.forEach(fn => fn()); dropdowns.forEach(p => p.remove()); instances.forEach(instance => instance.destroy(true, true)); window.removeEventListener('scroll', onScroll); host.removeEventListener('focusin', focusChanged); host.removeEventListener('click', click); host.removeEventListener('keydown', keydown); host.removeEventListener('submit', submit); spacer.remove(); closeQuote(); document.body.style.overflow = ''; };
+    return () => { active = false; removeNavListeners.forEach(fn => fn()); dropdowns.forEach(p => p.remove()); instances.forEach(instance => instance.destroy(true, true)); window.removeEventListener('scroll', onScroll); host.removeEventListener('focusin', focusChanged); host.removeEventListener('click', click); host.removeEventListener('keydown', keydown); host.removeEventListener('submit', submit); spacer.remove(); closeQuote(); document.body.style.overflow = ''; };
   }, [page]);
   return <>{page.styles.map(href => <link key={href} rel="stylesheet" href={href} />)}<div ref={root} dangerouslySetInnerHTML={{ __html: page.html }} /></>;
 }
