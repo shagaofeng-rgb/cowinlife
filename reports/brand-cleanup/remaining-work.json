@@ -2,7 +2,7 @@
   "generated_images": 317,
   "replaced_asset_urls": 572,
   "confirmed_remaining_images": 653,
-  "additional_candidates_needing_review": 1612,
+  "additional_candidates_needing_review": 2174,
   "pending": [
     {
       "asset": "/assets/b4ec10bbb1fe21ca5b5b.jpg",
@@ -4386,7 +4386,7 @@
       "score": 0.4292
     },
     {
-      "asset": "/assets/3c4923b0517f314f36e6.png",
+      "asset": "/assets/30daa2acc4c1f799065b.png",
       "score": 0.5842
     },
     {
@@ -8706,35 +8706,35 @@
       "score": 0.4857
     },
     {
-      "asset": "/assets/abbf820243ddca694c02.jpg",
+      "asset": "/assets/c0dc8df192cd5962b0da.jpg",
       "score": 0.4717
     },
     {
-      "asset": "/assets/ce735779e2578a17bdab.jpg",
+      "asset": "/assets/bd9583a35775870fc732.jpg",
       "score": 0.4242
     },
     {
-      "asset": "/assets/8c9144f2d5af8a480d81.jpg",
+      "asset": "/assets/e5c51d9272ee19d0cfab.jpg",
       "score": 0.4221
     },
     {
-      "asset": "/assets/6bef4c062ccd6ebc52b2.jpg",
+      "asset": "/assets/e0f7dece89360c8813bd.jpg",
       "score": 0.5924
     },
     {
-      "asset": "/assets/afa17ad770ed4cafa093.jpg",
+      "asset": "/assets/cd02fec10896036bd6b0.jpg",
       "score": 0.4014
     },
     {
-      "asset": "/assets/bc7fd569737dc9aa278f.jpg",
+      "asset": "/assets/c16ec2331667e1cd41ff.jpg",
       "score": 0.4115
     },
     {
-      "asset": "/assets/f0657e6c8495c5b00289.jpg",
+      "asset": "/assets/8c93dbc2cbcf605cb35a.jpg",
       "score": 0.4962
     },
     {
-      "asset": "/assets/81dd7fa765db07111a63.jpg",
+      "asset": "/assets/7223d15f858356983746.jpg",
       "score": 0.4393
     },
     {
@@ -9534,7 +9534,7 @@
       "score": 0.8056
     },
     {
-      "asset": "/assets/02f2c7fdad0ac21726c9.jpg",
+      "asset": "/assets/59258b7154e5944352c6.jpg",
       "score": 0.8064
     },
     {
@@ -10380,6 +10380,2255 @@
     {
       "asset": "/assets/e402970b6176eaf94aa2.jpg",
       "score": 0.656
+    },
+    {
+      "asset": "/assets/cf8dc9d3b3295ed6952f.jpg",
+      "score": 0.849
+    },
+    {
+      "asset": "/assets/86e286ac40586b2c1610.jpg",
+      "score": 0.5089
+    },
+    {
+      "asset": "/assets/a0eb9a63139683507bb7.jpg",
+      "score": 0.6679
+    },
+    {
+      "asset": "/assets/e9d1654342ed3faec95c.jpg",
+      "score": 0.7753
+    },
+    {
+      "asset": "/assets/ccd8484e33241ef430bd.jpg",
+      "score": 0.4316
+    },
+    {
+      "asset": "/assets/db0b2b90bb4136c666b8.jpg",
+      "score": 0.5352
+    },
+    {
+      "asset": "/assets/9eacfc488358c40a6b66.jpg",
+      "score": 0.467
+    },
+    {
+      "asset": "/assets/01483d44ff603ac9d3a5.jpg",
+      "score": 0.579
+    },
+    {
+      "asset": "/assets/675939e49d2e4e351a05.jpg",
+      "score": 0.4533
+    },
+    {
+      "asset": "/assets/e3c5d7e14cbbfba4a45e.jpg",
+      "score": 0.4178
+    },
+    {
+      "asset": "/assets/98e57e8ddb894b6d4b38.jpg",
+      "score": 0.4232
+    },
+    {
+      "asset": "/assets/9ebad760e94c7351fc78.jpg",
+      "score": 0.4685
+    },
+    {
+      "asset": "/assets/1db582315ec8eada2ad7.jpg",
+      "score": 0.7463
+    },
+    {
+      "asset": "/assets/c3afa68a6b8e1fa9f7ff.jpg",
+      "score": 0.7922
+    },
+    {
+      "asset": "/assets/c43566e1678ca5d93fc1.jpg",
+      "score": 0.6371
+    },
+    {
+      "asset": "/assets/acc5684193333dd856aa.jpg",
+      "score": 0.8619
+    },
+    {
+      "asset": "/assets/7327804830ffec0a57ba.jpg",
+      "score": 0.4271
+    },
+    {
+      "asset": "/assets/0e3622bccb0004cbba88.jpg",
+      "score": 0.4448
+    },
+    {
+      "asset": "/assets/70ee09f0d5907e314ade.jpg",
+      "score": 0.4196
+    },
+    {
+      "asset": "/assets/972699826d99ade76cad.jpg",
+      "score": 0.7751
+    },
+    {
+      "asset": "/assets/38acfed6e810320a95e3.jpg",
+      "score": 0.4395
+    },
+    {
+      "asset": "/assets/a817fe9d013bfe8c196e.jpg",
+      "score": 0.8329
+    },
+    {
+      "asset": "/assets/6bc220e902387e2cb760.jpg",
+      "score": 0.7008
+    },
+    {
+      "asset": "/assets/ebf112a34688b00b1b30.jpg",
+      "score": 0.8853
+    },
+    {
+      "asset": "/assets/01ca003c424b03894cb5.jpg",
+      "score": 0.8971
+    },
+    {
+      "asset": "/assets/90585f7c4f0bec91a5d6.jpg",
+      "score": 0.7728
+    },
+    {
+      "asset": "/assets/c30264b88ac8213d2c66.jpg",
+      "score": 0.4008
+    },
+    {
+      "asset": "/assets/b09f3b737e35c28ba5bd.jpg",
+      "score": 0.4531
+    },
+    {
+      "asset": "/assets/f83aa96d06548dd99346.jpg",
+      "score": 0.4022
+    },
+    {
+      "asset": "/assets/6ff3afef6565022fc968.jpg",
+      "score": 0.426
+    },
+    {
+      "asset": "/assets/871e2816da9ebed2a765.jpg",
+      "score": 0.4143
+    },
+    {
+      "asset": "/assets/62571a9ee141614f7624.jpg",
+      "score": 0.4233
+    },
+    {
+      "asset": "/assets/1b8e0073ca7f328dbdbf.jpg",
+      "score": 0.4607
+    },
+    {
+      "asset": "/assets/c7a4dd5a77407525e9bb.png",
+      "score": 0.417
+    },
+    {
+      "asset": "/assets/31c1a2e3ee4ecc52c610.png",
+      "score": 0.448
+    },
+    {
+      "asset": "/assets/4b1c9b548ab20aeb6bde.png",
+      "score": 0.4235
+    },
+    {
+      "asset": "/assets/2e1ac382b825acdfaef1.jpg",
+      "score": 0.4183
+    },
+    {
+      "asset": "/assets/64fa0202d4dccac2c4c5.jpg",
+      "score": 0.4293
+    },
+    {
+      "asset": "/assets/7d8e7ac6491296ff36f2.jpg",
+      "score": 0.4337
+    },
+    {
+      "asset": "/assets/5af4574587be80711989.jpg",
+      "score": 0.4472
+    },
+    {
+      "asset": "/assets/d3efd3c20e88b05a0048.jpg",
+      "score": 0.446
+    },
+    {
+      "asset": "/assets/0e9fd58b4d94f6910887.jpg",
+      "score": 0.4544
+    },
+    {
+      "asset": "/assets/19034a42dfd5d68053b1.jpg",
+      "score": 0.6106
+    },
+    {
+      "asset": "/assets/426c0e8bd093a2df6ae2.jpg",
+      "score": 0.5406
+    },
+    {
+      "asset": "/assets/7bc915f14523c9c738b0.jpg",
+      "score": 0.5674
+    },
+    {
+      "asset": "/assets/4758ac96af8c569e0e65.jpg",
+      "score": 0.495
+    },
+    {
+      "asset": "/assets/3e58302c7d1f5be1ed70.jpg",
+      "score": 0.5844
+    },
+    {
+      "asset": "/assets/0f059fdf943160cd2f04.jpg",
+      "score": 0.5764
+    },
+    {
+      "asset": "/assets/444ee9f67646afd2820b.jpg",
+      "score": 0.7381
+    },
+    {
+      "asset": "/assets/c1cf15b30c4e6b0b3b15.jpg",
+      "score": 0.4585
+    },
+    {
+      "asset": "/assets/2c280c7f1cd5b4e19166.jpg",
+      "score": 0.443
+    },
+    {
+      "asset": "/assets/64aba40fa67e28f23ac0.jpg",
+      "score": 0.6395
+    },
+    {
+      "asset": "/assets/9f9190b5363a2baaa2ed.jpg",
+      "score": 0.5756
+    },
+    {
+      "asset": "/assets/10cbf8c3b11efdf5b09e.jpg",
+      "score": 0.4193
+    },
+    {
+      "asset": "/assets/b059b764ef656c9f3fee.jpg",
+      "score": 0.4761
+    },
+    {
+      "asset": "/assets/d42abcfa6c494285b95c.jpg",
+      "score": 0.6991
+    },
+    {
+      "asset": "/assets/2b5a4b3d62b31f76d9ea.jpg",
+      "score": 0.8469
+    },
+    {
+      "asset": "/assets/c82937b17a3694b88582.jpg",
+      "score": 0.5894
+    },
+    {
+      "asset": "/assets/0a28c7300550d1146286.jpg",
+      "score": 0.7667
+    },
+    {
+      "asset": "/assets/871e5585b944bea07b59.jpg",
+      "score": 0.8632
+    },
+    {
+      "asset": "/assets/9fa6d91f9d857f220496.jpg",
+      "score": 0.4186
+    },
+    {
+      "asset": "/assets/607ec9e252f737d28c02.jpg",
+      "score": 0.437
+    },
+    {
+      "asset": "/assets/a05124bc90d503a2c04a.jpg",
+      "score": 0.4869
+    },
+    {
+      "asset": "/assets/4ebec8481a30ea9e67bb.jpg",
+      "score": 0.5091
+    },
+    {
+      "asset": "/assets/8356845ebb50073138e1.jpg",
+      "score": 0.4704
+    },
+    {
+      "asset": "/assets/1e6e83322f1363efc8b6.jpg",
+      "score": 0.5934
+    },
+    {
+      "asset": "/assets/9fe6cf4e1e7ccfb8efdf.jpg",
+      "score": 0.7486
+    },
+    {
+      "asset": "/assets/ffb83f1026ef88d84432.jpg",
+      "score": 0.4268
+    },
+    {
+      "asset": "/assets/3b520db0828822c6898d.jpg",
+      "score": 0.4171
+    },
+    {
+      "asset": "/assets/6805000cc1b6d9611483.jpg",
+      "score": 0.4133
+    },
+    {
+      "asset": "/assets/6d15d7e6bd30ebaccba9.jpg",
+      "score": 0.421
+    },
+    {
+      "asset": "/assets/7953d44c6dc11705a730.jpg",
+      "score": 0.4307
+    },
+    {
+      "asset": "/assets/3443975657f5d5b79ab6.jpg",
+      "score": 0.4514
+    },
+    {
+      "asset": "/assets/0522da464e04ed1d4f8f.jpg",
+      "score": 0.6564
+    },
+    {
+      "asset": "/assets/ba96e0c16aa093c2755d.jpg",
+      "score": 0.5785
+    },
+    {
+      "asset": "/assets/1c799baf567b2d81fd11.jpg",
+      "score": 0.4226
+    },
+    {
+      "asset": "/assets/b168ce6de68bbf0e0e3f.jpg",
+      "score": 0.4468
+    },
+    {
+      "asset": "/assets/1f3925c29d3bcb85cbe7.jpg",
+      "score": 0.4012
+    },
+    {
+      "asset": "/assets/e53e1dcbc160e79356af.jpg",
+      "score": 0.4198
+    },
+    {
+      "asset": "/assets/62f0a151419c558930e2.jpg",
+      "score": 0.6403
+    },
+    {
+      "asset": "/assets/58513e8b72c4d1d378f3.jpg",
+      "score": 0.4463
+    },
+    {
+      "asset": "/assets/61c9ae01bcde163f6e19.jpg",
+      "score": 0.7934
+    },
+    {
+      "asset": "/assets/682efc6efa0678d3d858.jpg",
+      "score": 0.4933
+    },
+    {
+      "asset": "/assets/846bb8089b990e8e6ef6.jpg",
+      "score": 0.7616
+    },
+    {
+      "asset": "/assets/e21255251b268545f31d.jpg",
+      "score": 0.8172
+    },
+    {
+      "asset": "/assets/d5ce0b4193508990ec14.jpg",
+      "score": 0.4616
+    },
+    {
+      "asset": "/assets/69b4ec366918bc29b240.jpg",
+      "score": 0.4308
+    },
+    {
+      "asset": "/assets/1832b831e9edd992e9cf.jpg",
+      "score": 0.4239
+    },
+    {
+      "asset": "/assets/d9c5601dac17f0314187.jpg",
+      "score": 0.8631
+    },
+    {
+      "asset": "/assets/299474545366d9839e73.jpg",
+      "score": 0.6199
+    },
+    {
+      "asset": "/assets/b63b8e811bce25bf5503.jpg",
+      "score": 0.4345
+    },
+    {
+      "asset": "/assets/4422929a967513c5aca7.jpg",
+      "score": 0.4785
+    },
+    {
+      "asset": "/assets/3381bb119002790cff6f.jpg",
+      "score": 0.4221
+    },
+    {
+      "asset": "/assets/5506cd4f9fe914d482d7.jpg",
+      "score": 0.7688
+    },
+    {
+      "asset": "/assets/e23f6300e50d45169e34.jpg",
+      "score": 0.5086
+    },
+    {
+      "asset": "/assets/b0489ef3212f0241e3f5.jpg",
+      "score": 0.4508
+    },
+    {
+      "asset": "/assets/10fa523b2f348fc14486.jpg",
+      "score": 0.4367
+    },
+    {
+      "asset": "/assets/a833f852a300b95512d8.jpg",
+      "score": 0.4129
+    },
+    {
+      "asset": "/assets/d369de10295f0d0eb518.jpg",
+      "score": 0.4089
+    },
+    {
+      "asset": "/assets/ce052a001915e745e37f.jpg",
+      "score": 0.4392
+    },
+    {
+      "asset": "/assets/2f66b4b6fb64ce6ff232.jpg",
+      "score": 0.4461
+    },
+    {
+      "asset": "/assets/ecf8a7c385223eebe662.jpg",
+      "score": 0.4233
+    },
+    {
+      "asset": "/assets/1b3b4524c6c6b7a4c4b9.jpg",
+      "score": 0.4259
+    },
+    {
+      "asset": "/assets/ace993ac182bd4fcea66.jpg",
+      "score": 0.7973
+    },
+    {
+      "asset": "/assets/12b0965e47687bb91527.jpg",
+      "score": 0.5796
+    },
+    {
+      "asset": "/assets/ce6862fd2745d8f1b6ee.jpg",
+      "score": 0.6182
+    },
+    {
+      "asset": "/assets/eb305727722964d87cef.jpg",
+      "score": 0.4128
+    },
+    {
+      "asset": "/assets/8c03dce9196c47cbf95b.jpg",
+      "score": 0.5702
+    },
+    {
+      "asset": "/assets/9aab1493ab39dbed4720.jpg",
+      "score": 0.7666
+    },
+    {
+      "asset": "/assets/6f10b7a5922206597ace.jpg",
+      "score": 0.8303
+    },
+    {
+      "asset": "/assets/827fbc1683c5d33f3484.jpg",
+      "score": 0.7897
+    },
+    {
+      "asset": "/assets/ad93ef30a5a4d6012e5c.jpg",
+      "score": 0.8302
+    },
+    {
+      "asset": "/assets/089f2b119e64efd7faf4.jpg",
+      "score": 0.7994
+    },
+    {
+      "asset": "/assets/3ff15adbab7d5b00fceb.jpg",
+      "score": 0.6127
+    },
+    {
+      "asset": "/assets/83dceaa57564211a2f7c.jpg",
+      "score": 0.8098
+    },
+    {
+      "asset": "/assets/06bfde2e7f939ddbac24.jpg",
+      "score": 0.7426
+    },
+    {
+      "asset": "/assets/ab1d47e18ec9df905a07.jpg",
+      "score": 0.4369
+    },
+    {
+      "asset": "/assets/99dc0a3dc40b0b81c505.jpg",
+      "score": 0.4003
+    },
+    {
+      "asset": "/assets/e993777b533abbaf0e4a.jpg",
+      "score": 0.5437
+    },
+    {
+      "asset": "/assets/63a795e523598aa76493.jpg",
+      "score": 0.4259
+    },
+    {
+      "asset": "/assets/7e812d755e6acb41f295.png",
+      "score": 0.7994
+    },
+    {
+      "asset": "/assets/62388ab5d60d0aa78770.jpg",
+      "score": 0.5494
+    },
+    {
+      "asset": "/assets/1756982a908f74d34375.png",
+      "score": 0.8027
+    },
+    {
+      "asset": "/assets/82edf27f4db105e34b59.jpg",
+      "score": 0.5792
+    },
+    {
+      "asset": "/assets/6f2e0fed652304893bc7.jpg",
+      "score": 0.4417
+    },
+    {
+      "asset": "/assets/d23a9d51292b97b750f1.jpg",
+      "score": 0.4593
+    },
+    {
+      "asset": "/assets/a5f2ec1b25eaec809d9b.jpg",
+      "score": 0.4946
+    },
+    {
+      "asset": "/assets/5ddd863364fc6c74b7ef.jpg",
+      "score": 0.6661
+    },
+    {
+      "asset": "/assets/ecf28dfeb58e5a7db292.jpg",
+      "score": 0.4056
+    },
+    {
+      "asset": "/assets/bb45ec9d507750bf56a1.jpg",
+      "score": 0.8359
+    },
+    {
+      "asset": "/assets/5dba318ecfa41ce63125.jpg",
+      "score": 0.4075
+    },
+    {
+      "asset": "/assets/f946e7a86ecd30fe64c7.jpg",
+      "score": 0.4485
+    },
+    {
+      "asset": "/assets/4b007aa340b06e4103fe.jpg",
+      "score": 0.5661
+    },
+    {
+      "asset": "/assets/47169a328e2e494502c6.jpg",
+      "score": 0.4756
+    },
+    {
+      "asset": "/assets/6b40eda99cf65d68dcc8.jpg",
+      "score": 0.4287
+    },
+    {
+      "asset": "/assets/53c7c0b325cae9f312cd.jpg",
+      "score": 0.4486
+    },
+    {
+      "asset": "/assets/d60164978b17a77f396f.jpg",
+      "score": 0.4283
+    },
+    {
+      "asset": "/assets/11dd4e3cdf01339eb734.jpg",
+      "score": 0.448
+    },
+    {
+      "asset": "/assets/d5fe08827d2bf1374faf.jpg",
+      "score": 0.4346
+    },
+    {
+      "asset": "/assets/cc689c4c098f028d7e5d.jpg",
+      "score": 0.4763
+    },
+    {
+      "asset": "/assets/74cb9bca59b77f77a595.jpg",
+      "score": 0.4102
+    },
+    {
+      "asset": "/assets/85d174be18425b2f8ccf.jpg",
+      "score": 0.452
+    },
+    {
+      "asset": "/assets/39acbcd5978e01bfd934.jpg",
+      "score": 0.4313
+    },
+    {
+      "asset": "/assets/8a7ca0bcc216cd2822fe.jpg",
+      "score": 0.4138
+    },
+    {
+      "asset": "/assets/b8d1e4710b3fb00980a2.jpg",
+      "score": 0.4268
+    },
+    {
+      "asset": "/assets/706ee8c2fd95fb290693.jpg",
+      "score": 0.4419
+    },
+    {
+      "asset": "/assets/f0f055bce6ec94c03e2c.jpg",
+      "score": 0.4436
+    },
+    {
+      "asset": "/assets/7996dad9c45d7fdcb436.jpg",
+      "score": 0.459
+    },
+    {
+      "asset": "/assets/a632ae776a9f5d0b90e7.jpg",
+      "score": 0.4433
+    },
+    {
+      "asset": "/assets/7634d2aa06155dc148f2.jpg",
+      "score": 0.4277
+    },
+    {
+      "asset": "/assets/edbf6db0280e3f67ff76.jpg",
+      "score": 0.4422
+    },
+    {
+      "asset": "/assets/d5698762528835a5c1ab.jpg",
+      "score": 0.4868
+    },
+    {
+      "asset": "/assets/2d2a26c364cb581726bd.jpg",
+      "score": 0.4439
+    },
+    {
+      "asset": "/assets/73c68ab91bc643932661.jpg",
+      "score": 0.4803
+    },
+    {
+      "asset": "/assets/ed4e7ec18c02941557a8.jpg",
+      "score": 0.4274
+    },
+    {
+      "asset": "/assets/19d8975bf1f59e91dde2.jpg",
+      "score": 0.4803
+    },
+    {
+      "asset": "/assets/177edc83e5320b4c91f8.jpg",
+      "score": 0.4347
+    },
+    {
+      "asset": "/assets/1c02f116a1dc2ec2dbd2.jpg",
+      "score": 0.4337
+    },
+    {
+      "asset": "/assets/fc0da18b2286b9c5728f.jpg",
+      "score": 0.4678
+    },
+    {
+      "asset": "/assets/b3c8f9ddb2bce5c9dc91.jpg",
+      "score": 0.5534
+    },
+    {
+      "asset": "/assets/761d58fbc2da514a55f1.jpg",
+      "score": 0.4673
+    },
+    {
+      "asset": "/assets/36fe8223e772e254c5e9.jpg",
+      "score": 0.6616
+    },
+    {
+      "asset": "/assets/b8f6e3168a6e79917d9f.jpg",
+      "score": 0.6725
+    },
+    {
+      "asset": "/assets/d2c8d9fc4865eade5b47.png",
+      "score": 0.4457
+    },
+    {
+      "asset": "/assets/4bb327217664002a441d.png",
+      "score": 0.406
+    },
+    {
+      "asset": "/assets/ef42ea30b6f0feb33dd9.png",
+      "score": 0.4057
+    },
+    {
+      "asset": "/assets/9f62b4fceb351470e817.jpg",
+      "score": 0.4593
+    },
+    {
+      "asset": "/assets/502c5ecb54edfb020079.jpg",
+      "score": 0.5134
+    },
+    {
+      "asset": "/assets/74ea81f2edd91c9e8f8d.jpg",
+      "score": 0.43
+    },
+    {
+      "asset": "/assets/e3f7cc45b7ba5cf96dee.jpg",
+      "score": 0.7092
+    },
+    {
+      "asset": "/assets/eccee9f551f30a3dd741.jpg",
+      "score": 0.7283
+    },
+    {
+      "asset": "/assets/7e091ea7c698df48e231.jpg",
+      "score": 0.7488
+    },
+    {
+      "asset": "/assets/8d5fd5d67c5118746e0c.jpg",
+      "score": 0.5684
+    },
+    {
+      "asset": "/assets/c5766170e38e67bf271a.jpg",
+      "score": 0.5738
+    },
+    {
+      "asset": "/assets/eb97fa7473ccd4a24cfd.jpg",
+      "score": 0.4384
+    },
+    {
+      "asset": "/assets/a954ee58f4624c045e22.jpg",
+      "score": 0.4472
+    },
+    {
+      "asset": "/assets/ca86232166f5dadd18c9.jpg",
+      "score": 0.8237
+    },
+    {
+      "asset": "/assets/994164c97d327d0bc9a9.jpg",
+      "score": 0.483
+    },
+    {
+      "asset": "/assets/93e0ea8a153d39ddac84.jpg",
+      "score": 0.7067
+    },
+    {
+      "asset": "/assets/84e6b5b1904d12e4d2a6.jpg",
+      "score": 0.7217
+    },
+    {
+      "asset": "/assets/ad22f21ebc6d241c6d50.jpg",
+      "score": 0.411
+    },
+    {
+      "asset": "/assets/3e1ee951a28df88ebd6d.jpg",
+      "score": 0.4962
+    },
+    {
+      "asset": "/assets/8e0991b1d38ab26150a7.jpg",
+      "score": 0.4244
+    },
+    {
+      "asset": "/assets/3a25962fd2a0f217ef03.jpg",
+      "score": 0.7514
+    },
+    {
+      "asset": "/assets/ed531142d39d9b948951.jpg",
+      "score": 0.5151
+    },
+    {
+      "asset": "/assets/d0ff7a7800e87b945daa.jpg",
+      "score": 0.4504
+    },
+    {
+      "asset": "/assets/543941da978de4574a7e.jpg",
+      "score": 0.4292
+    },
+    {
+      "asset": "/assets/357e8aba6fd60c2811bd.jpg",
+      "score": 0.4227
+    },
+    {
+      "asset": "/assets/725a987320b9810ee6b5.jpg",
+      "score": 0.4026
+    },
+    {
+      "asset": "/assets/da6bc0bfdd258757b81c.jpg",
+      "score": 0.4174
+    },
+    {
+      "asset": "/assets/5dfdc9d5003d37fdf8f1.jpg",
+      "score": 0.5968
+    },
+    {
+      "asset": "/assets/0f41389e3f2faec721fd.jpg",
+      "score": 0.728
+    },
+    {
+      "asset": "/assets/12487eddc20e10e3cf8c.jpg",
+      "score": 0.798
+    },
+    {
+      "asset": "/assets/7867516bfbb8f045c1ed.jpg",
+      "score": 0.7225
+    },
+    {
+      "asset": "/assets/aefa337f1bb02c794ae7.jpg",
+      "score": 0.792
+    },
+    {
+      "asset": "/assets/fe863bb20df2444b0c79.jpg",
+      "score": 0.5787
+    },
+    {
+      "asset": "/assets/2b8c76c7bf5401ad98f5.jpg",
+      "score": 0.6927
+    },
+    {
+      "asset": "/assets/ba26acbab6e374775253.png",
+      "score": 0.8212
+    },
+    {
+      "asset": "/assets/996e8e98b73f02a36e58.png",
+      "score": 0.4189
+    },
+    {
+      "asset": "/assets/3ff98586fe4f95cb9b46.png",
+      "score": 0.6023
+    },
+    {
+      "asset": "/assets/357516c940b6a69229b4.png",
+      "score": 0.7501
+    },
+    {
+      "asset": "/assets/c06510a23486c0e6485f.png",
+      "score": 0.7426
+    },
+    {
+      "asset": "/assets/887ca45fb86c9d03ce7d.JPG",
+      "score": 0.433
+    },
+    {
+      "asset": "/assets/45f50cda2facaab7f086.jpg",
+      "score": 0.5578
+    },
+    {
+      "asset": "/assets/0861f9f023c27c3f1718.jpg",
+      "score": 0.7786
+    },
+    {
+      "asset": "/assets/8dd4b4553001449dba3a.jpg",
+      "score": 0.5279
+    },
+    {
+      "asset": "/assets/f8dd0f0f8daf89473a74.jpg",
+      "score": 0.4283
+    },
+    {
+      "asset": "/assets/7e484d9eb317eb8e4aa8.jpg",
+      "score": 0.7163
+    },
+    {
+      "asset": "/assets/0328a5057d02cbf4d196.jpg",
+      "score": 0.7636
+    },
+    {
+      "asset": "/assets/a892f9c94ecae9b610c4.jpg",
+      "score": 0.4099
+    },
+    {
+      "asset": "/assets/f382c4187d9dc8152a76.jpg",
+      "score": 0.5028
+    },
+    {
+      "asset": "/assets/0c29e25bd98351e776ef.jpg",
+      "score": 0.4061
+    },
+    {
+      "asset": "/assets/3d0983717e961d8d1632.jpg",
+      "score": 0.6127
+    },
+    {
+      "asset": "/assets/76173ad48175c7bbd8f0.png",
+      "score": 0.4336
+    },
+    {
+      "asset": "/assets/dcb764891427d6884f8c.jpg",
+      "score": 0.7104
+    },
+    {
+      "asset": "/assets/085f2feb1463f075c867.jpg",
+      "score": 0.7238
+    },
+    {
+      "asset": "/assets/6c6eaf28df2bb1336de1.jpg",
+      "score": 0.5929
+    },
+    {
+      "asset": "/assets/9b85dcf960e8d8018382.jpg",
+      "score": 0.5917
+    },
+    {
+      "asset": "/assets/ac1ea4be3609e5f42622.jpg",
+      "score": 0.5887
+    },
+    {
+      "asset": "/assets/b98fb59a70cc75ca1a76.jpg",
+      "score": 0.4589
+    },
+    {
+      "asset": "/assets/6eabe748948d563c8872.png",
+      "score": 0.4239
+    },
+    {
+      "asset": "/assets/d0029f9364ab3ca7b651.png",
+      "score": 0.4299
+    },
+    {
+      "asset": "/assets/e61dc7e10df3bf419366.png",
+      "score": 0.4558
+    },
+    {
+      "asset": "/assets/3ad9943b7e1f19c42e03.jpg",
+      "score": 0.4121
+    },
+    {
+      "asset": "/assets/0815fdfe9b0f06f10a18.png",
+      "score": 0.8779
+    },
+    {
+      "asset": "/assets/5ea3d4add1b5a919e789.png",
+      "score": 0.4693
+    },
+    {
+      "asset": "/assets/fd2045f07c60066a13e7.png",
+      "score": 0.438
+    },
+    {
+      "asset": "/assets/4e39e4ea6ff3400e07bf.png",
+      "score": 0.4219
+    },
+    {
+      "asset": "/assets/c3c91a65f5787dc0352a.png",
+      "score": 0.7886
+    },
+    {
+      "asset": "/assets/c1abaca1dbf2c15c015f.png",
+      "score": 0.8183
+    },
+    {
+      "asset": "/assets/3cf4d710d73cb73107d8.png",
+      "score": 0.7774
+    },
+    {
+      "asset": "/assets/c373edd22497d2144aa9.png",
+      "score": 0.7893
+    },
+    {
+      "asset": "/assets/f7b5a221cff34ce4ad8f.png",
+      "score": 0.4256
+    },
+    {
+      "asset": "/assets/2eecaef7c77fff280167.png",
+      "score": 0.6631
+    },
+    {
+      "asset": "/assets/cc670d53677791e69ab0.jpg",
+      "score": 0.4343
+    },
+    {
+      "asset": "/assets/d5afeddc8ac9803e901a.jpg",
+      "score": 0.6786
+    },
+    {
+      "asset": "/assets/210a6600dd3da3d5b731.jpg",
+      "score": 0.6853
+    },
+    {
+      "asset": "/assets/6183dcac7f4b41fe1ae3.jpg",
+      "score": 0.7098
+    },
+    {
+      "asset": "/assets/ce90a7e045a71a39bb88.jpg",
+      "score": 0.4178
+    },
+    {
+      "asset": "/assets/c504b4830dcec8ee1cd0.jpg",
+      "score": 0.46
+    },
+    {
+      "asset": "/assets/8aa5b17f7cbcd1e9c090.jpg",
+      "score": 0.5987
+    },
+    {
+      "asset": "/assets/0c4c3c5a57e824178bf0.jpg",
+      "score": 0.4127
+    },
+    {
+      "asset": "/assets/db041d8271bf77e0edc6.jpg",
+      "score": 0.5369
+    },
+    {
+      "asset": "/assets/3abb28c940bd22df73a3.jpg",
+      "score": 0.5939
+    },
+    {
+      "asset": "/assets/9dfdf355cf57c8e7abbb.jpg",
+      "score": 0.4879
+    },
+    {
+      "asset": "/assets/f8aa7cb8ba073a31608c.jpg",
+      "score": 0.5512
+    },
+    {
+      "asset": "/assets/3b2443c9d38948b0ebc9.jpg",
+      "score": 0.56
+    },
+    {
+      "asset": "/assets/20bd5f870d7eb7b7d101.jpg",
+      "score": 0.4104
+    },
+    {
+      "asset": "/assets/74d0528c7331e8df3b44.jpg",
+      "score": 0.4737
+    },
+    {
+      "asset": "/assets/4ea328ced286bd831db7.jpg",
+      "score": 0.4457
+    },
+    {
+      "asset": "/assets/d5ba2b4b0ea2b89d848d.jpg",
+      "score": 0.414
+    },
+    {
+      "asset": "/assets/8eed62aa826f32eca1ff.jpg",
+      "score": 0.4164
+    },
+    {
+      "asset": "/assets/866215ff38c100394e3d.png",
+      "score": 0.6514
+    },
+    {
+      "asset": "/assets/e4e18b53acfac609b256.png",
+      "score": 0.5134
+    },
+    {
+      "asset": "/assets/bdbea12771982b46d5ec.png",
+      "score": 0.648
+    },
+    {
+      "asset": "/assets/205cd5fe3aade1718822.jpg",
+      "score": 0.9186
+    },
+    {
+      "asset": "/assets/14bce279812464735241.jpg",
+      "score": 0.6335
+    },
+    {
+      "asset": "/assets/845755363187e84a1e69.jpg",
+      "score": 0.5314
+    },
+    {
+      "asset": "/assets/65ed68501e69f132e29c.jpg",
+      "score": 0.4313
+    },
+    {
+      "asset": "/assets/55586f8cc751b907fcdb.jpg",
+      "score": 0.4465
+    },
+    {
+      "asset": "/assets/c717da1290a258b4c75e.jpg",
+      "score": 0.4453
+    },
+    {
+      "asset": "/assets/e9c3b97b585546c65533.jpg",
+      "score": 0.4689
+    },
+    {
+      "asset": "/assets/9eb8763045a72af4381a.jpg",
+      "score": 0.4479
+    },
+    {
+      "asset": "/assets/e2fec0ff00b3f7446b14.jpg",
+      "score": 0.6783
+    },
+    {
+      "asset": "/assets/b2087c78e8c8dfd3c851.jpg",
+      "score": 0.7215
+    },
+    {
+      "asset": "/assets/7c95b3b4395ad389f052.jpg",
+      "score": 0.6926
+    },
+    {
+      "asset": "/assets/d4841f75a7fe29cd716f.jpg",
+      "score": 0.8077
+    },
+    {
+      "asset": "/assets/5ec8dcde34c40cdae1c5.jpg",
+      "score": 0.7924
+    },
+    {
+      "asset": "/assets/45e43441856301b8a293.jpg",
+      "score": 0.7614
+    },
+    {
+      "asset": "/assets/72214275f403fee004c7.jpg",
+      "score": 0.8324
+    },
+    {
+      "asset": "/assets/1a9f369e7cbba1fe2014.jpg",
+      "score": 0.9223
+    },
+    {
+      "asset": "/assets/50edc1b7d1e6ecf66b2f.jpg",
+      "score": 0.8737
+    },
+    {
+      "asset": "/assets/316b0ebe29879f158002.jpg",
+      "score": 0.5346
+    },
+    {
+      "asset": "/assets/343864beb242b3df978c.jpg",
+      "score": 0.5363
+    },
+    {
+      "asset": "/assets/f446c2174bdee14028dd.jpg",
+      "score": 0.8489
+    },
+    {
+      "asset": "/assets/61fc28d5b9ce2be719a3.jpg",
+      "score": 0.9187
+    },
+    {
+      "asset": "/assets/fd55aab7ee8d06b08058.jpg",
+      "score": 0.728
+    },
+    {
+      "asset": "/assets/35655b6c0c51d16d3f34.jpg",
+      "score": 0.5944
+    },
+    {
+      "asset": "/assets/13ade52c9551b2722488.jpg",
+      "score": 0.6787
+    },
+    {
+      "asset": "/assets/e14ffdf88807f175a95e.jpg",
+      "score": 0.5883
+    },
+    {
+      "asset": "/assets/7a5788d620cb296b5be2.jpg",
+      "score": 0.7564
+    },
+    {
+      "asset": "/assets/b419210f1825a7191821.jpg",
+      "score": 0.4279
+    },
+    {
+      "asset": "/assets/0f43f49cab780f4dbea0.jpg",
+      "score": 0.4187
+    },
+    {
+      "asset": "/assets/faa63aadc852ad10cef9.jpg",
+      "score": 0.4627
+    },
+    {
+      "asset": "/assets/bd537520484ff7a53f2e.jpg",
+      "score": 0.4362
+    },
+    {
+      "asset": "/assets/c02fa5393823c6189b6a.jpg",
+      "score": 0.4093
+    },
+    {
+      "asset": "/assets/b5a9705f7548f33c7f52.jpg",
+      "score": 0.4406
+    },
+    {
+      "asset": "/assets/16618140b76e353fc539.jpg",
+      "score": 0.6047
+    },
+    {
+      "asset": "/assets/c18c8e8c0ced093436ac.jpg",
+      "score": 0.4791
+    },
+    {
+      "asset": "/assets/8d4adf791b3a7387d675.jpg",
+      "score": 0.811
+    },
+    {
+      "asset": "/assets/0aec2885db1041ee4352.jpg",
+      "score": 0.8374
+    },
+    {
+      "asset": "/assets/0a227d24fbbe2d034faa.jpg",
+      "score": 0.4667
+    },
+    {
+      "asset": "/assets/1014d9d0394cb08ac9d4.jpg",
+      "score": 0.4964
+    },
+    {
+      "asset": "/assets/94028b61473359ac1d2a.jpg",
+      "score": 0.4303
+    },
+    {
+      "asset": "/assets/21816c4ac73c353d6149.jpg",
+      "score": 0.4894
+    },
+    {
+      "asset": "/assets/38ff0a706bd90c3dc1cd.jpg",
+      "score": 0.4457
+    },
+    {
+      "asset": "/assets/72623924b81b66983319.png",
+      "score": 0.4267
+    },
+    {
+      "asset": "/assets/c2eb317aacc1c1f5cb94.png",
+      "score": 0.4397
+    },
+    {
+      "asset": "/assets/e1941366042ada35c310.png",
+      "score": 0.4377
+    },
+    {
+      "asset": "/assets/50995fb300dae5815203.png",
+      "score": 0.4431
+    },
+    {
+      "asset": "/assets/4f220096e2611e4b1f96.png",
+      "score": 0.5964
+    },
+    {
+      "asset": "/assets/ff0ed3dfd70909b61f2c.png",
+      "score": 0.4174
+    },
+    {
+      "asset": "/assets/307f6f2fe9be269b09ff.png",
+      "score": 0.63
+    },
+    {
+      "asset": "/assets/e20961bea36bcd5f83cf.png",
+      "score": 0.5474
+    },
+    {
+      "asset": "/assets/42694ef4bd8c29e5a1dd.png",
+      "score": 0.5251
+    },
+    {
+      "asset": "/assets/e9c33d0910376b3864e1.png",
+      "score": 0.6582
+    },
+    {
+      "asset": "/assets/2e0dd143b44ad52a5b18.jpg",
+      "score": 0.4282
+    },
+    {
+      "asset": "/assets/4f65fc5e1357fc642ca3.jpg",
+      "score": 0.4018
+    },
+    {
+      "asset": "/assets/4847f6d8551ec74e5f19.jpg",
+      "score": 0.4338
+    },
+    {
+      "asset": "/assets/f331bd47cdf6cb4a22c3.jpg",
+      "score": 0.4361
+    },
+    {
+      "asset": "/assets/de311a46525f85094cd5.jpg",
+      "score": 0.4233
+    },
+    {
+      "asset": "/assets/feb55db13161d7dd0f87.jpg",
+      "score": 0.4566
+    },
+    {
+      "asset": "/assets/4bcf5f55a7755e18220a.jpg",
+      "score": 0.4435
+    },
+    {
+      "asset": "/assets/1958ce20773540f580ea.jpg",
+      "score": 0.416
+    },
+    {
+      "asset": "/assets/dabcca0cdbceb5407929.jpg",
+      "score": 0.4606
+    },
+    {
+      "asset": "/assets/cf03acc6d391a5da5d6b.jpg",
+      "score": 0.4196
+    },
+    {
+      "asset": "/assets/6158e61325710e1e6f71.jpg",
+      "score": 0.4216
+    },
+    {
+      "asset": "/assets/195fd02fbf799d7c8516.png",
+      "score": 0.4021
+    },
+    {
+      "asset": "/assets/0c855670437a4baef75b.jpg",
+      "score": 0.4374
+    },
+    {
+      "asset": "/assets/973095fae192ae8eeecd.jpg",
+      "score": 0.4291
+    },
+    {
+      "asset": "/assets/4d70b3e39935146e3408.jpg",
+      "score": 0.4277
+    },
+    {
+      "asset": "/assets/ed956e8b7125909caa30.jpg",
+      "score": 0.4139
+    },
+    {
+      "asset": "/assets/c7e353db0ee42ffe0500.jpg",
+      "score": 0.6877
+    },
+    {
+      "asset": "/assets/d4a3a2fb8ea793cfe28e.png",
+      "score": 0.6248
+    },
+    {
+      "asset": "/assets/c2b3aa4cbb49d47c98cb.jpg",
+      "score": 0.6045
+    },
+    {
+      "asset": "/assets/1300b54be4e9cd876241.jpg",
+      "score": 0.5391
+    },
+    {
+      "asset": "/assets/bc09bc3e00cb0c495aa5.png",
+      "score": 0.4326
+    },
+    {
+      "asset": "/assets/e97d02e9f5c6b4a86510.jpg",
+      "score": 0.8446
+    },
+    {
+      "asset": "/assets/46d553e6708d37135c7f.png",
+      "score": 0.4227
+    },
+    {
+      "asset": "/assets/a1b1de98ff6010f3ead4.jpg",
+      "score": 0.6376
+    },
+    {
+      "asset": "/assets/669a83f1878a2b35f90b.png",
+      "score": 0.5967
+    },
+    {
+      "asset": "/assets/3366a66f79c72736d598.jpg",
+      "score": 0.4607
+    },
+    {
+      "asset": "/assets/31e66c944f0d504cc060.jpeg",
+      "score": 0.4707
+    },
+    {
+      "asset": "/assets/453c9b06351a333728a0.png",
+      "score": 0.4514
+    },
+    {
+      "asset": "/assets/2fbe60cb42367cd95969.png",
+      "score": 0.4429
+    },
+    {
+      "asset": "/assets/815836580efdec5ab7ed.jpg",
+      "score": 0.4269
+    },
+    {
+      "asset": "/assets/5b0fed4ae17964a71af1.jpg",
+      "score": 0.6672
+    },
+    {
+      "asset": "/assets/51ab34e4bc78ce262d6f.png",
+      "score": 0.464
+    },
+    {
+      "asset": "/assets/0916fd30514fac69ee76.png",
+      "score": 0.4153
+    },
+    {
+      "asset": "/assets/ac77141ddbf713efd946.png",
+      "score": 0.4011
+    },
+    {
+      "asset": "/assets/fdcba992c08b6a8429a3.jpg",
+      "score": 0.6003
+    },
+    {
+      "asset": "/assets/00bb8bdbb5fe3c2112dd.jpg",
+      "score": 0.5299
+    },
+    {
+      "asset": "/assets/7ff91d9530ce7cbd948c.jpg",
+      "score": 0.7953
+    },
+    {
+      "asset": "/assets/0a0559e132fd5f0c87d7.jpg",
+      "score": 0.81
+    },
+    {
+      "asset": "/assets/be1076962d60f49e1bf9.jpg",
+      "score": 0.4269
+    },
+    {
+      "asset": "/assets/a74e56345d9ddedaa59d.jpg",
+      "score": 0.6604
+    },
+    {
+      "asset": "/assets/373b2f32b6fdae06570a.jpg",
+      "score": 0.6767
+    },
+    {
+      "asset": "/assets/2d2c2fe10d26b78865c3.jpg",
+      "score": 0.475
+    },
+    {
+      "asset": "/assets/4268308b0226d67b5573.jpg",
+      "score": 0.4531
+    },
+    {
+      "asset": "/assets/b02ae73b1f68699a32f3.jpg",
+      "score": 0.4419
+    },
+    {
+      "asset": "/assets/0831cbc164d0f324896d.jpg",
+      "score": 0.7227
+    },
+    {
+      "asset": "/assets/043654924d6428de3921.jpg",
+      "score": 0.4406
+    },
+    {
+      "asset": "/assets/836d537fe9fde33dc39a.jpg",
+      "score": 0.4049
+    },
+    {
+      "asset": "/assets/751d5232b595d15994b9.jpg",
+      "score": 0.434
+    },
+    {
+      "asset": "/assets/1b3607d337db4ab1e3f4.jpg",
+      "score": 0.401
+    },
+    {
+      "asset": "/assets/ea55e5aa6cc3510cefde.jpg",
+      "score": 0.4228
+    },
+    {
+      "asset": "/assets/983bc50bfde4cc956fa1.png",
+      "score": 0.4366
+    },
+    {
+      "asset": "/assets/90cc9dee52162728be2c.png",
+      "score": 0.4932
+    },
+    {
+      "asset": "/assets/bfdd7e8fffdf3114ecb6.jpg",
+      "score": 0.4224
+    },
+    {
+      "asset": "/assets/66a7f7b06e90edd6b15b.jpg",
+      "score": 0.8652
+    },
+    {
+      "asset": "/assets/3891279794c6e0e79a52.jpg",
+      "score": 0.4723
+    },
+    {
+      "asset": "/assets/1257e6f9eb094463f79c.jpg",
+      "score": 0.7495
+    },
+    {
+      "asset": "/assets/094d62c0648efa8e8f70.jpg",
+      "score": 0.6621
+    },
+    {
+      "asset": "/assets/7692197fb7e848ee7a7d.jpg",
+      "score": 0.7755
+    },
+    {
+      "asset": "/assets/194c35624dca16ff5c24.jpg",
+      "score": 0.5769
+    },
+    {
+      "asset": "/assets/e65bc0282bbcf54b6a99.JPG",
+      "score": 0.5343
+    },
+    {
+      "asset": "/assets/00a21eb47411c553719e.JPG",
+      "score": 0.4333
+    },
+    {
+      "asset": "/assets/953c9ffe3ba04e09dd4b.jpg",
+      "score": 0.5099
+    },
+    {
+      "asset": "/assets/46a78cb50ed70b5d911e.jpg",
+      "score": 0.4137
+    },
+    {
+      "asset": "/assets/72668408ea3441f52e99.jpg",
+      "score": 0.6198
+    },
+    {
+      "asset": "/assets/ab0d600de5cdf3fab103.jpg",
+      "score": 0.4392
+    },
+    {
+      "asset": "/assets/fc00eb7b49f949f701a9.jpg",
+      "score": 0.7081
+    },
+    {
+      "asset": "/assets/1737ae4c63d5e3e69f34.jpg",
+      "score": 0.7241
+    },
+    {
+      "asset": "/assets/991dc055b346286e5ec1.jpg",
+      "score": 0.458
+    },
+    {
+      "asset": "/assets/a4f82c2db242cf93a9a4.jpg",
+      "score": 0.614
+    },
+    {
+      "asset": "/assets/12839cd4c5eaa74352f3.jpg",
+      "score": 0.4983
+    },
+    {
+      "asset": "/assets/7c5148a3c156be9bd69b.jpg",
+      "score": 0.6272
+    },
+    {
+      "asset": "/assets/b593fb0812781bab60f6.jpg",
+      "score": 0.4987
+    },
+    {
+      "asset": "/assets/97c2a48c8579e2f1d3fc.jpg",
+      "score": 0.4492
+    },
+    {
+      "asset": "/assets/4ffc91a834715bea8269.jpg",
+      "score": 0.4618
+    },
+    {
+      "asset": "/assets/21588902563c825f13ce.jpg",
+      "score": 0.4463
+    },
+    {
+      "asset": "/assets/4feaf56a5e6928047b56.jpg",
+      "score": 0.4019
+    },
+    {
+      "asset": "/assets/24f645509a546b5671b6.jpg",
+      "score": 0.6351
+    },
+    {
+      "asset": "/assets/92a74163a3ff5a96efb8.jpg",
+      "score": 0.5195
+    },
+    {
+      "asset": "/assets/ed863a0f0d8d28fd35ba.JPG",
+      "score": 0.8182
+    },
+    {
+      "asset": "/assets/10046ba5ca97361f9147.jpg",
+      "score": 0.7688
+    },
+    {
+      "asset": "/assets/39a8e07454c76a1d492b.JPG",
+      "score": 0.8301
+    },
+    {
+      "asset": "/assets/ee1ec4ec2e9ca04d4730.jpg",
+      "score": 0.4562
+    },
+    {
+      "asset": "/assets/e852b95453831e444b20.jpg",
+      "score": 0.4563
+    },
+    {
+      "asset": "/assets/e232f8a49135b080d31d.jpg",
+      "score": 0.4642
+    },
+    {
+      "asset": "/assets/baaf8b41088704706504.jpg",
+      "score": 0.4781
+    },
+    {
+      "asset": "/assets/37589ce741a2ee4a2a5d.jpg",
+      "score": 0.6992
+    },
+    {
+      "asset": "/assets/e811a9b47fe9fb3adc30.jpg",
+      "score": 0.5624
+    },
+    {
+      "asset": "/assets/66feccead055b31e93a5.jpg",
+      "score": 0.8213
+    },
+    {
+      "asset": "/assets/d8e5f9a6c14d37f632e0.jpg",
+      "score": 0.4292
+    },
+    {
+      "asset": "/assets/6bd5002a6b32f83fb928.jpg",
+      "score": 0.4163
+    },
+    {
+      "asset": "/assets/a607ee55b4d735fb0407.jpg",
+      "score": 0.4475
+    },
+    {
+      "asset": "/assets/0fe38ebfa34835c3aff3.png",
+      "score": 0.5027
+    },
+    {
+      "asset": "/assets/85137212e316cbf32ad5.jpg",
+      "score": 0.5095
+    },
+    {
+      "asset": "/assets/c00b99f153c0342b8c17.jpg",
+      "score": 0.544
+    },
+    {
+      "asset": "/assets/0aec6992cfbc23ed63ee.png",
+      "score": 0.5617
+    },
+    {
+      "asset": "/assets/ad552bafa71944a0bfb9.jpg",
+      "score": 0.4259
+    },
+    {
+      "asset": "/assets/0cd6219d45186d2d385f.jpg",
+      "score": 0.4402
+    },
+    {
+      "asset": "/assets/cba3899247d47f2e2f9d.jpg",
+      "score": 0.4382
+    },
+    {
+      "asset": "/assets/c9a6dbc4cc7b3c182447.jpg",
+      "score": 0.4607
+    },
+    {
+      "asset": "/assets/a1c04a0e1f3e59aae1a2.png",
+      "score": 0.4089
+    },
+    {
+      "asset": "/assets/527c6dd13a86e524dcd4.png",
+      "score": 0.4044
+    },
+    {
+      "asset": "/assets/9bcb2583d5a645491f79.jpg",
+      "score": 0.4589
+    },
+    {
+      "asset": "/assets/8d2254ce5a46643e6e61.jpg",
+      "score": 0.4513
+    },
+    {
+      "asset": "/assets/95faf568de400a225b17.png",
+      "score": 0.4779
+    },
+    {
+      "asset": "/assets/dff4afad0f2ea98090c2.png",
+      "score": 0.4355
+    },
+    {
+      "asset": "/assets/609082486be3badc77c3.jpg",
+      "score": 0.4357
+    },
+    {
+      "asset": "/assets/ece868ec9c8531c97a2d.jpg",
+      "score": 0.4009
+    },
+    {
+      "asset": "/assets/11da603d4f6d7640e060.jpg",
+      "score": 0.4371
+    },
+    {
+      "asset": "/assets/12e26d3b885d1d157d64.jpg",
+      "score": 0.4129
+    },
+    {
+      "asset": "/assets/755a085760a8a903b7bd.jpg",
+      "score": 0.4038
+    },
+    {
+      "asset": "/assets/f07a44040a0f13e2e536.jpg",
+      "score": 0.5181
+    },
+    {
+      "asset": "/assets/e15ced6b141a3536e425.jpg",
+      "score": 0.5348
+    },
+    {
+      "asset": "/assets/1a2ccdae20864777f8c1.jpg",
+      "score": 0.4021
+    },
+    {
+      "asset": "/assets/233a675aaa847f493026.jpg",
+      "score": 0.6989
+    },
+    {
+      "asset": "/assets/7405970c8aee9335e78e.jpg",
+      "score": 0.7938
+    },
+    {
+      "asset": "/assets/3d3de3527293f2bb29b7.jpg",
+      "score": 0.6701
+    },
+    {
+      "asset": "/assets/89f9c57b5bbbc5570b95.jpg",
+      "score": 0.8558
+    },
+    {
+      "asset": "/assets/01429af97c4eceda2ba3.jpg",
+      "score": 0.7272
+    },
+    {
+      "asset": "/assets/22d92ef2ac4430492792.jpg",
+      "score": 0.454
+    },
+    {
+      "asset": "/assets/f41b076daa136b04c887.jpg",
+      "score": 0.4341
+    },
+    {
+      "asset": "/assets/1dd5beb0c56e7d3eb88a.jpg",
+      "score": 0.4377
+    },
+    {
+      "asset": "/assets/03fdafa7eb670335b87b.jpg",
+      "score": 0.4326
+    },
+    {
+      "asset": "/assets/cf67c5f15bbeb59ceac2.jpg",
+      "score": 0.4087
+    },
+    {
+      "asset": "/assets/a7b1d0b30e2994380a38.png",
+      "score": 0.4338
+    },
+    {
+      "asset": "/assets/741599400b0844b9bc9c.jpg",
+      "score": 0.479
+    },
+    {
+      "asset": "/assets/137fc80044105b591f90.jpg",
+      "score": 0.4658
+    },
+    {
+      "asset": "/assets/8ca74b2e7243c42034de.png",
+      "score": 0.8012
+    },
+    {
+      "asset": "/assets/97ea521279e74319ea2c.jpg",
+      "score": 0.8355
+    },
+    {
+      "asset": "/assets/c5da655baf3a7a035dd5.png",
+      "score": 0.8047
+    },
+    {
+      "asset": "/assets/71b3a91393f6ffa04974.jpg",
+      "score": 0.4946
+    },
+    {
+      "asset": "/assets/04429404e7c6c9c59dcf.jpg",
+      "score": 0.4247
+    },
+    {
+      "asset": "/assets/0d9b792080706a4dc975.jpg",
+      "score": 0.4475
+    },
+    {
+      "asset": "/assets/e1e88d35c1e60cb5dd27.png",
+      "score": 0.4338
+    },
+    {
+      "asset": "/assets/c51d3af0e37449489eb0.jpg",
+      "score": 0.405
+    },
+    {
+      "asset": "/assets/0be01f173cd4d9fa33c5.jpg",
+      "score": 0.4239
+    },
+    {
+      "asset": "/assets/1a7edd576dd5f790c899.jpg",
+      "score": 0.6651
+    },
+    {
+      "asset": "/assets/b43a8d626db425c96d62.jpg",
+      "score": 0.7217
+    },
+    {
+      "asset": "/assets/072cd11f438fa54bc08c.jpg",
+      "score": 0.4415
+    },
+    {
+      "asset": "/assets/99684b354c907d01b474.jpg",
+      "score": 0.5398
+    },
+    {
+      "asset": "/assets/a9f5c993ba7b07e0e7ce.jpg",
+      "score": 0.5448
+    },
+    {
+      "asset": "/assets/20f75705cce1a7ac37bb.jpg",
+      "score": 0.6148
+    },
+    {
+      "asset": "/assets/6d302b0401acef27f267.jpg",
+      "score": 0.4119
+    },
+    {
+      "asset": "/assets/9d75c7e0ec5baed8b859.jpg",
+      "score": 0.45
+    },
+    {
+      "asset": "/assets/40c377ea4bcb8dda53db.jpg",
+      "score": 0.7685
+    },
+    {
+      "asset": "/assets/c3342e3264f344e53d25.jpg",
+      "score": 0.6481
+    },
+    {
+      "asset": "/assets/cfefecc79c07072c3660.jpg",
+      "score": 0.5914
+    },
+    {
+      "asset": "/assets/2eeaa58138dbad220201.jpg",
+      "score": 0.5449
+    },
+    {
+      "asset": "/assets/b21c6094ae5eba691d29.jpg",
+      "score": 0.8706
+    },
+    {
+      "asset": "/assets/c5e91dffd5d2cdbf1b84.png",
+      "score": 0.7751
+    },
+    {
+      "asset": "/assets/54e5cf87f194476b82ef.jpg",
+      "score": 0.8305
+    },
+    {
+      "asset": "/assets/6e8727e5efd90947b209.png",
+      "score": 0.7846
+    },
+    {
+      "asset": "/assets/ea8b1744b4e0c7e40216.png",
+      "score": 0.891
+    },
+    {
+      "asset": "/assets/507609b5bdadd4736cad.jpg",
+      "score": 0.7951
+    },
+    {
+      "asset": "/assets/3ac494aeee2b61a8f164.jpg",
+      "score": 0.7375
+    },
+    {
+      "asset": "/assets/6740c838139627c711d7.png",
+      "score": 0.7554
+    },
+    {
+      "asset": "/assets/ad60445dca03cebbda0b.jpg",
+      "score": 0.4468
+    },
+    {
+      "asset": "/assets/0cc338492da4cd90c066.jpg",
+      "score": 0.4178
+    },
+    {
+      "asset": "/assets/1293a3e41f017845770c.jpg",
+      "score": 0.4293
+    },
+    {
+      "asset": "/assets/44dc4c22154628769239.png",
+      "score": 0.4616
+    },
+    {
+      "asset": "/assets/f018120d501b5826de8d.png",
+      "score": 0.4298
+    },
+    {
+      "asset": "/assets/8bf1a73239b371ca5bf9.jpg",
+      "score": 0.5555
+    },
+    {
+      "asset": "/assets/76585f008e2269b773b5.jpg",
+      "score": 0.4696
+    },
+    {
+      "asset": "/assets/8af4d4d8f6995ee3fcab.jpg",
+      "score": 0.4535
+    },
+    {
+      "asset": "/assets/49298f0be5849cfce8eb.jpg",
+      "score": 0.5124
+    },
+    {
+      "asset": "/assets/83de2c960cc90c4f07a9.jpg",
+      "score": 0.486
+    },
+    {
+      "asset": "/assets/88ed2596769c1afd15d6.jpg",
+      "score": 0.5105
+    },
+    {
+      "asset": "/assets/6a1565db782650e8f928.jpg",
+      "score": 0.5841
+    },
+    {
+      "asset": "/assets/04f78fc23c68a00cffea.png",
+      "score": 0.4339
+    },
+    {
+      "asset": "/assets/18862230d235182c72cf.png",
+      "score": 0.43
+    },
+    {
+      "asset": "/assets/f9737cdc1507dc3ec98b.jpg",
+      "score": 0.4317
+    },
+    {
+      "asset": "/assets/b5d8ea72409d1712304a.jpg",
+      "score": 0.4028
+    },
+    {
+      "asset": "/assets/dfd16069b560b8826255.jpg",
+      "score": 0.4264
+    },
+    {
+      "asset": "/assets/d04f7afba947968cf041.jpg",
+      "score": 0.4115
+    },
+    {
+      "asset": "/assets/7b723d8ce76f376aecf7.png",
+      "score": 0.4453
+    },
+    {
+      "asset": "/assets/b9693447feae8ce207e2.png",
+      "score": 0.4224
+    },
+    {
+      "asset": "/assets/281bbdeef52c4e8fe0f6.jpeg",
+      "score": 0.4289
+    },
+    {
+      "asset": "/assets/c23626d0b6cc386ec827.png",
+      "score": 0.4113
+    },
+    {
+      "asset": "/assets/b0e3944293b0d7a1e7bc.jpeg",
+      "score": 0.4295
+    },
+    {
+      "asset": "/assets/466f959c5f0da41307ca.png",
+      "score": 0.4185
+    },
+    {
+      "asset": "/assets/e6e4be418fa7ccae5f88.jpg",
+      "score": 0.4338
+    },
+    {
+      "asset": "/assets/1dc865e1d07ea7402219.jpg",
+      "score": 0.4423
+    },
+    {
+      "asset": "/assets/94ef30c445d1a97980c7.jpeg",
+      "score": 0.4463
+    },
+    {
+      "asset": "/assets/99318ebdb758c9b0e0c9.JPG",
+      "score": 0.4087
+    },
+    {
+      "asset": "/assets/f50023717b60028f80fd.JPG",
+      "score": 0.4444
+    },
+    {
+      "asset": "/assets/a328894dfb0a379c7ddf.jpg",
+      "score": 0.4219
+    },
+    {
+      "asset": "/assets/dcb7f3ca66bb37fcff34.PNG",
+      "score": 0.4297
+    },
+    {
+      "asset": "/assets/48a017fdf13f01b499b5.jpg",
+      "score": 0.4321
+    },
+    {
+      "asset": "/assets/5ce3518b5b6dd7d736b6.jpg",
+      "score": 0.4023
+    },
+    {
+      "asset": "/assets/fd89fbc30117014ed051.jpg",
+      "score": 0.6671
+    },
+    {
+      "asset": "/assets/18a0728c69d9664b4679.jpeg",
+      "score": 0.4598
+    },
+    {
+      "asset": "/assets/c74e54c29a48f20b5b6e.jpeg",
+      "score": 0.4276
+    },
+    {
+      "asset": "/assets/f6ff67b5f46b587bbd35.png",
+      "score": 0.41
+    },
+    {
+      "asset": "/assets/f76eec0acdb4cc0335ad.jpg",
+      "score": 0.8336
+    },
+    {
+      "asset": "/assets/b08b31410bd4c68ab0ad.jpg",
+      "score": 0.4382
+    },
+    {
+      "asset": "/assets/2cdebece58c8f6ed8433.jpg",
+      "score": 0.4508
+    },
+    {
+      "asset": "/assets/4bcbd95e65203f7c9e29.jpg",
+      "score": 0.4638
+    },
+    {
+      "asset": "/assets/c489c26016da5517dfc2.jpg",
+      "score": 0.4074
+    },
+    {
+      "asset": "/assets/c1266762618003bf6856.jpg",
+      "score": 0.8452
+    },
+    {
+      "asset": "/assets/0e57ecf3dea567a0a7be.jpg",
+      "score": 0.8092
+    },
+    {
+      "asset": "/assets/ab0b0022679a64916f83.jpg",
+      "score": 0.7441
+    },
+    {
+      "asset": "/assets/36c997d7e67690f8d718.jpg",
+      "score": 0.8552
+    },
+    {
+      "asset": "/assets/da1d22f78fd941594c44.png",
+      "score": 0.4363
+    },
+    {
+      "asset": "/assets/56af02c42d70309cc09d.jpg",
+      "score": 0.5937
+    },
+    {
+      "asset": "/assets/2e63c527e4dca0fd9232.jpg",
+      "score": 0.621
+    },
+    {
+      "asset": "/assets/66f8c1d6f1224737271a.jpg",
+      "score": 0.7113
+    },
+    {
+      "asset": "/assets/829a13927902a8aef85f.jpg",
+      "score": 0.641
+    },
+    {
+      "asset": "/assets/0c2a4f974bf41b35f8d6.jpg",
+      "score": 0.681
+    },
+    {
+      "asset": "/assets/2d5f0e695ab6edfa996b.jpg",
+      "score": 0.682
+    },
+    {
+      "asset": "/assets/66566a1cfd7955f44bf7.jpg",
+      "score": 0.4491
+    },
+    {
+      "asset": "/assets/f0f1f059e49ef91ee777.jpg",
+      "score": 0.6482
+    },
+    {
+      "asset": "/assets/b169b82516ccd591339f.jpg",
+      "score": 0.4243
+    },
+    {
+      "asset": "/assets/01eb2c3555cf337de033.png",
+      "score": 0.7225
+    },
+    {
+      "asset": "/assets/67fd8a4a9b29fa9c1ddd.png",
+      "score": 0.4228
+    },
+    {
+      "asset": "/assets/0ba448ba91dd7c1d48d1.jpg",
+      "score": 0.4322
+    },
+    {
+      "asset": "/assets/ccbe1d12ff37aeddacc4.jpg",
+      "score": 0.8769
+    },
+    {
+      "asset": "/assets/5b9da505dbc14508d70d.jpg",
+      "score": 0.4238
+    },
+    {
+      "asset": "/assets/1e0cc972ff6fa5a430e6.jpg",
+      "score": 0.4148
+    },
+    {
+      "asset": "/assets/55106aa000531955fa1f.jpg",
+      "score": 0.4052
+    },
+    {
+      "asset": "/assets/5e4f3a8d8db98c0e36fa.jpg",
+      "score": 0.498
+    },
+    {
+      "asset": "/assets/d1a7a4910ca34c95b123.jpg",
+      "score": 0.4136
+    },
+    {
+      "asset": "/assets/579997647ade2bec9846.jpg",
+      "score": 0.7208
+    },
+    {
+      "asset": "/assets/e451f77a108df031e08f.jpg",
+      "score": 0.8427
+    },
+    {
+      "asset": "/assets/71e7ed14477a580a1a7f.jpg",
+      "score": 0.4751
+    },
+    {
+      "asset": "/assets/a8e4fa58f479dd7c888f.jpg",
+      "score": 0.4488
+    },
+    {
+      "asset": "/assets/9e419f4d37b06ec13248.jpg",
+      "score": 0.4537
+    },
+    {
+      "asset": "/assets/38dd15ac81ed3d0f5fb1.jpg",
+      "score": 0.4005
+    },
+    {
+      "asset": "/assets/1d4a2e7f4ef871ca6fa8.jpg",
+      "score": 0.7907
+    },
+    {
+      "asset": "/assets/53e8d2f7a8d72155a32e.jpg",
+      "score": 0.7822
+    },
+    {
+      "asset": "/assets/acc80869f417ffffa38b.jpg",
+      "score": 0.4364
+    },
+    {
+      "asset": "/assets/4ce7a94774af56f69b24.jpg",
+      "score": 0.7942
+    },
+    {
+      "asset": "/assets/71f33e16f15f22a5fd39.jpg",
+      "score": 0.8281
+    },
+    {
+      "asset": "/assets/cb156c0a0cf4fc7854b9.jpg",
+      "score": 0.5594
+    },
+    {
+      "asset": "/assets/8d3afa7343165a97437f.jpg",
+      "score": 0.8453
+    },
+    {
+      "asset": "/assets/738b8688434ca091654d.jpg",
+      "score": 0.8359
+    },
+    {
+      "asset": "/assets/a99040c03874a905c2ba.jpg",
+      "score": 0.6603
+    },
+    {
+      "asset": "/assets/fe2811eb12f535b1cec4.jpg",
+      "score": 0.8621
+    },
+    {
+      "asset": "/assets/695a902421ef57a3fb55.jpg",
+      "score": 0.8584
+    },
+    {
+      "asset": "/assets/54a9dd9437084031f49f.jpg",
+      "score": 0.8472
+    },
+    {
+      "asset": "/assets/9f0e0f13b0b4dee4d244.jpg",
+      "score": 0.8595
+    },
+    {
+      "asset": "/assets/297def0bbfed75fb4045.jpg",
+      "score": 0.8404
+    },
+    {
+      "asset": "/assets/58fd41b08f4e203bd65e.jpg",
+      "score": 0.7483
+    },
+    {
+      "asset": "/assets/1dfe2fda6720f175e34e.jpg",
+      "score": 0.865
+    },
+    {
+      "asset": "/assets/e8a287ed531c0efd37b2.jpg",
+      "score": 0.451
+    },
+    {
+      "asset": "/assets/a8b08dde7f49620cd520.jpg",
+      "score": 0.4086
+    },
+    {
+      "asset": "/assets/42cff9edbdf3c6eee134.jpg",
+      "score": 0.4281
+    },
+    {
+      "asset": "/assets/f66e5f0ab5be6f783f90.jpg",
+      "score": 0.4371
+    },
+    {
+      "asset": "/assets/f414c8dcafa7fab7fbef.jpg",
+      "score": 0.7936
+    },
+    {
+      "asset": "/assets/c38d5af4bec374c6d378.jpg",
+      "score": 0.4185
+    },
+    {
+      "asset": "/assets/b5fb6c91a517a2d3a41d.jpg",
+      "score": 0.463
+    },
+    {
+      "asset": "/assets/7ac892c6e47bbc51b5d3.jpg",
+      "score": 0.4149
+    },
+    {
+      "asset": "/assets/9a6a9754093cbde52458.jpg",
+      "score": 0.6863
+    },
+    {
+      "asset": "/assets/284b850d9e0d4db26e94.jpg",
+      "score": 0.5733
+    },
+    {
+      "asset": "/assets/b6fc6a379570ed697741.jpg",
+      "score": 0.6475
+    },
+    {
+      "asset": "/assets/c9d43bfe716caac9fede.jpg",
+      "score": 0.5731
+    },
+    {
+      "asset": "/assets/92aaf1030f83589dcd6e.jpg",
+      "score": 0.4049
+    },
+    {
+      "asset": "/assets/85afef0865eb74489328.jpg",
+      "score": 0.4099
     }
-  ]
+  ],
+  "fine_scan_complete": true
 }
