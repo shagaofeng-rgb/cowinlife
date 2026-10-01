@@ -1,0 +1,13 @@
+{
+  "build": "passed",
+  "typecheck": "passed",
+  "redirects_checked": 61,
+  "redirect_failures": [],
+  "responsive_views": [
+    "desktop home/product",
+    "390px product",
+    "768px contact"
+  ],
+  "image_review_count": 317,
+  "scope": "Partial release: remaining-work.json records unfinished images."
+}

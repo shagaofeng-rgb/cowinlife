@@ -87,7 +87,10 @@ function nameLinks(html: string): string {
 }
 
 export function brandText(value: string): string {
-  return value.replace(/\bNEW BRAND\b/g, 'Cowinlife').replace(/\[Location\]\s*/g, '');
+  return value
+    .replace(/\bNEW BRAND\b/g, 'Cowinlife')
+    .replace(/\b(?:Suzhou\s+)?Da\s*xiang\b(?:\s+Container(?:\s+Hous(?:e|ing))?)?(?:\s+Co\.?[,]?\s*Ltd\.?)?|\bDXH(?=\b|container|prefab|expandable)(?:container)?/gi, '')
+    .replace(/\[(?:Location|New company[^\]]*|Contact person|Contact details[^\]]*)\]\s*/gi, '');
 }
 
 export function optimizePage(page: PageData): PageData {
