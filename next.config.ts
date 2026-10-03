@@ -1,6 +1,7 @@
 import type { NextConfig } from 'next';
 import legacyBrandRedirects from './content/legacy-brand-redirects.json';
 const config: NextConfig = {
+  productionBrowserSourceMaps: false,
   outputFileTracingIncludes: { '/*': ['./content/pages/**/*.json', './content/index.json'] },
   poweredByHeader: false,
   devIndicators: false,
