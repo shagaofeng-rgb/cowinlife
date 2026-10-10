@@ -29,16 +29,13 @@ export async function signIn(email: string, password: string) {
 }
 
 export async function isAdmin() {
-  const token = (await cookies()).get(COOKIE)?.value;
-  if (!token) return false;
-  const result = await query('SELECT 1 FROM admin_sessions WHERE token_hash=$1 AND expires_at > now()', [hash(token)]);
-  return result.rowCount === 1;
+  return Boolean(await adminRole());
 }
 
 export async function adminRole() {
   const token = (await cookies()).get(COOKIE)?.value;
   if (!token) return null;
-  const result = await query<{email:string;role:string}>('SELECT s.email,coalesce(r.name,\'Super Admin\') role FROM admin_sessions s LEFT JOIN users u ON lower(u.email)=lower(s.email) LEFT JOIN user_roles ur ON ur.user_id=u.id LEFT JOIN roles r ON r.id=ur.role_id WHERE s.token_hash=$1 AND s.expires_at>now() LIMIT 1',[hash(token)]);
+  const result = await query<{email:string;role:string}>("SELECT s.email,CASE WHEN lower(s.email)=lower($2) THEN 'Super Admin' ELSE r.name END role FROM admin_sessions s LEFT JOIN users u ON lower(u.email)=lower(s.email) LEFT JOIN user_roles ur ON ur.user_id=u.id LEFT JOIN roles r ON r.id=ur.role_id WHERE s.token_hash=$1 AND s.expires_at>now() AND (lower(s.email)=lower($2) OR (u.active=true AND r.name IS NOT NULL)) LIMIT 1",[hash(token),adminEmail()]);
   return result.rows[0] || null;
 }
 

@@ -1,11 +1,84 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
-type Row = { label: string; value: string };
-type Lead = { id: string; name: string; company: string; email: string; country: string; product: string; source: string; status: string; created_at: string };
-type Data = { summary: { pv: string; visitors: string; sessions: string; inquiries: string }; trend: { date: string; pv: string; uv: string }[]; sources: Row[]; pages: Row[]; journeys: Row[]; recentLeads: Lead[]; range: number };
-const number = (value: string) => Number(value || 0).toLocaleString();
-function Bars({ title, rows, href }: { title: string; rows: Row[]; href?: string }) { const max = Math.max(...rows.map(r => Number(r.value)), 1); return <section className="admin-panel"><div className="admin-panel-heading"><h2>{title}</h2>{href ? <Link href={href}>查看详情</Link> : null}</div>{rows.length ? <div className="admin-bars">{rows.slice(0, 6).map(row => <div className="admin-bar" key={row.label}><span title={row.label}>{row.label}</span><i><b style={{ width: `${Math.max(4, Number(row.value) / max * 100)}%` }} /></i><strong>{number(row.value)}</strong></div>)}</div> : <p className="admin-empty">暂无真实访问记录</p>}</section>; }
-function Trend({ rows }: { rows: Data['trend'] }) { const max = Math.max(...rows.map(row => Number(row.pv)), 1); return <section className="admin-panel admin-trend-panel"><div className="admin-panel-heading"><div><h2>访问趋势</h2><span>页面浏览量</span></div><Link href="/admin/analytics">流量分析</Link></div>{rows.length ? <div className="admin-chart">{rows.map(row => <div key={row.date} title={`${row.date} · ${row.pv} PV`}><i style={{ height: `${Math.max(4, Number(row.pv) / max * 100)}%` }} /><span>{row.date.slice(5)}</span></div>)}</div> : <p className="admin-empty">暂无真实访问记录</p>}</section>; }
-export default function AdminDashboard({ initial }: { initial: Data }) { const [data, setData] = useState(initial); const [loading, setLoading] = useState(false); const change = async (range: string) => { setLoading(true); try { const response = await fetch(`/api/admin/overview?range=${range}`); if (response.ok) setData(await response.json()); } finally { setLoading(false); } }; return <main className="admin-content dashboard-workspace"><header className="admin-head"><div><p>运营总览</p><h1>企业运营中心</h1><span>所有统计均来自网站已记录的访问和客户询盘。</span></div><div className="admin-ranges">{[['7d','近 7 天'],['30d','近 30 天'],['90d','近 90 天']].map(([key,label]) => <button className={data.range === Number(key.slice(0,-1)) ? 'active' : ''} disabled={loading} onClick={() => change(key)} key={key}>{label}</button>)}</div></header><section className="admin-metrics"><article><span>页面浏览</span><strong>{number(data.summary.pv)}</strong></article><article><span>独立访客</span><strong>{number(data.summary.visitors)}</strong></article><article><span>访问会话</span><strong>{number(data.summary.sessions)}</strong></article><article><span>客户询盘</span><strong>{number(data.summary.inquiries)}</strong></article></section><Trend rows={data.trend}/><div className="admin-grid"><Bars title="来源平台" rows={data.sources} href="/admin/analytics"/><Bars title="热门页面" rows={data.pages} href="/admin/analytics"/></div><section className="admin-panel admin-table"><div className="admin-panel-heading"><h2>最近客户询盘</h2><Link href="/admin/leads">查看全部</Link></div><table><thead><tr><th>客户</th><th>公司</th><th>国家</th><th>产品</th><th>来源</th><th>状态</th><th>时间</th></tr></thead><tbody>{data.recentLeads.length ? data.recentLeads.map(lead => <tr key={lead.id}><td><b>{lead.name || lead.email || '-'}</b></td><td>{lead.company || '-'}</td><td>{lead.country || '-'}</td><td>{lead.product || '-'}</td><td>{lead.source || '-'}</td><td><span className="admin-badge">{lead.status}</span></td><td>{new Date(lead.created_at).toLocaleDateString('zh-CN')}</td></tr>) : <tr><td colSpan={7}>暂无客户询盘</td></tr>}</tbody></table></section></main>; }
+import { useRef, useState } from 'react';
+import { ArrowRight, Eye, FileText, Inbox, MessageSquare, TrendingUp, Users } from 'lucide-react';
+import AdminDateRange, { rangeQuery, type RangeValue } from './AdminDateRange';
+import type { dashboardData } from '@/lib/analytics';
+
+type Data = Awaited<ReturnType<typeof dashboardData>>;
+type Row = Data['sources'][number];
+const number = (value: string) => Number(value || 0).toLocaleString('zh-CN');
+
+function Empty({ children }: { children: React.ReactNode }) {
+  return <div className="admin-visual-empty"><Inbox aria-hidden="true" size={28}/><p>{children}</p></div>;
+}
+
+export function AdminBars({ title, rows, href, rangeLabel }: { title: string; rows: Row[]; href?: string; rangeLabel: string }) {
+  const max = Math.max(...rows.map(row => Number(row.value)), 1);
+  return <section className="admin-panel admin-insight-panel">
+    <div className="admin-panel-heading"><div><h2>{title}</h2><span>页面浏览 · {rangeLabel}</span></div>{href ? <Link href={href}>查看详情 <ArrowRight size={15} aria-hidden="true" /></Link> : null}</div>
+    {rows.length ? <div className="admin-bars">{rows.map(row => <div className="admin-bar" key={row.label}>
+      <span title={row.label}>{row.label}</span><i aria-hidden="true"><b style={{ width: `${Number(row.value) / max * 100}%` }} /></i><strong>{number(row.value)}</strong>
+    </div>)}</div> : <Empty>暂无可用访问数据</Empty>}
+  </section>;
+}
+
+function Trend({ rows, rangeLabel }: { rows: Data['trend']; rangeLabel: string }) {
+  const max = Math.max(...rows.map(row => Number(row.pv)), 1);
+  return <section className="admin-panel admin-trend-panel">
+    <div className="admin-panel-heading"><div><h2><TrendingUp size={20} aria-hidden="true"/>访问趋势</h2><span>页面浏览量 · {rangeLabel}</span></div><Link href="/admin/analytics">流量分析 <ArrowRight size={15} aria-hidden="true" /></Link></div>
+    {rows.length ? <div className="admin-chart" role="img" aria-label={`${rangeLabel}页面浏览趋势：${rows.map(row => `${row.date} ${row.pv}次`).join('，')}`}>
+      {rows.map(row => <div key={row.date} title={`${row.date} · ${row.pv} 次`}><i style={{ height: `${Number(row.pv) / max * 100}%` }} /><span>{row.date.slice(5)}</span></div>)}
+    </div> : <Empty>暂无可用访问数据</Empty>}
+  </section>;
+}
+
+function RecentLeads({ rows, range }: { rows: Data['recentLeads']; range: Data['range'] }) {
+  return <section className="admin-panel admin-recent-leads">
+    <div className="admin-panel-heading"><h2><MessageSquare size={19} aria-hidden="true"/>最近客户询盘</h2><Link href="/admin/leads">查看全部 <ArrowRight size={15} aria-hidden="true" /></Link></div>
+    {rows.length ? <ul className="admin-lead-list">{rows.map(lead => <li key={lead.id}>
+      <Link href={`/admin/leads?${rangeQuery(range)}&q=${encodeURIComponent(lead.email || lead.name || lead.company || '')}`}>
+        <strong>{lead.name || lead.company || lead.email || '未填写姓名'}</strong>
+        <small>{lead.company || lead.product || '未填写公司或产品'}</small>
+        <span>{new Date(lead.created_at).toLocaleDateString('zh-CN')} <ArrowRight size={14} aria-hidden="true"/></span>
+      </Link>
+    </li>)}</ul> : <Empty>暂无客户询盘</Empty>}
+  </section>;
+}
+
+export default function AdminDashboard({ initial }: { initial: Data }) {
+  const [data, setData] = useState(initial);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const request = useRef(0);
+  const change = async (range: RangeValue) => {
+    const current = ++request.current;
+    setLoading(true); setError('');
+    try {
+      const response = await fetch(`/api/admin/overview?${rangeQuery(range)}`, { cache: 'no-store' });
+      if (!response.ok) throw new Error('读取失败，请重试');
+      const next = await response.json() as Data;
+      if (current === request.current) setData(next);
+    } catch { if (current === request.current) setError('读取失败，请重试'); }
+    finally { if (current === request.current) setLoading(false); }
+  };
+  const metrics = [
+    { label: '页面浏览', value: data.summary.pv, icon: Eye, href: '/admin/analytics' },
+    { label: '独立访客', value: data.summary.visitors, icon: Users, href: '/admin/analytics' },
+    { label: '访问会话', value: data.summary.sessions, icon: MessageSquare, href: '/admin/analytics' },
+    { label: '客户询盘', value: data.summary.inquiries, icon: FileText, href: '/admin/leads' },
+  ];
+  return <main className="admin-content dashboard-workspace">
+    <header className="admin-head"><div><p>运营总览</p><h1>企业运营中心</h1><span>网站访问与客户询盘</span></div><AdminDateRange value={data.range} onChange={change} busy={loading}/></header>
+    {error ? <div className="admin-error" role="alert">{error}</div> : null}
+    <section className="admin-metrics" aria-label={`${data.range.label}核心指标`}>
+      {metrics.map(({label,value,icon:Icon,href}) => <Link key={label} href={href} className="admin-metric"><span><Icon size={20} aria-hidden="true" />{label}</span><small>{data.range.label}</small><strong>{number(value)}</strong></Link>)}
+    </section>
+    <div className="admin-dashboard-layout">
+      <div className="admin-dashboard-main"><Trend rows={data.trend} rangeLabel={data.range.label}/><div className="admin-grid"><AdminBars title="来源渠道" rows={data.sources} href="/admin/analytics" rangeLabel={data.range.label}/><AdminBars title="热门页面" rows={data.pages} href="/admin/analytics" rangeLabel={data.range.label}/></div></div>
+      <RecentLeads rows={data.recentLeads} range={data.range}/>
+    </div>
+    {loading ? <p className="admin-status" role="status">正在更新所选时间范围…</p> : null}
+  </main>;
+}

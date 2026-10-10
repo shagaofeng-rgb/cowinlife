@@ -1,9 +1,13 @@
 import { NextResponse } from 'next/server';
 import { isAdmin } from '@/lib/admin-auth';
 import { dashboardData } from '@/lib/analytics';
+import { rangeFromRequest } from '@/lib/admin-date-range';
 export const runtime = 'nodejs';
 export async function GET(request: Request) {
   if (!await isAdmin()) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  const range = new URL(request.url).searchParams.get('range') || '7d';
-  return NextResponse.json(await dashboardData(['7d', '30d', '90d'].includes(range) ? range : '7d'), { headers: { 'Cache-Control': 'private, max-age=30' } });
+  try {
+    return NextResponse.json(await dashboardData(rangeFromRequest(request)), { headers: { 'Cache-Control': 'private, no-store' } });
+  } catch {
+    return NextResponse.json({ error: '无法读取所选时间范围' }, { status: 400 });
+  }
 }
