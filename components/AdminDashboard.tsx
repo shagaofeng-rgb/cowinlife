@@ -70,13 +70,16 @@ export default function AdminDashboard({ initial }: { initial: Data }) {
     { label: '客户询盘', value: data.summary.inquiries, icon: FileText, href: '/admin/leads' },
   ];
   return <main className="admin-content dashboard-workspace">
-    <header className="admin-head"><div><p>运营总览</p><h1>企业运营中心</h1><span>网站访问与客户询盘</span></div><AdminDateRange value={data.range} onChange={change} busy={loading}/></header>
-    {error ? <div className="admin-error" role="alert">{error}</div> : null}
-    <section className="admin-metrics" aria-label={`${data.range.label}核心指标`}>
-      {metrics.map(({label,value,icon:Icon,href}) => <Link key={label} href={href} className="admin-metric"><span><Icon size={20} aria-hidden="true" />{label}</span><small>{data.range.label}</small><strong>{number(value)}</strong></Link>)}
-    </section>
     <div className="admin-dashboard-layout">
-      <div className="admin-dashboard-main"><Trend rows={data.trend} rangeLabel={data.range.label}/><div className="admin-grid"><AdminBars title="来源渠道" rows={data.sources} href="/admin/analytics" rangeLabel={data.range.label}/><AdminBars title="热门页面" rows={data.pages} href="/admin/analytics" rangeLabel={data.range.label}/></div></div>
+      <div className="admin-dashboard-main">
+        <header className="admin-head"><div><p>运营总览</p><h1>企业运营中心</h1><span>网站访问与客户询盘</span></div><AdminDateRange value={data.range} onChange={change} busy={loading}/></header>
+        {error ? <div className="admin-error" role="alert">{error}</div> : null}
+        <section className="admin-metrics" aria-label={`${data.range.label}核心指标`}>
+          {metrics.map(({label,value,icon:Icon,href}) => <Link key={label} href={href} className="admin-metric"><span><Icon size={20} aria-hidden="true" />{label}</span><small>{data.range.label}</small><strong>{number(value)}</strong></Link>)}
+        </section>
+        <Trend rows={data.trend} rangeLabel={data.range.label}/>
+        <div className="admin-grid"><AdminBars title="来源渠道" rows={data.sources} href="/admin/analytics" rangeLabel={data.range.label}/><AdminBars title="热门页面" rows={data.pages} href="/admin/analytics" rangeLabel={data.range.label}/></div>
+      </div>
       <RecentLeads rows={data.recentLeads} range={data.range}/>
     </div>
     {loading ? <p className="admin-status" role="status">正在更新所选时间范围…</p> : null}
