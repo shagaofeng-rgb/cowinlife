@@ -8,6 +8,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
+report_name = sys.argv[2] if len(sys.argv) > 2 else "batch-2026-10-10.json"
+if Path(report_name).name != report_name or not report_name.endswith(".json"):
+    raise ValueError("Report name must be a JSON filename")
 
 
 def read_json(path: Path):
@@ -99,7 +102,7 @@ dimensions_path.write_text(json.dumps(dimensions, ensure_ascii=False))
 write_json(remaining_path, remaining)
 write_json(asset_report_path, asset_report)
 write_json(
-    ROOT / "reports/brand-cleanup/batch-2026-10-10.json",
+    ROOT / "reports/brand-cleanup" / report_name,
     {"restored_images": len(restored_primaries), "replaced_asset_urls": len(mapping),
      "replaced_references": replaced_occurrences, "assets": mapping},
 )

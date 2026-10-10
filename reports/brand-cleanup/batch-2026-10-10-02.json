@@ -1,0 +1,23 @@
+{
+  "restored_images": 16,
+  "replaced_asset_urls": 16,
+  "replaced_references": 71,
+  "assets": {
+    "/assets/d5e0156ec4836048efff.jpg": "/cleaned/9c8a40c3f37f08df7e5f.jpg",
+    "/assets/e8dfc9b8e11f1a09031a.jpg": "/cleaned/ab9c6d402dccbac99285.jpg",
+    "/assets/91c29faacd89161cc1d8.jpg": "/cleaned/aeaecb00a8874de6871c.jpg",
+    "/assets/c7a58a6e4510092f5c22.jpg": "/cleaned/5f3465db1364116cc972.jpg",
+    "/assets/9199a0ff1143f7318907.jpg": "/cleaned/7676674d687a835f6d9b.jpg",
+    "/assets/7f1fcc44d340b15924f8.jpg": "/cleaned/cd334a1d8da6b0bb9e9f.jpg",
+    "/assets/eb0e9c4fab111cbfe7d9.jpg": "/cleaned/7b62a544823acb114ad5.jpg",
+    "/assets/9ddbcf3cecab5eaa27ed.jpg": "/cleaned/db7e6ca1d63f0fe30b99.jpg",
+    "/assets/6d6224fa79c573350752.jpg": "/cleaned/8f856cac0c720410c1a6.jpg",
+    "/assets/6d8c67fb85ff5addd8e1.jpg": "/cleaned/50c612da5fc3e446495c.jpg",
+    "/assets/df8f538ebc9796a93836.jpg": "/cleaned/792d252a3688c05493a8.jpg",
+    "/assets/13352d5209aa3ff0be8e.jpg": "/cleaned/72ea5575e5c25940b001.jpg",
+    "/assets/5933df27dc4a7600c3dc.jpg": "/cleaned/b4d0d95e84b5cfccb3bb.jpg",
+    "/assets/d17fb5d89e0ac0c91d33.jpg": "/cleaned/cf6fc3c573432ddb0965.jpg",
+    "/assets/ae55d6d0711e6ef48fca.jpg": "/cleaned/b2f77ba5b22de21470d2.jpg",
+    "/assets/2acf3e77e92fb2fe6223.jpg": "/cleaned/a078ead1688a65abc30b.jpg"
+  }
+}
