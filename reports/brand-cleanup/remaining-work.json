@@ -1,7 +1,7 @@
 {
-  "generated_images": 317,
-  "replaced_asset_urls": 572,
-  "confirmed_remaining_images": 653,
+  "generated_images": 333,
+  "replaced_asset_urls": 589,
+  "confirmed_remaining_images": 637,
   "additional_candidates_needing_review": 2174,
   "pending": [
     {
@@ -194,12 +194,6 @@
       "asset": "/assets/ee5a687a96800181aaf0.jpg",
       "variants": [
         "/assets/ee5a687a96800181aaf0.jpg"
-      ]
-    },
-    {
-      "asset": "/assets/acc22753e327a13527bf.jpg",
-      "variants": [
-        "/assets/acc22753e327a13527bf.jpg"
       ]
     },
     {
@@ -469,12 +463,6 @@
       ]
     },
     {
-      "asset": "/assets/8db2af1fe214ea5544f0.jpg",
-      "variants": [
-        "/assets/8db2af1fe214ea5544f0.jpg"
-      ]
-    },
-    {
       "asset": "/assets/6e01a454adbbba58cac6.jpg",
       "variants": [
         "/assets/6e01a454adbbba58cac6.jpg"
@@ -526,13 +514,6 @@
       "asset": "/assets/28e1c5019dda2fab544f.jpg",
       "variants": [
         "/assets/28e1c5019dda2fab544f.jpg"
-      ]
-    },
-    {
-      "asset": "/assets/7bab2b20af42e5bcd3a9.png",
-      "variants": [
-        "/assets/7bab2b20af42e5bcd3a9.png",
-        "/assets/db7fdc7063b997ef2e81.png"
       ]
     },
     {
@@ -674,12 +655,6 @@
       ]
     },
     {
-      "asset": "/assets/f5bf472d529e05f98bbd.jpg",
-      "variants": [
-        "/assets/f5bf472d529e05f98bbd.jpg"
-      ]
-    },
-    {
       "asset": "/assets/5d2e69d0751402e97813.jpg",
       "variants": [
         "/assets/5d2e69d0751402e97813.jpg"
@@ -719,12 +694,6 @@
       "asset": "/assets/48cb09e87b10b4e3cd62.jpg",
       "variants": [
         "/assets/48cb09e87b10b4e3cd62.jpg"
-      ]
-    },
-    {
-      "asset": "/assets/9f4bccd0811af0174c48.jpg",
-      "variants": [
-        "/assets/9f4bccd0811af0174c48.jpg"
       ]
     },
     {
@@ -1379,12 +1348,6 @@
       ]
     },
     {
-      "asset": "/assets/b6fba358882fe6c4593c.jpg",
-      "variants": [
-        "/assets/b6fba358882fe6c4593c.jpg"
-      ]
-    },
-    {
       "asset": "/assets/5a88a84bafa31115c667.jpg",
       "variants": [
         "/assets/5a88a84bafa31115c667.jpg"
@@ -1487,12 +1450,6 @@
       ]
     },
     {
-      "asset": "/assets/4680fa0bc28a2e02a04c.png",
-      "variants": [
-        "/assets/4680fa0bc28a2e02a04c.png"
-      ]
-    },
-    {
       "asset": "/assets/352e52128dd88afab1ff.jpg",
       "variants": [
         "/assets/352e52128dd88afab1ff.jpg"
@@ -1514,12 +1471,6 @@
       "asset": "/assets/e62a0681d9817e0bd408.jpg",
       "variants": [
         "/assets/e62a0681d9817e0bd408.jpg"
-      ]
-    },
-    {
-      "asset": "/assets/1917d44f4a0e773731c8.jpg",
-      "variants": [
-        "/assets/1917d44f4a0e773731c8.jpg"
       ]
     },
     {
@@ -1634,12 +1585,6 @@
       "asset": "/assets/8029a2e6d98db3c156b6.jpg",
       "variants": [
         "/assets/8029a2e6d98db3c156b6.jpg"
-      ]
-    },
-    {
-      "asset": "/assets/df028846047084a730b5.jpg",
-      "variants": [
-        "/assets/df028846047084a730b5.jpg"
       ]
     },
     {
@@ -1945,12 +1890,6 @@
       ]
     },
     {
-      "asset": "/assets/9ab5df063696bd1b04e9.jpg",
-      "variants": [
-        "/assets/9ab5df063696bd1b04e9.jpg"
-      ]
-    },
-    {
       "asset": "/assets/565078ab72fd7862904d.jpg",
       "variants": [
         "/assets/565078ab72fd7862904d.jpg"
@@ -1966,12 +1905,6 @@
       "asset": "/assets/9e9db35cc6ff7d6a12d6.jpg",
       "variants": [
         "/assets/9e9db35cc6ff7d6a12d6.jpg"
-      ]
-    },
-    {
-      "asset": "/assets/52de6f9024b13edc05f4.jpg",
-      "variants": [
-        "/assets/52de6f9024b13edc05f4.jpg"
       ]
     },
     {
@@ -2192,12 +2125,6 @@
       ]
     },
     {
-      "asset": "/assets/98be378dd5e7b959be0d.jpg",
-      "variants": [
-        "/assets/98be378dd5e7b959be0d.jpg"
-      ]
-    },
-    {
       "asset": "/assets/15b022070d56c182b9e6.png",
       "variants": [
         "/assets/15b022070d56c182b9e6.png"
@@ -2225,12 +2152,6 @@
       "asset": "/assets/321b1fa8a4ebc4c9235e.jpg",
       "variants": [
         "/assets/321b1fa8a4ebc4c9235e.jpg"
-      ]
-    },
-    {
-      "asset": "/assets/6ac8035a12031a36c6bd.jpg",
-      "variants": [
-        "/assets/6ac8035a12031a36c6bd.jpg"
       ]
     },
     {
@@ -2555,12 +2476,6 @@
       "asset": "/assets/7311edc6cb3ab6c32189.jpg",
       "variants": [
         "/assets/7311edc6cb3ab6c32189.jpg"
-      ]
-    },
-    {
-      "asset": "/assets/dcc67519bbc9396b1878.jpg",
-      "variants": [
-        "/assets/dcc67519bbc9396b1878.jpg"
       ]
     },
     {
@@ -3005,12 +2920,6 @@
       "asset": "/assets/6858fb272e0393053ad7.jpg",
       "variants": [
         "/assets/6858fb272e0393053ad7.jpg"
-      ]
-    },
-    {
-      "asset": "/assets/3c04b42b9a24f135220f.png",
-      "variants": [
-        "/assets/3c04b42b9a24f135220f.png"
       ]
     },
     {
@@ -3815,12 +3724,6 @@
       "asset": "/assets/b4f7f4d6f113e336d30c.jpg",
       "variants": [
         "/assets/b4f7f4d6f113e336d30c.jpg"
-      ]
-    },
-    {
-      "asset": "/assets/05772c5a63ae3a9c5f2c.jpg",
-      "variants": [
-        "/assets/05772c5a63ae3a9c5f2c.jpg"
       ]
     },
     {
