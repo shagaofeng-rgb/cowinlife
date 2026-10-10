@@ -15,10 +15,10 @@ function sourceFor(referrer: string, currentUrl: string) {
 export async function recordEvent(input: { visitorId: string; sessionId: string; page: string; previousPage?: string; referrer?: string; currentUrl?: string; device?: string; country?: string; region?: string }) {
   const page = String(input.page || '/').slice(0, 240);
   const attribution = sourceFor(String(input.referrer || ''), String(input.currentUrl || page));
-  await query('INSERT INTO analytics_events (visitor_id,session_id,event_type,page_path,previous_path,referrer,source,channel,device,country,region,metadata) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)', [input.visitorId.slice(0, 80), input.sessionId.slice(0, 80), 'page_view', page, String(input.previousPage || '').slice(0, 240), String(input.referrer || '').slice(0, 300), attribution.source, attribution.channel, String(input.device || '').slice(0, 40), String(input.country || 'Unknown').slice(0, 8), String(input.region || '').slice(0, 120), JSON.stringify({ tracking_version: '2' })]);
+  await query('INSERT INTO analytics_events (visitor_id,session_id,event_type,page_path,previous_path,referrer,source,channel,device,country,region,metadata) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)', [input.visitorId.slice(0, 80), input.sessionId.slice(0, 80), 'page_view', page, String(input.previousPage || '').slice(0, 240), String(input.referrer || '').slice(0, 300), attribution.source, attribution.channel, String(input.device || '').slice(0, 40), String(input.country || 'Unknown').slice(0, 8), String(input.region || '').slice(0, 120), JSON.stringify({ tracking_version: '2', site_environment: 'production' })]);
 }
 
-const eventWhere = "event_type='page_view' AND metadata->>'tracking_version'='2' AND event_time >= $1 AND event_time < $2";
+const eventWhere = "event_type='page_view' AND metadata->>'tracking_version'='2' AND metadata->>'site_environment'='production' AND event_time >= $1 AND event_time < $2";
 
 export async function dashboardData(range: AdminDateRange) {
   const values = [range.start, range.end];
