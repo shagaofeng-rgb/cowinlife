@@ -30,7 +30,12 @@ export async function generateMetadata({ params }: Props) {
       if (['cowinlife.com', 'www.cowinlife.com'].includes(url.hostname) && !/dxh/i.test(url.pathname)) canonical = url.href;
     } catch { /* Use this page's canonical when a stored URL is invalid. */ }
   }
-  return { title, description, alternates: { canonical } };
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    ...(path === '/search.html' ? { robots: { index: false, follow: true } } : {}),
+  };
 }
 export default async function Page({ params, searchParams }: Props) {
   const { slug = [] } = await params;
