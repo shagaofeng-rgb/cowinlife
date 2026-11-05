@@ -1,1 +1,17 @@
-export default function NotFound() { return <main style={{maxWidth:760,margin:'100px auto',padding:24,fontFamily:'sans-serif'}}><h1>Page not available in this preview</h1><p>This page has not yet been imported into the local site.</p><a href="/">Return to home</a></main>; }
+import SiteFrame from '@/components/interior/SiteFrame';
+
+export default function NotFound() {
+  return (
+    <SiteFrame>
+      <main id="main-content" className="cl-wrap cl-utility">
+        <p className="cl-eyebrow">404 · Page not found</p>
+        <h1>This page isn’t available.</h1>
+        <p className="cl-lead">Explore the product catalogue or search for what you need.</p>
+        <div className="cl-actions">
+          <a className="cl-button" href="/product.html">Browse products</a>
+          <a className="cl-button cl-button-outline" href="/search.html">Search Cowinlife</a>
+        </div>
+      </main>
+    </SiteFrame>
+  );
+}

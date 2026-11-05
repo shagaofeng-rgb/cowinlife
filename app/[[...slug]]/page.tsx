@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation';
 import { getPage, getIndex } from '@/lib/content';
 import Website from '@/components/Website';
-import SearchPage from '@/components/SearchPage';
+import InteriorPage from '@/components/interior/InteriorPage';
+import { getInteriorContent } from '@/lib/interior-content';
 import { query } from '@/lib/database';
 import { brandText } from '@/lib/optimize-page';
-type Props = { params: Promise<{ slug?: string[] }>; searchParams: Promise<{ keyword?: string }> };
+type Props = { params: Promise<{ slug?: string[] }> };
 export const revalidate = 300;
 export const dynamic = 'force-static';
 export async function generateMetadata({ params }: Props) {
@@ -34,20 +35,21 @@ export async function generateMetadata({ params }: Props) {
     title,
     description,
     alternates: { canonical },
-    ...(path === '/search.html' ? { robots: { index: false, follow: true } } : {}),
   };
 }
-export default async function Page({ params, searchParams }: Props) {
+export default async function Page({ params }: Props) {
   const { slug = [] } = await params;
   const pathname = '/' + slug.join('/');
-  if (pathname === '/search.html') {
-    const home = await getPage('/');
-    if (!home) notFound();
-    const { headerHtml, footerHtml, styles, inquiryHtml, thumbnail, displayTitle } = home;
-    return <SearchPage shell={{ headerHtml, footerHtml, styles, inquiryHtml, thumbnail, displayTitle, carousels: [] }} entries={await getIndex()} keyword={(await searchParams).keyword || ''} />;
-  }
   const page = await getPage(pathname);
   if (!page) notFound();
-  const { html, styles, carousels, inquiryHtml, thumbnail, displayTitle } = page;
-  return <Website page={{ html, styles, carousels, inquiryHtml, thumbnail, displayTitle }} />;
+
+  if (pathname === '/') {
+    const { html, styles, carousels, inquiryHtml, thumbnail, displayTitle } = page;
+    return <Website page={{ html, styles, carousels, inquiryHtml, thumbnail, displayTitle }} />;
+  }
+
+  const index = await getIndex();
+  const entry = index.find(item => item.path === pathname);
+  if (!entry) notFound();
+  return <InteriorPage page={getInteriorContent(page, entry, index)} />;
 }
