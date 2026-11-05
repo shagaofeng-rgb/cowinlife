@@ -3,7 +3,7 @@ import { getPage, getIndex } from '@/lib/content';
 import Website from '@/components/Website';
 import InteriorPage from '@/components/interior/InteriorPage';
 import { getInteriorContent } from '@/lib/interior-content';
-import { query } from '@/lib/database';
+import { getPublicSeoOverride } from '@/lib/public-seo';
 import { brandText } from '@/lib/optimize-page';
 type Props = { params: Promise<{ slug?: string[] }> };
 export const revalidate = 300;
@@ -12,15 +12,7 @@ export async function generateMetadata({ params }: Props) {
   const { slug = [] } = await params;
   const path = '/' + slug.join('/');
   const page = await getPage(path);
-  let configured: { title: string; description: string; canonical: string } | undefined;
-  if (process.env.DATABASE_URL) {
-    try {
-      const seo = await query<{title:string;description:string;canonical:string}>('SELECT title,description,canonical FROM seo_pages WHERE path=$1 LIMIT 1',[path]);
-      configured = seo.rows[0];
-    } catch {
-      // The public page can still render its file-based metadata if SEO storage is unavailable.
-    }
-  }
+  const configured = page ? await getPublicSeoOverride(path) : undefined;
   const title = brandText(configured?.title || page?.title || 'Cowinlife');
   const description = brandText(configured?.description || page?.description || '');
   // Imported external canonicals must never send search engines to the old company.
