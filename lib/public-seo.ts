@@ -14,8 +14,8 @@ const getPublicSeoOverrides = unstable_cache(
     `);
     return Object.fromEntries(rows.map(({ path, ...override }) => [path, override]));
   },
-  [publicSeoCacheTag],
-  { tags: [publicSeoCacheTag], revalidate: 3600 },
+  ['cowinlife-public-seo-on-demand'],
+  { tags: [publicSeoCacheTag], revalidate: false },
 );
 
 export async function getPublicSeoOverride(path: string): Promise<SeoOverride | undefined> {
